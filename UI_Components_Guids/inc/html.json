@@ -1,0 +1,248 @@
+{
+	"pan":{
+		"prefix": "pan",
+		"body":[
+			"<!--컨텐츠 영역-->",
+			"<div class=\"cntWrap\">",
+			"\t<div class=\"contents container-xxl\">",
+			"\t<!--컨텐츠 내용 부분 :: 반드시 시멘틱태그 준수-->",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "컨텐츠 한판"
+	},
+	"mainpan":{
+		"prefix": "mainpan",
+		"body":[
+			"<!--메인 영역-->",
+			"<div class=\"mnWrap\">",
+			"\t<main class=\"container-xxl\">",
+			"\t<!--컨텐츠 내용 부분 :: 반드시 시멘틱태그 준수-->",
+			"\t</main>",
+			"</div>"
+		],
+		"description": "메인 한판"
+	},
+	"banpan":{
+		"prefix": "banpan",
+		"body":[
+			"<!--반판 영역-->",
+			"<div class=\"container-fluid\">",
+			"\t<div class=\"d-flex\">",
+			"\t\t<div class=\"left col-6\">왼쪽 영역값</div>",
+			"\t\t<div class=\"right col-6\">오른쪽 영역값</div>",
+			"\t</div>     ",
+			"</div>"
+		],
+		"description": "메인 한판"
+	},
+
+	"boot":{
+		"prefix": "boot",
+		"body": [
+			"<!--부트스트랩 CDN영역-->",
+			"<link rel=\"stylesheet\" href=\"../css/bootstrap.min.css\">",
+    		"<script src=\"../js/bootstrap.bundle.min.js\"></script>",
+    		"<link rel=\"stylesheet\" href=\"../css/bootstrap-icons.css\">",
+    		"<link rel=\"stylesheet\" href=\"../css/styles_added.css\">"
+		],
+		"description": "bootstrap"
+	},
+	"mal": {
+		"prefix": "mal",
+		"body": [
+			"<!--말풍선 버튼 영역-->",
+			"<div class=\"popover bs-popover-auto fade show bg-success z-2\" role=\"tooltip\" id=\"popover591809\" data-popper-placement=\"right\" style=\"position: relative; inset: 0px auto auto 0px; margin: 0px;\">",
+			"\t<div class=\"popover-arrow \" style=\"position: absolute; transform: translate(0px, 19px); top: 0px;\"> </div>",
+			"\t<div class=\"popover-body text-white\">내용</div>",
+			"</div>"
+		],
+		"description": "말풍선"
+	},
+	"lists":{
+		"prefix": "lists",
+		"body": [
+			"<!--리스트 영역-->",
+			"<div class=\"shadow p-3 mb-5 bg-body-tertiary rounded d-flex container-fluid justify-content-between align-items-center\">",
+			"\t<div class=\"leftInfo\">",
+			"\t\t<!-- 게시글 하나당 왼쪽 영역의 값 입력  예) h2 title, p addr -->",
+			"\t</div>",
+			"\t<div class=\"rightInfo\">",
+			"\t\t<!-- 게시글 하나당 오른쪽 영역의 값 입력 예)mal, btn 등등  -->",
+			"\t\t<!-- 만약, 오른쪽 값이 없다면 그냥 지우면 됨 -->",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "리스트 박스"
+	},
+	"sel":{
+		"prefix": "sel",
+		"body": [
+			"<!--셀렉트 영역-->",
+			"<select class=\"form-select\" aria-label=\"Default select example\">",
+			"<!--셀렉트에 들어갈 값을 입력해주세요-->",
+			"\t<option selected>Open this select menu</option>",
+			"\t<option value=\"1\">One</option>",
+			"\t<option value=\"2\">Two</option>",
+			"\t<option value=\"3\">Three</option>",
+		  	"</select>"
+		],
+		"description": "셀렉트"
+	},
+	"paging":{
+		"prefix": "paging",
+		"body":[
+			"<!--페이징 영역-->",
+			"<nav aria-label=\"Page navigation example\">",
+			"\t<ul class=\"pagination\">",
+			"\t\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>",
+			"\t\t<!-- 필요한 개수만큼 li 추가-->",
+			"\t\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">1</a></li>",
+			"\t\t<li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>",
+			"\t</ul>",
+			"</nav>"
+		],
+		"description": "페이징"
+	},
+	"lab":{
+		"prefix": "lab",
+		"body":[
+			"<!--라벨 영역-->",
+			"<!--라벨에 들어갈 이름 class명 노란색 : bg-warning bg-gradient 변경 / 초록색 : bg-success bg-gradient 변경 -->",
+			"<span class=\"badge bg-secondary\">Review</span>"
+		],
+		"description": "레이블"
+	},
+	"alert":{
+		"prefix": "alert",
+		"body":[
+			"<!--alert 영역-->",
+			"<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">",
+			"\t<div class=\"container-xxl\" style=\"position: relative;\">",
+			"\t\t알림에 들어갈 문구를 넣으세요",
+			"\t\t<button type=\"button p-0\" style=\"padding:0.25rem 1rem\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "알림"
+	},
+	"search":{
+		"prefix": "search",
+		"body":[
+		"<!--검색 영역-->",			
+		"<div class=\"srchWrap\">",
+		"\t<div class=\"contents d-flex container-xxl\">",
+		"\t\t<div class=\"serch col-8 d-flex\">",
+		"\t\t\t<select class=\"form-select m\" style=\"max-width: 300px;\" aria-label=\"Default select example\">",
+		"\t\t\t\t<!--option태그를 추가해서 옵션값을 추가하세요-->",
+		"\t\t\t\t<option selected>Open this select menu</option>",
+		"\t\t\t</select>",
+		"\t\t\t<input type=\"text\" class=\"form-control ms-2\">",
+		"\t\t</div>",
+		"\t\t<div class=\"btns col-4 ms-2\">",
+		"\t\t\t\t<button class=\"btn btn-success col-4\" type=\"submit\">검색하기</button>",
+		"\t\t\t\t<button class=\"btn btn-success col-4\" type=\"submit\">새글쓰기</button>",
+		"\t\t</div>",
+		"\t</div>",
+		"</div>"
+		]
+	},
+	"btn":{
+		"prefix": "btn",
+		"body":[
+			"<button class=\"btn btn-success\" type=\"button\">버튼값 입력  노란색 : bg-warning bg-gradient 추가 / 초록색 : bg-success bg-gradient 추가 </button>"
+		]
+	},
+	"modal":{
+		"prefix": "modal",
+		"body":[
+			"<!--모달 영역-->",
+			"<div class=\"modal fade\" id=\"staticBackdrop\" data-bs-keyboard=\"false\" tabindex=\"-1\" aria-labelledby=\"staticBackdropLabel\" aria-hidden=\"true\">",
+			"\t<div class=\"modal-dialog modal-dialog-scrollable modal-lg z-3\">",
+			"\t\t<div class=\"modal-content\">",
+			"\t\t\t<div class=\"modal-header\">",
+			"\t\t\t\t<h1 class=\"modal-title fs-5\" id=\"staticBackdropLabel\">모달 타이틀</h1>",
+			"\t\t\t\t<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"></button>",
+			"\t\t\t</div>",
+			"\t\t\t<div class=\"modal-body container-fluid\">",
+			"\t\t\t\t<!-- 모달 내 들어 갈 내용 추가하세요 -->",
+			"\t\t\t</div>",
+			"\t\t\t<div class=\"modal-footer\">",
+			"\t\t\t\t<!-- 버튼 추가가능 -->",
+			"\t\t\t\t<button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">버튼</button>",
+			"\t\t\t</div>",
+			"\t\t</div>",
+			"\t</div>",
+			"</div>"
+		]
+	},
+	"modalBtn":{
+		"prefix": "modalbtn",
+		"body":[
+			"<!--모달 버튼 영역-->",
+			"<button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop\">",
+    		"\t<!--data-bs-target=속성 안에는 반드시 띄워 줄 모달의 id값이 들어가야 함-->",
+    		"\t버튼 안에 들어갈 내용",
+			"</button>"
+		],
+		"description": "모달 버튼 || 반드시 모달과 쌍으로 넣을것 !"
+	},
+	"upimg":{
+		"prefix": "upimg",
+		"body":[
+			"<div class=\"card border-0\">",
+			"\t<img src=\"../img_readme/siteMap_List.png\" class=\"card-img-top\" alt=\"...\">",
+			"\t<div class=\"card-body\">",
+			"\t\t<!--여기에 이미지 아래 텍스트 값 추가됩니다.-->",
+			"\t\t<!-- 텍스트 타이틀은 반드시 h3 사용 -->",
+			"\t\t<!-- 설명 주석내용은 p태그를 사용하시고 -->",
+			"\t\t<!-- 모든 inline tag는 div로 한번 묶어주세요 예) <div class=\"btns\"><button>버튼</button></div> -->",
+			"\t</div>",
+			"</div>"
+		]
+	},
+	"txts":{
+		"prefix": "txts",
+		"body": [
+			"<!--옆으로 나열되는 텍스트 영역-->",
+			"<div class=\"texts d-flex\">",
+			"\t<!-- 왼쪽 요소가 아이콘일 경우 icon, 라벨일경우 lb-->",
+			"\t<!-- 왼쪽 요소의 크기에따라서 col-숫자는 변할 수 있음-->",
+			"\t<div class=\"icon col-1\">",
+			"\t\t<!-- 라벨이라면 값을 바로 넣으면 됨-->",
+			"\t\t<i class=\"bi bi-pin-map\"></i>",
+			"\t</div>",
+			"\t<!--오른쪽 요소가 텍스트일경우 p태그 사용-->",
+			"\t<!--오른쪽 요소가 아이콘일 경우 p태그 안에 i태그 여러개 사용 가능-->",
+			"\t<p>서울시 강남구 논현1동 844-1</p>",
+			"</div>"
+		]
+	},
+	"brdTxt":{
+		"prefix": "brdTxt",
+		"body": [
+			"<div class=\"brdTxt\">",
+			"\t<h4>게시판 제목</h4>",
+			"\t<p class=\"ell\">시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!</p>",
+			"\t<div class=\"icons\">",
+			"\t\t<span class=\"badge bg-warning bg-gradient\">Review</span>",
+			"\t\t<span class=\"times ms-2\"><i class=\"bi bi-clock\"></i> <span>2023-02-02</span></span>",
+			"\t\t<span class=\"views ms-2\"><i class=\"bi bi-person-lines-fill\"></i> <span>27</span></span>",
+			"\t</div>",
+			"</div>"
+		]
+	},
+	"inptxt":{
+		"prefix": "inptxt",
+		"body": [
+			"<!-- input태그 label for과 매칭되는 id반드시 준수할 것 ! input이 들어있는 태그는 form태그안에 반드시 위치해야함!! -->",
+			"<div class=\"mb-3 d-flex\">",
+			"\t<label for=\"input의 아이디와 일치\" class=\"form-label col-2\">Email address</label>",
+			"\t<input type=\"타입입력\" class=\"form-control\" id=\"label의 for과 일치\" placeholder=\"필요하다면 입력\">",
+			"\t<div class=\"rt col-3 ms-2\">",
+			"\t\t<!-- 이부분에 버튼이 들어옴 만약 버튼이 없으면 빈div로 놔둠 -->",
+			"\t</div>",
+			"</div>"
+		]
+	}
+}
