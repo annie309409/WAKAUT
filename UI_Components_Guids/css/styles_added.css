@@ -34,5 +34,5 @@ div.img{
 
 /*박정아 : 말풍선 오른쪽 fill 옐로우*/
 .popyellow.bs-popover-auto[data-popper-placement^=right]>.popover-arrow::after, .bs-popover-end>.popover-arrow::after{
-    border-right-color: #198754;
+    border-right-color: #ffc107;
 }
