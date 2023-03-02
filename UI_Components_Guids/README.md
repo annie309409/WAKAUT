@@ -74,7 +74,7 @@
 
 ### 컬러참조(bootstrap)
 > 예시<br>
-> ![이미지](../img_readme/result0302016.png) <br>
+> ![이미지](../img_readme/result0302017.png) <br>
 
 ```html
 <span class="badge text-bg-primary">Primary</span>
@@ -85,4 +85,29 @@
 <span class="badge text-bg-info">Info</span>
 <span class="badge text-bg-light">Light</span>
 <span class="badge text-bg-dark">Dark</span>
+```
+
+
+### 마진 참조 
+* 만약 왼쪽이나 위쪽으로 공간을 두고 싶다면 다음 가이드를 참조한다.
+* 마진은 요소와 요소의 사이를 '배경없이' 떨어트리고 싶을 때 사용 
+* 패딩은 특정 요소안에 요소들을 '배경유지' 하면서 떨어트리고 싶을 때 사용
+
+```html
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.ms-1 {
+  margin-left: ($spacer * .25) !important;
+}
+
+.px-2 {
+  padding-left: ($spacer * .5) !important;
+  padding-right: ($spacer * .5) !important;
+}
+
+.p-3 {
+  padding: $spacer !important;
+}
 ```
