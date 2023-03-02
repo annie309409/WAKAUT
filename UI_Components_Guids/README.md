@@ -71,3 +71,18 @@
 | inptxt | 인풋태그 |
 
 
+
+### 컬러참조(bootstrap)
+> 예시<br>
+> ![이미지](../img_readme/result0302016.png) <br>
+
+```html
+<span class="badge text-bg-primary">Primary</span>
+<span class="badge text-bg-secondary">Secondary</span>
+<span class="badge text-bg-success">Success</span>
+<span class="badge text-bg-danger">Danger</span>
+<span class="badge text-bg-warning">Warning</span>
+<span class="badge text-bg-info">Info</span>
+<span class="badge text-bg-light">Light</span>
+<span class="badge text-bg-dark">Dark</span>
+```
