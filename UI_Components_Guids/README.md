@@ -1,7 +1,7 @@
 # 내근처 운동 가이드 앱 컴포넌트 가이드 (UI)
-## 모든 가이드는 [Bootstrap](https://getbootstrap.com/) 5.3ver을 기반으로 한다.
-## 사용 에디터는 snnipet의 편리한 사용을 위하여 VSCODE를 활용한다. 
-## 설치 가이드 
++ 모든 가이드는 [Bootstrap](https://getbootstrap.com/) 5.3ver을 기반으로 한다.
++ 사용 에디터는 snnipet의 편리한 사용을 위하여 VSCODE를 활용한다. 
++ 설치 가이드 
 1. 모든 작업은 현재 폴더 기준에서 UI제작_이름 형식으로 작성하여 작업한다. (branch는 반드시 본인 branch사용 staging사용 금지)
 > 예시<br>
 > ![이미지](../img_readme/result0302009.png) <br>
