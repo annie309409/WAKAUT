@@ -52,7 +52,8 @@
 		"prefix": "mal",
 		"body": [
 			"<!--말풍선 버튼 영역-->",
-			"<div class=\"popover bs-popover-auto fade show bg-success z-2\" role=\"tooltip\" id=\"popover591809\" data-popper-placement=\"right\" style=\"position: relative; inset: 0px auto auto 0px; margin: 0px;\">",
+			"<!--말풍선의 색에따라서 popgreen 혹은 popyellow로 class명 작성-->",
+			"<div class=\"popover popgreen bs-popover-auto fade show bg-success z-2\" role=\"tooltip\" id=\"popover591809\" data-popper-placement=\"right\" style=\"position: relative; inset: 0px auto auto 0px; margin: 0px;\">",
 			"\t<div class=\"popover-arrow \" style=\"position: absolute; transform: translate(0px, 19px); top: 0px;\"> </div>",
 			"\t<div class=\"popover-body text-white\">내용</div>",
 			"</div>"
@@ -63,7 +64,7 @@
 		"prefix": "lists",
 		"body": [
 			"<!--리스트 영역-->",
-			"<div class=\"shadow p-3 mb-5 bg-body-tertiary rounded d-flex container-fluid justify-content-between align-items-center\">",
+			"<div class=\"shadow p-3 mb-5 bg-body-tertiary rounded d-flex container-fluid justify-content-between align-items-center mt-4\">",
 			"\t<div class=\"leftInfo\">",
 			"\t\t<!-- 게시글 하나당 왼쪽 영역의 값 입력  예) h2 title, p addr -->",
 			"\t</div>",
@@ -242,6 +243,15 @@
 			"\t<div class=\"rt col-3 ms-2\">",
 			"\t\t<!-- 이부분에 버튼이 들어옴 만약 버튼이 없으면 빈div로 놔둠 -->",
 			"\t</div>",
+			"</div>"
+		]
+	},
+	"leftImg":{
+		"prefix": "leftImg",
+		"body": [
+			"<div class=\"imgLft d-flex\">",
+			"\t<div class=\"img col-2\"></div>",
+			"\t<!-- 오른쪽에 들어갈 내용, 만약 board에 들어가는 텍스트라면 brdTxt탭 칠 것-->",
 			"</div>"
 		]
 	}
