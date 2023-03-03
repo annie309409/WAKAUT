@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--부트스트랩 CDN영역-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/styles_added.css">
+</head>
+<body>
+    <!--컨텐츠 영역-->
+    <div class="cntWrap">
+        <div class="contents container-xxl">
+            <!--반판 영역-->
+            <div class="container-fluid">
+                <div class="d-flex">
+                    <div class="left col-6">
+                        <!--리스트 영역-->
+                        <div class="shadow p-3 mb-5 bg-body-tertiary rounded d-flex container-fluid justify-content-between align-items-center mt-4">
+                            <div class="leftInfo">
+                                <h2>운동종합건물</h2>
+                                <p>서울시 관악구 신림동</p>
+                            </div>
+                            <div class="rightInfo">
+                                <!--말풍선 버튼 영역-->
+                                <!--말풍선의 색에따라서 popgreen 혹은 popyellow로 class명 작성-->
+                                <div class="popover popgreen bs-popover-auto fade show bg-success z-2" role="tooltip" id="popover591809" data-popper-placement="right" style="position: relative; inset: 0px auto auto 0px; margin: 0px;">
+                                    <div class="popover-arrow " style="position: absolute; transform: translate(0px, 19px); top: 0px;"> </div>
+                                    <div class="popover-body text-white">💪🏻🤳🏻</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right col-6">오른쪽 영역값</div>
+                </div>     
+            </div>
+        </div>
+    </div>
+
+    <!--모달 버튼 영역-->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <!--data-bs-target=속성 안에는 반드시 띄워 줄 모달의 id값이 들어가야 함-->
+        헬로
+    </button>
+    <!--모달 영역-->
+    <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg z-3">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">모달 헤더부분</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <!-- 모달 내 들어 갈 내용 추가하세요 -->
+                    <!--반판 영역-->
+                    <div class="container-fluid">
+                        <div class="d-flex">
+                            <div class="left col-6">
+                                <div class="card border-0">
+                                    <img src="../img_readme/siteMap_List.png" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <!--여기에 이미지 아래 텍스트 값 추가됩니다.-->
+                                        <!-- 텍스트 타이틀은 반드시 h3 사용 -->
+                                        <!-- 설명 주석내용은 p태그를 사용하시고 -->
+                                        <!-- 모든 inline tag는 div로 한번 묶어주세요 예) <div class="btns"><button>버튼</button></div> -->
+                                        <h3>시설평가하기</h3>
+                                        <p>다른 사용자에게 의견을 들려주세요</p>
+                                        <div class="btns"> 
+                                            <button class="btn btn-success" type="button">버튼값 입력  노란색 : bg-warning bg-gradient 추가 / 초록색 : bg-success bg-gradient 추가 </button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="right col-6">오른쪽 영역값</div>
+                        </div>     
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <!-- 버튼 추가가능 -->
+
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기 버튼</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
