@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 보기</title>
+    <!--부트스트랩 CDN영역-->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/styles_added.css">
+</head>
+<body>
+    <!--컨텐츠 영역-->
+    <div class="cntWrap view">
+        <!--헤더 제목영역-->
+        <div class="hdrWrap bg-secondary">
+            <header class="container-xxl">
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded d-flex container-fluid justify-content-between align-items-center mt-4 p-4">
+                    <div class="leftInfo">
+                        <div class="title d-flex align-items-center">
+                            <h2>게시판 제목</h2> 
+                            <span class="badge bg-info ms-2">Review</span>
+                        </div>
+                        <h5><i class="bi bi-person-fill"></i>구디 거북이</h5>
+                    </div>
+                    <div class="rightInfo">
+                        <span><i class="bi bi-alarm-fill me-2"></i>2023-03-03</span>
+                        <span class="ms-2"><i class="bi bi-person-lines-fill me-2"></i>778</span>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <!-- 내용영역 -->
+        <div class="contents container-xxl">
+            <p style="white-space: pre-wrap"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.
+
+
+ Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.
+            <p>
+            
+
+            <!-- 리플영역 -->
+            <div class="replay bg-dark-subtle">
+                <div class="txtLft d-flex">
+                    <h5>abc123</h5>
+                    <p class="ms-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quia obcaecati, ipsa rerum, quidem, perferendis est quaerat sunt fugiat beatae ratione? Sapiente magni a tenetur tempora numquam praesentium accusamus facilis.</p>
+                </div>
+                <form>
+                    <div class="reTxt d-flex align-items-end">
+                        <div class="form-floating mt-3 col-10">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">abc123</label>
+                        </div>
+                        <button class="btn btn-success ms-5" type="submit">댓글 등록</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- 버튼영역 -->
+            <div class="btns d-flex justify-content-end mt-4">
+                <button class="btn btn-secondary ms-2" type="button">목록으로 </button>
+                <button class="btn btn-success ms-2" type="button">수정하기</button>
+                <button class="btn btn-secondary ms-2" type="button">삭제하기</button>
+                <button class="btn btn-danger ms-2" type="button">강제삭제</button>
+            </div>
+
+        </div>
+    </div> 
+</body>
+</html>
