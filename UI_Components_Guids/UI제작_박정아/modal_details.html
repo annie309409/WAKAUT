@@ -12,23 +12,15 @@
 </head>
 <body>
 
-<button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#hello"
->
-    모달
-</button>
 
 <!--모달 버튼 영역-->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details">
     <!--data-bs-target=속성 안에는 반드시 띄워 줄 모달의 id값이 들어가야 함-->
     버튼 안에 들어갈 내용
 </button>
 
 <!--모달 영역-->
-<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="details" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg z-3">
         <div class="modal-content">
             <div class="modal-header">
@@ -111,6 +103,8 @@
                                     <span class="views ms-2"><i class="bi bi-person-lines-fill"></i> <span>27</span></span>
                                 </div>
                             </div>
+                            
+                            <button class="btn btn-success" type="button">게시글 더 보기</button>
 
                         </div>
                     </div>     
@@ -118,101 +112,11 @@
             </div>
             <div class="modal-footer">
                 <!-- 버튼 추가가능 -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">버튼</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
             </div>
         </div>
     </div>
 </div>
-
-
-<div class="card">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-
-
-<!-- 모달창 -->
-<div
-        id="hello"
-        class="modal fade"
-
->
-    <!-- fade를 붙이면 모달창이 스~윽 -->
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                시설 자세히 보기
-                <button
-                        type="button"
-                        class="btn btn-danger"
-                        data-bs-dismiss="modal"
-                        style="background-color: #999999; border: none"
-                >
-                    X
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                    <div class="row" style="height: 500px">
-                        <div class="col-xl-5">
-                            <div class="img"></div>
-                            <h6>시설 평가하기</h6>
-                            <p style="font-size: 12px; color: #a4a4a4">다른 사용자에게 의견을 들려주세요</p>
-                            <i class="bi bi-star-fill"></i>&nbsp;<i class="bi bi-star-fill"></i>&nbsp;<i class="bi bi-star-fill"></i>&nbsp;<i class="bi bi-star"></i>&nbsp;<i class="bi bi-star"></i>
-                            <br><button type="button" class="btn btn-outline-info col-8"
-                                        style="color: #525252; margin-top: 10px">즐겨찾기 추가하기</button>
-                            <br><button type="button" class="btn btn-warning col-8" style="margin-top: 15px">공유하기(링크or카카오)</button>
-                        </div>
-                        <div class="right col-xl-7">
-                            <h3>업체명 수영장</h3>
-                            <p><i class="bi bi-pin-map"></i>&nbsp;&nbsp;&nbsp;&nbsp;서울시 강남구 논현1동 844-1</p>
-                            <p><i class="bi bi-telephone"></i>&nbsp;&nbsp;&nbsp;&nbsp;02 - 1234 - 5678</p>
-                            <p><i class="bi bi-house"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">https://HelloWonderfulWorldAgain.co.kr</a></p>
-                            <p><i class="bi bi-emoji-smile"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="bi bi-star-fill" style="font-size: 15px"></i>&nbsp;<i class="bi bi-star-fill" style="font-size: 15px"></i>&nbsp;<i class="bi bi-star-fill" style="font-size: 15px"></i>&nbsp;<i class="bi bi-star" style="font-size: 15px"></i>&nbsp;<i class="bi bi-star" style="font-size: 15px"></i></p>
-                            <h5><a href="#">게시판 제목</a></h5>
-                            <textarea wrap="soft" readonly>시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!</textarea>
-                            <br><button type="button" class="btn btn-info" style="font-size: 3px; padding: 1px 3px; margin-top: 0">Review</button>&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="bi bi-clock"></i>&nbsp;&nbsp;2000-01-01&nbsp;&nbsp;<i class="bi bi-person"></i>&nbsp;&nbsp;115</span>
-                            <h5><a href="#">게시판 제목</a></h5>
-                            <textarea id="myTextarea" wrap="soft" readonly>시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!시간은 금이라구 친구!</textarea>
-                            <br><button type="button" class="btn btn-info" style="font-size: 3px; padding: 1px 3px; margin-top: 0">Review</button>&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="bi bi-clock"></i>&nbsp;&nbsp;2000-01-01&nbsp;&nbsp;<i class="bi bi-person"></i>&nbsp;&nbsp;115</span>
-                            <br><button type="button" class="btn btn-info col-6" style="margin-top: 10px">게시글 더 보기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button
-                        type="button"
-                        class="col-xl-3 btn btn-danger"
-                        data-bs-dismiss="modal"
-                        style="background-color: #999999; border: none; height: 34px"
-                >
-                    닫기
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--컨텐츠 영역-->
-<div class="cntWrap">
-    <div class="contents container-xxl">
-    <!--컨텐츠 내용 부분 :: 반드시 시멘틱태그 준수-->
-    <form action="">
-        <!-- input태그 label for과 매칭되는 id반드시 준수할 것 ! input이 들어있는 태그는 form태그안에 반드시 위치해야함!! -->
-        <div class="mb-3 d-flex">
-            <label for="exampleFormControlInput1" class="form-label col-2">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            <div class="rt col-3 ms-2">
-                <!-- 이부분에 버튼이 들어오거나 없으면 빈div로 놔둠 -->
-            </div>
-        </div>
-    </form>
-</div>    
 
 
 

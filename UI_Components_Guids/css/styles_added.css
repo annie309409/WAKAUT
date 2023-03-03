@@ -36,3 +36,27 @@ div.img{
 .popyellow.bs-popover-auto[data-popper-placement^=right]>.popover-arrow::after, .bs-popover-end>.popover-arrow::after{
     border-right-color: #ffc107;
 }
+
+/*박정아 : 말풍선 오른쪽 fill 그레이*/
+.popgray.bs-popover-auto[data-popper-placement^=right]>.popover-arrow::after, .bs-popover-end>.popover-arrow::after{
+    border-right-color: #6c757d;
+}
+
+/* 박정아 : 게시글 부분 상단 그림 */
+.cntWrap.view .hdrWrap{
+    height: 280px;
+    padding-top: 200px;
+}
+.cntWrap.view .hdrWrap header>div{
+    width: 50%;
+    margin-right: auto;
+    margin-left: 0;
+}
+.cntWrap.view .hdrWrap+div{
+    margin-top: 160px;
+}
+
+/*박정아: 리플부분 수정*/
+div.replay{
+    padding: 40px calc(100% / 12);
+}
