@@ -1,0 +1,36 @@
+<div class="hdrWrap bg-secondary-subtle">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary container-xxl">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">WAKAUT</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0"> 
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/info/mypage">MyPage</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/board/list">Community</a>
+                  </li>
+
+                  {{#if session.userid}}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Logout</a>
+                  </li>
+                  {{else}}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/info/login">Login/signIn</a>
+                  </li>
+                  {{/if}}
+                </ul>
+                <form class="d-flex col-7" role="search">
+                  <input class="form-control me-2" type="search" placeholder="운동장소를 검색하세요" aria-label="Search">
+                  <button class="btn btn-success col-4" type="submit">Search Place</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+    </header>
+</div>

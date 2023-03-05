@@ -1,0 +1,78 @@
+/* 박정아 : 게시판에서 두줄 이상되는 텍스트 줄임표시 */
+p.ell{
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical
+}
+
+/*박정아 : 게시판의 텍스트에 위아래 공간 부여*/
+.brdTxt{
+    padding: 20px 0px;
+
+}
+
+/*박정아 : 모달창의 반응형 이전 작업을위한 전처리*/
+.modal-dialog{
+    min-width: 800px;
+}
+
+/*박정아 : 이미지 사이즈 확인*/
+div.img{
+    height: auto;
+    background-color: #ccc;
+}
+
+/*박정아 : 말풍선 오른쪽 fill 그린*/
+.popgreen.bs-popover-auto[data-popper-placement^=right]>.popover-arrow::after, .bs-popover-end>.popover-arrow::after{
+    border-right-color: #198754;
+}
+
+
+/*박정아 : 말풍선 오른쪽 fill 옐로우*/
+.popyellow.bs-popover-auto[data-popper-placement^=right]>.popover-arrow::after, .bs-popover-end>.popover-arrow::after{
+    border-right-color: #ffc107;
+}
+
+/*박정아 : 말풍선 오른쪽 fill 그레이*/
+.popgray.bs-popover-auto[data-popper-placement^=right]>.popover-arrow::after, .bs-popover-end>.popover-arrow::after{
+    border-right-color: #6c757d;
+}
+
+/* 박정아 : 게시글 부분 상단 그림 */
+.cntWrap.view .hdrWrap{
+    height: 280px;
+    padding-top: 200px;
+}
+.cntWrap.view .hdrWrap header>div{
+    width: 50%;
+    margin-right: auto;
+    margin-left: 0;
+}
+.cntWrap.view .hdrWrap+div{
+    margin-top: 160px;
+}
+
+/*박정아: 리플부분 수정*/
+div.replay{
+    padding: 40px calc(100% / 12);
+}
+
+
+/*박정아 : 커서 발생부분*/
+.shadow,.shadow .leftInfo{
+    position: relative;
+}
+.shadow>a , .shadow .leftInfo>a{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+    top: 0;left: 0;
+    z-index: 3;
+    color:transparent;
+}
+

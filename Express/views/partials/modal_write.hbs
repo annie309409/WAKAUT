@@ -1,0 +1,45 @@
+ <div class="modal fade" id="write" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg z-3">
+            <div class="modal-content">
+                <form>     
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">새 글 쓰기</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body container-fluid">
+                        <!-- 제목 -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="제목을 입력하세요">
+                            <label for="floatingInput">제목</label>
+                        </div>
+                        <!-- 작성자 -->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" value="구디거북이" readonly>
+                            <label for="floatingInput">작성자</label>
+                        </div>
+                        <!--셀렉트 영역-->
+                        <select class="form-select mt-3" aria-label="Default select example">
+                        <!--셀렉트에 들어갈 값을 입력해주세요-->
+                            <option selected>Categories</option>
+                            <option value="1">Review</option>
+                            <option value="2">Community</option>
+                        </select>
+                        <!-- 텍스트 -->
+                        <div class="form-floating mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                            <label for="floatingTextarea2">내용을 입력하세요!</label>
+                        </div>
+                        <div class="input-group mt-3">
+                            <input type="file" class="form-control" id="inputGroupFile02">
+                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- 버튼 추가가능 -->
+                        <button type="reset" class="btn btn-secondary">다시쓰기</button>
+                        <button type="submit" class="btn btn-secondary">글 올리기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
