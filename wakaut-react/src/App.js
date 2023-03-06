@@ -1,9 +1,9 @@
-import { Button , Badge} from 'react-bootstrap';
+import BoardList from './components/board_list';
 
 const App=()=>{
     return (
         <div>
-        {/* 여기에 모듈 import값 넣어볼것 !*/}
+            <BoardList />
         </div>
     )
 }
