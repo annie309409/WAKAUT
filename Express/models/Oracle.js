@@ -8,7 +8,7 @@ const Oracle ={
     },
     initConn: async ()=>{
         // 본인이 설치한 java의 위치 설정 
-        oracledb.initOracleClient({libDir:'C:/Java/instantclient_19_18'});
+        oracledb.initOracleClient({libDir:'C:/Java/instantclient_19_17'});
     },
     makeConn : async () => {
         try{

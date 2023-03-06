@@ -13,7 +13,7 @@
 + [경기도 생활체육 시설](https://data.gg.go.kr/portal/data/service/selectServicePage.do?page=1&sortColumn=&sortDirection=&infId=6LMU5TBQ6RJJRBLAZWBC21105087&infSeq=1&searchWord=%EC%B2%B4%EC%9C%A1%EC%8B%9C%EC%84%A4)
 
 ## Software Architecture
-![이미지](../img_readme/swdrawing.png)
+![이미지](../img_readme/프레젠테이션1.png)
 
 ## 개발가이드 
 ### 폴더설명
