@@ -4,7 +4,7 @@ import {Container,Form, Button} from 'react-bootstrap';
 const Search=(props)=>{
     return(
     <Container>
-        <Form className='fluid d-flex'>
+        <Form className='fluid d-flex justify-content-center'>
             <div className="left d-flex col-9">
                 <Form.Select aria-label="Default select example" style={{maxWidth:'200px'}}>
                     <option>카테고리 선택</option>

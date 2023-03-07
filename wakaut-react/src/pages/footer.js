@@ -1,7 +1,7 @@
 import {Container,Row} from 'react-bootstrap';
 const Footer = ()=>{
     return(
-       <footer className="bg-light mt-5 pt-4 pb-4">
+       <footer className="bg-light pt-4 pb-4">
             <Container>
                 <Row>
                 <h1>WAKAUT</h1>
