@@ -3,17 +3,19 @@ import List from "../components/list";
 import {Map,MapMarker} from "react-kakao-maps-sdk";
 import mapicon from "../assets/map-icon.png";
 import { useState } from "react";
+import ModalDetail from "./modal_detail";
 
 const Main=()=>{
     const [isOpen, setIsOpen] = useState(false);
+    const [lgShow, setLgShow] = useState(false);
 
     return(
         <Container className="d-flex mt-4 mb-4">
             <div className="left col-6">
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary'></List>
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-danger'></List>
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary'></List>
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary'></List>
+                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary' onClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-danger' onClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary' onClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary' onClick={()=>{ setLgShow(true)}}></List>
             </div>
             <div className="right col-6 ms-4">
                 <Map center={{ lat: 33.5563, lng: 126.79581 }} style={{ width: "100%", height: "800px" }}  level={5 }>
@@ -36,6 +38,8 @@ const Main=()=>{
                 </MapMarker>
                 </Map>
             </div>
+            <ModalDetail lgShow={lgShow} setLgShow={setLgShow} score={3} />
+            
         </Container>
     )
 }
