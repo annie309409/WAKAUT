@@ -7,7 +7,7 @@ const List = (props)=>{
                     <h2>{props.title}</h2>
                     <p className="ell mb-0">{props.note}</p>
                 </div>
-                <div className="mal bg-warning ms-auto">{props.malcnt}</div>
+                <div className={`mal ${props.col} ms-auto`}>{props.malcnt}</div>
             </div>
         </div>
     )
