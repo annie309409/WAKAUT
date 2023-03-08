@@ -1,4 +1,4 @@
-import BoardList from './components/board_list';
+import BoardList from './pages/board_list';
 import {Routes,Route} from "react-router";
 import NotFind404 from './pages/NotFind404';
 import Main from './pages/main';
