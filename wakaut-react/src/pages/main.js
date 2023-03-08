@@ -4,6 +4,7 @@ import {Map,MapMarker} from "react-kakao-maps-sdk";
 import mapicon from "../assets/map-icon.png";
 import { useState } from "react";
 import ModalDetail from "./modal_detail";
+import { AiTwotoneHeart } from "react-icons/ai";
 
 const Main=()=>{
     const [isOpen, setIsOpen] = useState(false);
@@ -12,12 +13,13 @@ const Main=()=>{
     return(
         <Container className="d-flex mt-4 mb-4">
             <div className="left col-6">
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary' onClick={()=>{ setLgShow(true)}}></List>
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-danger' onClick={()=>{ setLgShow(true)}}></List>
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary' onClick={()=>{ setLgShow(true)}}></List>
-                <List title='부천 종합 운동장' malcnt='♥' note="경기도 부천시 소사로482" col='bg-secondary' onClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt={<AiTwotoneHeart />} note="경기도 부천시 소사로482" col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt={<AiTwotoneHeart />} note="경기도 부천시 소사로482" col='bg-danger' textClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt={<AiTwotoneHeart />} note="경기도 부천시 소사로482" col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>
+                <List title='부천 종합 운동장' malcnt={<AiTwotoneHeart />} note="경기도 부천시 소사로482" col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>
             </div>
             <div className="right col-6 ms-4">
+                {/* 맵 api 영역 (kakao-react전용 설치필요) :: npm install react-kakao-maps-sdk*/}
                 <Map center={{ lat: 33.5563, lng: 126.79581 }} style={{ width: "100%", height: "800px" }}  level={5 }>
                 <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}  image={{
                         src: `${mapicon}`, // 마커이미지의 주소입니다
