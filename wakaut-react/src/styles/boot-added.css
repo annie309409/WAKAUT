@@ -14,6 +14,11 @@
     cursor: pointer;
 }
 
+button a,button a:hover,button a:visited{
+    color: #fff;
+    text-decoration: none;
+}
+
 .mal{
     clip-path: polygon(0 50%, 20% 35%, 20% 0%, 99% 0%, 100% 100%, 20% 100%, 20% 65%);
     width: 100px;
