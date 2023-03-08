@@ -2,7 +2,7 @@ import { useState } from "react";
 import Alerts from '../components/alert';
 import Search from '../components/search';
 import '../styles/boot-added.css';
-import {Container, Button} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import List from '../components/list';
 import Paging from '../components/pagenation';
 import WriteModal from './write_modal';

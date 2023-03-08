@@ -1,3 +1,5 @@
+const { Kakao } = window;
+
 Kakao.init('69823228c875a5a95558c4f4b78b0ae9'); // 사용하려는 앱의 JavaScript 키 입력
 
 function kakaoShare({'addr':addr, 'title':title, 'des':des, 'img':img, 'likes':likes}) {

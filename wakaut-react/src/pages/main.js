@@ -5,10 +5,14 @@ import mapicon from "../assets/map-icon.png";
 import { useState } from "react";
 import { AiTwotoneHeart } from "react-icons/ai";
 import PlaceModal from "./place_modal";
+import img  from '../assets/workaut.png';
 
 const Main=()=>{
     const [isOpen, setIsOpen] = useState(false);
     const [lgShow, setLgShow] = useState(false);
+    let addr = '경기도 부천시 소사로482';
+    let title = '부천 종합 운동장';
+    let des = '#에어로빅 #줌바 #조깅';
 
     return(
         <Container className="d-flex mt-4 mb-4">
@@ -19,7 +23,6 @@ const Main=()=>{
                 <List title='부천 종합 운동장' malcnt={<AiTwotoneHeart />} note="경기도 부천시 소사로482" col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>
             </div>
             <div className="right col-6 ms-4">
-                {/* 맵 api 영역 (kakao-react전용 설치필요) :: npm install react-kakao-maps-sdk*/}
                 <Map center={{ lat: 33.5563, lng: 126.79581 }} style={{ width: "100%", height: "800px" }}  level={5 }>
                 <MapMarker position={{ lat: 33.55635, lng: 126.795841 }}  image={{
                         src: `${mapicon}`, // 마커이미지의 주소입니다
@@ -40,7 +43,7 @@ const Main=()=>{
                 </MapMarker>
                 </Map>
             </div>
-            <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}/>
+            <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3} addr={addr} title={title} des={des} img={img} />
             
         </Container>
     )
