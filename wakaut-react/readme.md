@@ -188,7 +188,7 @@ export default Main;
 |time | 작성일자 없어도 됨  |
 |img | true: 이미지 있음 false: 이미지 없음 |
 
-+ ![이미지](../img_readme/2023-03-08%2021%2059%2025.png) 이런 모습의 컴포넌트를 쓰고 싶다면 사용한다.
+> ![이미지](../img_readme/2023-03-08%2021%2059%2025.png) 이런 모습의 컴포넌트를 쓰고 싶다면 사용한다.
 ```javascript
 //list를 import한다.
 import List from "../components/list";
@@ -199,7 +199,7 @@ import List from "../components/list";
 
 ### search 
 + 아래와 같은 이미지의 모습일때 사용가능하며, 버튼 개수는 조절이 가능하다.
-+ ![이미지](../img_readme/2023-03-08%2021%2059%2055.png)
+> ![이미지](../img_readme/2023-03-08%2022%2008%2055.png)
 
 | 파라미터값 | 의미 |
 |---|---|
