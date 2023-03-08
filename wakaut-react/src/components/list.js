@@ -1,15 +1,19 @@
-import { AiFillClockCircle,AiFillRead } from "react-icons/ai";
+import { CiAlarmOn,CiRead } from "react-icons/ci";
 import {Badge} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 const List = (props)=>{
     return(
-        <div className="shadow mt-4" onClick={props.onClick}>
+        <div className="shadow mt-4">
             <div className="article d-flex p-3">
-                {(props.img)? (<div className="image"></div>):false}
-                <div className="texts ms-2 col-8">
-                    <h2>{props.title}</h2>
-                    <p className="ell mb-0">{props.note}</p>
-                    {(props.time)? <p className="mt-2 mb-0"> <Badge bg="success">{props.kd}</Badge> <AiFillClockCircle /> {props.time} <AiFillRead /> 255 </p> : false}
+                <div className="left d-flex col-10" onClick={props.textClick}>
+                    {(props.img)? (<div className="image"></div>):false}
+                    <div className="texts ms-2 col-8">
+                            <h2>{props.title}</h2>
+                            <p className="ell mb-0">{props.note}</p>
+                            {(props.time)? <p className="mt-2 mb-0"> <Badge bg={(props.kd=='review')?'warning':'success'}>{props.kd}</Badge> <CiAlarmOn /> {props.time} <CiRead /> {props.view} </p> : false}
+                        {(props.to)?<Link to={props.to}></Link>:false}
+                    </div>
                 </div>
                 {(props.malcnt)?<div className={`mal ${props.col} ms-auto`}>{props.malcnt}</div> : false}
             </div>
