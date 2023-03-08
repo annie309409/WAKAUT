@@ -3,8 +3,8 @@ import List from "../components/list";
 import {Map,MapMarker} from "react-kakao-maps-sdk";
 import mapicon from "../assets/map-icon.png";
 import { useState } from "react";
-import ModalDetail from "./modal_detail";
 import { AiTwotoneHeart } from "react-icons/ai";
+import PlaceModal from "./place_modal";
 
 const Main=()=>{
     const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const Main=()=>{
                 </MapMarker>
                 </Map>
             </div>
-            <ModalDetail lgShow={lgShow} setLgShow={setLgShow} score={3} />
+            <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}/>
             
         </Container>
     )

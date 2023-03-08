@@ -1,27 +1,18 @@
-import {Modal,Card,Button} from 'react-bootstrap';
-import {AiFillStar } from "react-icons/ai";
+import Modal from '../components/modal'
+import {Card,Button} from 'react-bootstrap';
+import {AiFillStar} from "react-icons/ai";
 import {CiLocationOn, CiPhone, CiFaceSmile } from "react-icons/ci";
 import List from '../components/list';
 import img  from '../assets/workaut.png';
 
-const ModalDetail=(props)=>{
+
+const PlaceModal=(props)=>{
     let scores=[];
     for(let i = 0; i<props.score; i++) scores.push(i);
-    const sc= scores.map(m=>{return <AiFillStar key={m} />});
-
+    const sc= (props.score) ? scores.map(m=>{return <AiFillStar key={m} />}): false;
+    
     return(
-        <Modal
-        size="lg"
-        show={props.lgShow}
-        onHide={() => props.setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-            시설 자세히보기
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='d-flex'>
+        <Modal lgShow={props.lgShow} setLgShow={props.setLgShow} class='d-flex'>
             <div className='left col-6 me-1'>
                 <Card className='border-0'>
                 <Card.Img variant="top" src={img} />
@@ -42,14 +33,12 @@ const ModalDetail=(props)=>{
                 <p><CiPhone /><span> 031-888-6666</span></p>
                 <p><CiFaceSmile /><span>{sc}</span></p>
                 <div className='brdPrev mb-5'>
-                    <List title="게시판 제목" note="이곳은 정말 좋은곳입니다." kd="review" time="2023-03-08" view="255"/>
+                    <List title="게시판 제목" note="이곳은 정말 좋은곳입니다." kd="community" time="2023-03-08" view="255"/>
                     <List title="게시판 제목" note="이곳은 정말 좋은곳입니다." kd="review" time="2023-03-08" view="255"/>
                 </div>
                 <Button variant="success">게시글 더 보기</Button>
             </div>
-        </Modal.Body>
-      </Modal>
+        </Modal>
     )
 }
-
-export default ModalDetail;
+export default PlaceModal;
