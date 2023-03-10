@@ -12,19 +12,19 @@ import MyPageList from "../components/mypage_list";
 
 const MyPage = () => {
     return(
-        <Container>
+        <Container style={{maxWidth:'550px', }}>
 
         <Title title='마이페이지'/>
 
             <div style={{display: 'flex',alignItems:"center", justifyContent: 'center'}}>
-                <div style={{width:'300px', height: '300px', backgroundColor: '#ccc', borderRadius:'20px'}}>
+                <div style={{width:'200px', height: '200px', backgroundColor: '#ccc', borderRadius:'20px'}}>
                     &nbsp;
                 </div>
             </div>
 
-            <div style={{display: 'flex',alignItems:"center", justifyContent: 'center', fontSize: '30px', marginTop:'20px', fontWeight:'bold'}}>홍길동</div>
+            <div style={{display: 'flex',alignItems:"center", justifyContent: 'center', fontSize: '22px', marginTop:'20px', fontWeight:'bold'}}>홍길동</div>
 
-            <div className='d-flex' style={{height:'100px', fontSize:'26px', marginTop:'10px'}}>
+            <div className='d-flex' style={{height:'50px', fontSize:'18px', marginTop:'10px'}}>
                 <Link to='#' className='col-lg-5' style={{textAlign:'end'}}>
                     <BsPencilSquare style={{color:'#17a0b8'}}/>
                 </Link>
