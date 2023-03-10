@@ -111,3 +111,47 @@ footer{
     font-size: 20px;
     line-height: 40px;
 }
+
+.mb-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin : 0 auto;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin : 0 auto;
+}
+
+.h2 {
+    border: none;
+    font-weight: bold;
+    color: #17A2B8 ;
+}
+
+.h5 {
+    font-weight: bold;
+    color: #54595E ;
+}
+
+
+.joinTitle {
+    background-color: #17A2B8;
+    color: #ffffff;
+}
+
+.btnB {
+    background-color: white;
+    color : #54595E;
+}
+
+.finish {
+    padding: 200px 0;
+}
