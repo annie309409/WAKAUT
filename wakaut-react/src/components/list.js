@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom';
 const List = (props)=>{
     return(
         <div className="shadow mt-4">
-            <div className="article d-flex p-3">
-                <div className="left d-flex col-10" onClick={props.textClick}>
+            <div className="article d-flex p-4">
+                <div className="left d-flex col-11  " onClick={props.textClick}>
                     {(props.img)? (<div className="image"></div>):false}
                     <div className="texts ms-2 col-8">
                             <h2>{props.title}</h2>
