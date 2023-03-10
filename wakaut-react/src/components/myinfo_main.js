@@ -6,19 +6,19 @@ const MyInfoMain = (props) => {
         <>
         {(props.noimage) ?
             <div className='d-flex' style={{alignItems:'center', marginTop: '40px'}}>
-                <div className='col-6' style={{fontSize:'32px', color:'#606060', fontWeight:'bold'}}>회원정보</div>
+                <div className='col-6' style={{fontSize:'16px', color:'#606060', fontWeight:'bold'}}>회원정보</div>
                 <div className='col-6' style={{display:'flex', justifyContent:'end'}}>
-                    <Link to='/modify'><Button type='button' style={{background:'#239aaf', border:'none', color:'white', fontSize: '25px', width:'200px', padding:'10px 0'}}>회원정보 수정</Button></Link>
+                    <Link to='/modify'><Button type='button' style={{background:'#239aaf', border:'none', color:'white', fontSize: '12px', width:'90px', padding:'5px 0'}}>회원정보 수정</Button></Link>
                 </div>
             </div>
         :
             <div className='d-flex' style={{alignItems:'center'}}>
                 <div className='col-3'>
-                    <div style={{width:'200px', height:'200px', background:'#ccc', borderRadius: '15px',}}>&nbsp;</div>
+                    <div style={{width:'110px', height:'110px', background:'#ccc', borderRadius:'15px',}}>&nbsp;</div>
                 </div>
-                <div className='col-6' style={{fontSize:'40px', fontWeight:'bold', justifyContent:'start', display:'flex'}}>홍길동</div>
+                <div className='col-6' style={{fontSize:'18px', fontWeight:'bold', justifyContent:'start', display:'flex'}}>홍길동</div>
                 <div className='col-3' style={{textAlign:'end'}}>
-                    <Link to='/'><Button type='button' style={{background:'#239aaf', border:'none', color:'white', fontSize: '25px', width:'200px', padding:'10px 0'}}>로그아웃</Button></Link>
+                    <Link to='/'><Button type='button' style={{background:'#239aaf', border:'none', color:'white', fontSize: '12px', width:'90px', padding:'5px 0'}}>로그아웃</Button></Link>
                 </div>
             </div>
         }
