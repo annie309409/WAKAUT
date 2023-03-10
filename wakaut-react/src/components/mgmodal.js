@@ -5,7 +5,6 @@
  const myModal = document.getElementById('myModal')
  const myInput = document.getElementById('myInput')
 
-
 const Mgmodal=(props)=>{
     return(
         <Modal show={props.LgShow}  onHide={()=> props.setLgShow(false)} lgShow={props.LgShow} setLgShow={props.setLgShow}

@@ -9,8 +9,6 @@ import Managerlist from "../components/manager_list";
 import Mgmodal from "../components/mgmodal";
 
 
-
-
 const Manager=()=>{
     const [LgShow, setLgShow] = useState(false);
     return(
