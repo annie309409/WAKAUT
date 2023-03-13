@@ -111,3 +111,57 @@ footer{
     font-size: 20px;
     line-height: 40px;
 }
+
+
+
+
+/*--------------------------------------------------------------------추가 managerlist*/
+
+
+.accountimg{
+    padding: 50px;
+    margin:5px;
+    border-Radius:20px;
+    width:200px;
+    background-color: #ccc;
+
+}
+.standal{
+    display:flex;
+}
+.accountinfo{
+    display:inline;
+    margin-Left:15px;
+
+}
+.accountTitle{
+    list-style:none
+}
+.accountinfo2{
+    display:inline;
+    margin-Left:45px
+}
+.accountTitle li:first-child{
+    color:gray;
+}
+.stopbtn{
+    display:flex;
+    justify-Content:end;
+    align-Content:center;
+    align-Items:end;
+}
+
+.acstopbtn{
+    background:#239aaf;
+    border:none;
+    color:white;
+    font-Size: 20px;
+
+}
+
+
+/*------------------------------추가 mgmodal*/
+.stopmodal{
+    display:flex;
+    align-Items:end;
+}

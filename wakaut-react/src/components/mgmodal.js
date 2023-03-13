@@ -2,8 +2,10 @@
  import '../styles/boot-added.css';
  import {Modal} from 'react-bootstrap';
  import React from "react";
+ import '../styles/boot-added.css'
  const myModal = document.getElementById('myModal')
  const myInput = document.getElementById('myInput')
+
 
 const Mgmodal=(props)=>{
     return(
@@ -22,7 +24,7 @@ const Mgmodal=(props)=>{
                         <p>해당 계정을 정지시키겠습니까?</p>
                     </Modal.Body>
 
-                    <Modal.Footer style={{display:'flex',alignItems:"end"}}>
+                    <Modal.Footer className="stopmodal" >
                         <Button variant="secondary" onClick={()=> props.setLgShow(false)}>아니요</Button>
                         <Button variant="primary" onClick={()=> props.setLgShow(false)}>네</Button>
                     </Modal.Footer>
