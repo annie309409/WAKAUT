@@ -14,7 +14,7 @@ const Join=()=>{
     const message = ['SMS', '이메일']
 
     return(
-        <Container style={{maxWidth:'800px'}}>
+        <Container className="modify-frm">
             <Title title='회원가입' />
             <Input label='아이디' placeholder="아이디를 입력해 주세요" btn={true} btnvalue="중복확인" variant="outline-secondary"/>
             <Input label='비밀번호' placeholder="6~20자 이내 영문,숫자,특문 조합으로 입력해 주세요" btn={false}/>
@@ -25,12 +25,12 @@ const Join=()=>{
             <ModifyRadio type='성별' radioval={gender} />
             <Input label='생년월일' value='' placeholder="YYYYMMDD" btn={false}/>
             <ModifyRadio type='선택약관동의' radioval={terms1} setLgShow={setLgShow} termsview='약관보기'/>
-            <hr style={{backgroundColor:'#17a1b8', height:'3px'}}/>
+            <hr className="hr"/>
             <ModifyRadio type='선택약관동의' radioval={terms2}/>
             <ModifyRadio message={message} notype={true} />
 
-            <div className='d-flex' style={{justifyContent: 'center'}}>
-               <Button style={{fontWeight:'bold', height:'40px', fontSize: '14px', color: 'white', marginLeft:'20px',}} className='col-2 shadow' variant='info'>회원가입 완료</Button>
+            <div className='mod-btn-container d-flex'>
+               <Button className="mod-info-btn col-2 shadow" variant='info'>회원가입 완료</Button>
             </div>
 
             <ModalDetail lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙

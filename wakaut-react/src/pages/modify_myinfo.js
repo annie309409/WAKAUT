@@ -17,7 +17,7 @@ const InfoModify=()=>{
     const message = ['SMS', '이메일']
 
     return(
-<Container style={{maxWidth:'800px'}}>
+<Container className='modify'>
     <Title title='개인 정보 수정' />
     <Input label='아이디' value='gildong' placeholder="" btn={false} btnvalue="" variant=""/>
     <Input label='현재 비밀번호' placeholder="비밀번호를 입력해 주세요" btn={false}/>
@@ -29,14 +29,14 @@ const InfoModify=()=>{
     <ModifyRadio type='성별' radioval={gender} />
     <Input label='생년월일' value='' placeholder="YYYYMMDD" btn={false}/>
     <ModifyRadio type='선택약관동의' radioval={terms1} setLgShow={setLgShow} termsview='약관보기'/>
-    <hr style={{backgroundColor:'#17a1b8', height:'3px'}}/>
+    <hr className="hr"/>
     <ModifyRadio type='선택약관동의' radioval={terms2}/>
     <ModifyRadio message={message} notype={true} />
 
-<div className='d-flex' style={{justifyContent: 'center'}}>
-    <Button  as={Link}
-             to="/" style={{display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', height:'40px', fontSize: '14px'}} className='col-2 shadow' variant="outline-info">탈퇴하기</Button>
-    <Button style={{fontWeight:'bold', height:'40px', fontSize: '14px', color: 'white', marginLeft:'20px',}} className='col-2 shadow' variant='info'><Link to='/myinfo'>회원정보 수정</Link></Button>
+<div className='mod-btn-container d-flex'>
+    <Button  as={Link} to="/"
+             className='mod-leave-btn col-2 shadow' variant="outline-info">탈퇴하기</Button>
+    <Button className='mod-info-btn col-2 shadow' variant='info'><Link to='/myinfo'>회원정보 수정</Link></Button>
 </div>
 
 <ModalDetail lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙

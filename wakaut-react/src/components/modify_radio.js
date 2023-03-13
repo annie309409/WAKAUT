@@ -20,11 +20,12 @@ const ModifyRadio = (props) => {
     return(
     <Container>
     {(!props.notype) ?
-    <Form className="d-flex" style={{height:'60px'}}>
-        <Form.Label style={{fontWeight:'bold', fontSize: '14px'}} size="lg" column lg={2}>{props.type}</Form.Label>
+    <Form className="radio-frm1 d-flex">
+        <Form.Label className="radio-type"
+                    size="lg" column lg={2}>{props.type}</Form.Label>
         <Col lg={7}>
             {props.radioval.map((val) => (
-            <Form.Check
+            <Form.Check className="radio-btn"
                 type='radio'
                 inline
                 key={val}
@@ -33,10 +34,11 @@ const ModifyRadio = (props) => {
                 checked={selectedValue === val}
                 onChange={handleRadioChange}
                 onClick={isChecked}
-                style={{fontWeight:'bold', marginLeft: "25px", fontSize: '14px'}}
             />))}
-            {(props.termsview) ?
-                <span style={{display:'flex', marginLeft:'380px', marginTop:'-25px', color:'#179fb8', fontSize: '14px'}} onClick={()=>props.setLgShow(true)}>{props.termsview}</span>
+            {(props.termsview)
+                ?
+                <span className="terms" onClick={()=>props.setLgShow(true)}>
+                    {props.termsview}</span>
                 :
                 false}
         </Col>
@@ -44,9 +46,9 @@ const ModifyRadio = (props) => {
 
     :
 
-    <Form className="d-flex" style={{height:'40px', justifyContent:'center'}}>
+    <Form className="d-flex radio-frm2">
         {props.message.map((val2) => (
-        <Form.Check
+        <Form.Check className="radio-btn"
             type='radio'
             inline
             key={val2}
@@ -55,7 +57,6 @@ const ModifyRadio = (props) => {
             checked={selectedValue === val2}
             onChange={handleRadioChange}
             onClick={isChecked}
-            style={{fontWeight:'bold', marginLeft: "25px", fontSize: '14px'}}
         />))}
     </Form>
     }
