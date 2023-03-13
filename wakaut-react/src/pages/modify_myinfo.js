@@ -17,7 +17,7 @@ const InfoModify=()=>{
     const message = ['SMS', '이메일']
 
     return(
-<Container className='modify'>
+<Container className='modify-frm'>
     <Title title='개인 정보 수정' />
     <Input label='아이디' value='gildong' placeholder="" btn={false} btnvalue="" variant=""/>
     <Input label='현재 비밀번호' placeholder="비밀번호를 입력해 주세요" btn={false}/>
