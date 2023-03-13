@@ -9,27 +9,33 @@ const Input = (props)=>{
 
     return(
 <Container>
-<Form className="d-flex" style={{height:'60px'}}>
-  <Form.Label style={{fontWeight:'bold', fontSize: '14px'}}
+<Form className="mod-frm d-flex">
+  <Form.Label className="mod-type"
               size="lg" column lg={2}>{props.label}</Form.Label>
 
     <Col lg={7}>
 
-    {(!props.placeholder) ?
-        <Form.Control style={{padding:'18px', marginLeft:'20px', height:'40px'}}
-          value={inputValue} className='Control shadow' column lg={2}
+    {(!props.placeholder)
+        ?
+        <Form.Control className='mod-input Control shadow'
+          value={inputValue}  column lg={2}
           type="text" onChange={(e) =>
             setInputValue(e.target.value)}/>
-            :
-        <Form.Control style={{padding:'18px', marginLeft:'20px', height:'40px'}}
-          className='Control shadow' column lg={2} type="text"
+        :
+        <Form.Control className='mod-input Control shadow'
+           column lg={2} type="text"
           placeholder={props.placeholder} />
     }
 
     </Col>
-   {(props.btn) ? (<Button style={{fontWeight:'bold', height:'40px',
-       marginLeft:'40px', fontSize: '14px'}}
-       className='col-2 shadow' variant={props.variant}>{props.btnvalue}</Button>) : false}
+
+   {(props.btn)
+       ?
+       (<Button className='mod-ipbtn col-2 shadow'
+                variant={props.variant}>{props.btnvalue}</Button>)
+       :
+       false}
+
 </Form>
 </Container>
 )
