@@ -11,15 +11,17 @@ const FavoritesList = (props) => {
 
     return (
         <>
-        <Form className="d-flex shadow" style={{height:'60px', fontSize:'12px', textAlign:'center', alignItems: 'center', marginTop:'10px'}}>
+        <Form className="fav-list-wrap d-flex shadow">
             <Form.Label column lg={1}>{props.region}</Form.Label>
-            <Form.Label column lg={6}><Link to={'#'} onClick={()=>{ setLgShow(true)}} style={{textDecoration: 'none', color:'#17a1b8'}}>{props.gym}</Link></Form.Label>
+            <Form.Label column lg={6}><Link to={'#'} className="gym"
+                onClick={()=>{ setLgShow(true)}}>{props.gym}</Link></Form.Label>
             <Form.Label column lg={2}>{props.contact}</Form.Label>
-            <Form.Label  column lg={3} style={{textAlign:'end'}}>
-                <Button type='button' style={{border:'none', height:'50%', color:'white', fontWeight:'bold', fontSize: '12px', backgroundColor: '#17a1b8', width: '30%', marginRight: '10px'}}>삭제</Button>
+            <Form.Label column lg={3} className="delete-btn-wrap">
+                <Button className="delete-btn" type='button'>삭제</Button>
             </Form.Label>
         </Form>
-    <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3} addr={addr} title={props.gym} des={des} img={img} />
+    <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}
+                addr={addr} title={props.gym} des={des} img={img} />
 
         </>
     );

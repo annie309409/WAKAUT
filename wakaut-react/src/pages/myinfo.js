@@ -5,7 +5,7 @@ import MyInfoMain from "../components/myinfo_main";
 
 const MyInfo = () => {
     return(
-      <Container style={{maxWidth:'500px'}}>
+      <Container className="myinfo">
 
       <Title title='내정보 관리'/>
 

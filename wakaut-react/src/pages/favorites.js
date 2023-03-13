@@ -4,18 +4,17 @@ import Title from '../components/title'
 import Paging from "../components/pagenation";
 import React, {useState} from "react";
 import FavoritesList from "../components/favorites_list";
-import PlaceModal from "./place_modal";
-import img from "../assets/workaut.png";
 
 const Favorites = () => {
 
+    const [lgShow, setLgShow] = useState(false)
     return(
 
         <>
-        <Container style={{maxWidth:'700px'}}>
+        <Container className="favorites">
             <Title title='즐겨찾기 목록'/>
-            <hr style={{backgroundColor:'#17a1b8', height:'3px'}}/>
-            <Form className="d-flex" style={{height:'40px', fontWeight:'bold', fontSize:'16px', textAlign:'center', marginTop: '-15px'}}>
+            <hr className="hr"/>
+            <Form className="fav-th d-flex">
                 <Form.Label column lg={1}>지역</Form.Label>
                 <Form.Label column lg={6}>시설명</Form.Label>
                 <Form.Label column lg={2}>연락처</Form.Label>
