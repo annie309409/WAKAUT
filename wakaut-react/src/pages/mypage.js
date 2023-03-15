@@ -12,34 +12,29 @@ import MyPageList from "../components/mypage_list";
 
 const MyPage = () => {
     return(
-        <Container>
+        <Container className="mypg">
 
         <Title title='마이페이지'/>
 
-            <div style={{display: 'flex',alignItems:"center", justifyContent: 'center'}}>
-                <div style={{width:'300px', height: '300px', backgroundColor: '#ccc', borderRadius:'20px'}}>
-                    &nbsp;
-                </div>
+            <div className="img-wrap">
+                <div className="mypg-img">&nbsp;</div>
             </div>
 
-            <div style={{display: 'flex',alignItems:"center", justifyContent: 'center', fontSize: '30px', marginTop:'20px', fontWeight:'bold'}}>홍길동</div>
+            <div className="mypg-name">홍길동</div>
 
-            <div className='d-flex' style={{height:'100px', fontSize:'26px', marginTop:'10px'}}>
-                <Link to='#' className='col-lg-5' style={{textAlign:'end'}}>
-                    <BsPencilSquare style={{color:'#17a0b8'}}/>
-                </Link>
-
-                <Link to='#' className='col-lg-2' style={{textAlign:'center', textDecoration: 'none', color:'black'}}>
-                    남긴 글
-                </Link>
-
-                <div className='col-lg-5' style={{textAlign:'start', color:'#17a0b8'}}>(12)</div>
+            <div className='write d-flex'>
+                <Link to='/boardlist' className='write-ic col-lg-5'><BsPencilSquare className="sq-pen"/></Link>
+                <Link to='/boardlist' className='write-history col-lg-2'>남긴 글</Link>
+                <div className='history-amount col-lg-5'>(12)</div>
             </div>
 
-            <MyPageList link='/myinfo' type='내 정보 관리' bsicon={BsBook} icon2={BsChevronCompactRight}/>
-            <MyPageList link='/modify' type='내 정보 수정' bsicon={BsPencilFill} icon2={BsChevronCompactRight}/>
-            <MyPageList link='/favorites' type='즐겨찾기 목록' bsicon={BsSuitHeartFill} icon2={BsChevronCompactRight}/>
-            <MyPageList aiicon={AiOutlineLogout} bg='#17a0b8' color='white'/>
+            <MyPageList link='/myinfo' type='내 정보 관리'
+                        bsicon={BsBook} icon2={BsChevronCompactRight}/>
+            <MyPageList link='/modify' type='내 정보 수정'
+                        bsicon={BsPencilFill} icon2={BsChevronCompactRight}/>
+            <MyPageList link='/favorites' type='즐겨찾기 목록'
+                        bsicon={BsSuitHeartFill} icon2={BsChevronCompactRight}/>
+            <MyPageList aiicon={AiOutlineLogout}/>
 
         </Container>
     )

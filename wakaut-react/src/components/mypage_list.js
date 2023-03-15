@@ -11,19 +11,26 @@ const MyPageList = (props) => {
 
     return(
 <>
-    {(props.icon2) ?
-    <div  className='d-flex' style={{justifyContent:'center'}}>
-        <Form className="shadow col-lg-10" style={{display: 'flex', height:'100px', fontWeight:'bold', fontSize:'30px', textAlign:'center', alignItems: 'center',marginTop:'20px'}}>
-            <Form.Label column lg={3}><BsIcon style={{color:'#17a0b8'}}/></Form.Label>
-            <Form.Label column lg={6} style={{textAlign: 'start'}}><Link to={props.link} style={{textDecoration: 'none', color:'black'}}>{props.type}</Link></Form.Label>
-            <Form.Label column lg={3}><Link to='#' style={{textDecoration: 'none', color:'black'}}><BsChevronCompactRight /></Link></Form.Label>
+    {(props.icon2)
+        ?
+    <div className='mypg-list-container d-flex'>
+        <Form className="mypg-list-wrapper shadow col-lg-10">
+            <Form.Label column lg={3}><BsIcon className="icon"/></Form.Label>
+            <Form.Label column lg={6} className="mypg-list-name-wrap">
+                <Link to={props.link} className="mp-list-link">{props.type}</Link>
+            </Form.Label>
+            <Form.Label column lg={3}>
+                <Link to={props.link} className="mypg-link-ic"><BsChevronCompactRight /></Link>
+            </Form.Label>
         </Form>
     </div>
-:
-    <div  className='d-flex' style={{justifyContent:'center'}}>
-        <Form className="shadow col-lg-10" style={{display: 'flex', height:'100px', fontWeight:'bold', fontSize:'30px', textAlign:'center', alignItems: 'center',marginTop:'20px', background:'#17a0b8', color:'white'}}>
+        :
+    <div className='mypg-list-container d-flex'>
+        <Form className="logout shadow col-lg-10">
             <Form.Label column lg={3}><AiIcon  /></Form.Label>
-            <Form.Label column lg={6} style={{textAlign: 'center'}}><Link to={'#'} style={{textDecoration: 'none', color:'white'}}>로그아웃</Link></Form.Label>
+            <Form.Label column lg={6} className="logout-label">
+                <Link to='/' className="logout-link">로그아웃</Link>
+            </Form.Label>
         </Form>
     </div>
     }
