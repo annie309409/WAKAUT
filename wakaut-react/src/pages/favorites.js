@@ -4,10 +4,14 @@ import Title from '../components/title'
 import Paging from "../components/pagenation";
 import React, {useState} from "react";
 import FavoritesList from "../components/favorites_list";
+import img from "../assets/workaut.png";
+import PlaceModal from "./place_modal";
 
 const Favorites = () => {
-
     const [lgShow, setLgShow] = useState(false)
+    let addr = '경기도 김포시 대평원거리 11-43';
+    let des = '#용인 #호랑이 #태권';
+    const title = "용인 태권도장 성남지점"
     return(
 
         <>
@@ -20,12 +24,15 @@ const Favorites = () => {
                 <Form.Label column lg={2}>연락처</Form.Label>
             </Form>
 
-            <FavoritesList region='성남시' gym='언더아머 단속반 성남지부(3대 500이하 클릭시 IP추적)' contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
-            <FavoritesList region='의정부시' gym='언더아머 단속반 의정부지부(3대 500이하 클릭시 IP추적)' contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
-            <FavoritesList region='화성시' gym='언더아머 단속반 화성지부(3대 500이하 클릭시 IP추적)' contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
-            <FavoritesList region='안산시' gym='언더아머 단속반 안산지부(3대 500이하 클릭시 IP추적)' contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
+            <FavoritesList region='성남시' gym={title} contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
+            <FavoritesList region='의정부시' gym={title} contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
+            <FavoritesList region='화성시' gym={title} contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
+            <FavoritesList region='안산시' gym={title} contact='123-4567-8910' textClick={()=>{ setLgShow(true)}}/>
 
             <Paging cnt={10}/>
+
+            <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}
+                        addr={addr} title={title} des={des} img={img} />
         </Container>
         </>
     )
