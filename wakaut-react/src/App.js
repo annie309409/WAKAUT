@@ -7,6 +7,7 @@ import InfoModify from "./pages/modify_myinfo";
 import MyPage from "./pages/mypage";
 import Favorites from "./pages/favorites";
 import MyInfo from "./pages/myinfo";
+import Manager from "./pages/manager";
 
 const App=()=>{
     return (
@@ -19,6 +20,7 @@ const App=()=>{
                 <Route path='/myinfo' element={<MyInfo />} />
                 <Route path='/modify' element={<InfoModify />} />
                 <Route path='/favorites' element={<Favorites />} />
+                <Route path='/manager' element={<Manager />} />
                 <Route path='/*' element={<NotFind404 />} />
             </Routes>
         </div>
