@@ -9,7 +9,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Header menu={['mypage','community','login/signin', 'join']} route={['/mypage','/boardlist','/login', 'join']}/>
+      <Header menu={['mypage','community','login/signin', 'join','manager']} route={['/mypage','/boardlist','/login', 'join','/manager']}/>
       <App />
       <Footer />
     </Router>

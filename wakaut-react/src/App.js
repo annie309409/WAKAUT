@@ -11,6 +11,7 @@ import Login from "./pages/login";
 import Join from "./pages/join";
 import Joinfin from "./pages/joinfin";
 import React from "react";
+import Manager from "./pages/manager";
 
 const App=()=>{
     return (
@@ -26,6 +27,7 @@ const App=()=>{
                 <Route path='/login' element={<Login />} />
                 <Route path='/join' element={<Join />} />
                 <Route path='/joinfin' element={<Joinfin />} />
+                <Route path='/manager' element={<Manager />} />
                 <Route path='/*' element={<NotFind404 />} />
             </Routes>
         </div>
