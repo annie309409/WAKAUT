@@ -514,3 +514,21 @@ footer{
     display:flex;
     align-Items:end;
 }
+
+
+/* index 세로 스크롤 처리 : 박정아*/
+.index>.left{
+    height: 800px;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+/* 전체 스크롤 스타일 지정 : 박정아*/
+html ::-webkit-scrollbar {
+    width: 15px;
+   
+}
+html ::-webkit-scrollbar-thumb{
+    background-color: rgba(136, 136, 138, 0.8);
+    border-radius: 10px;
+}

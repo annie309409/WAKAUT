@@ -19,7 +19,7 @@ const BoardList=()=>{
                 <List title='데스매치 현피앱' note='광고사절입니당' malcnt='8' img={true} col='bg-warning' time='2023.03.08' kd="community" to="/board/boardview"/>
             </Container>
             <WriteModal lgShow={lgShow} setLgShow={setLgShow}/>
-            <Paging pg={10}/>
+            <Paging cnt={10}/>
         </>
     )
 }
