@@ -4,6 +4,7 @@ import Paging from '../../components/pagenation';
 import Title from "../../components/title";
 import Managerlist from "../../components/manager_list";
 import Mgmodal from "../../components/mgmodal";
+import getLayout from '../../components/layouts/getLayout'
 
 const Manager=()=>{
     const [LgShow, setLgShow] = useState(false);
@@ -34,3 +35,5 @@ const Manager=()=>{
     )
 }
 export default Manager;
+
+getLayout(Manager,{title:'WAKAUT 관리자 페이지 입니다.',description:'관리자 페이지입니다. (관리자 외 출입금지)'})

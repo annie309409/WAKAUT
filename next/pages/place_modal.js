@@ -23,7 +23,7 @@ const PlaceModal=(props)=>{
                     <Card.Text>{sc}</Card.Text>
                     <div className='btns'>
                         <Button variant="primary" className='fluid'>즐겨찾기 추가</Button>
-                        <Button variant="warning" className='fluid ms-2' >카카오 공유하기</Button>
+                        <Button variant="warning" className='fluid ms-2'>카카오 공유하기</Button>
                     </div>
                 </Card.Body>
                 </Card>
