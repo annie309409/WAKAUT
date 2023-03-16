@@ -1,12 +1,13 @@
 import '../styles/globals.css';
 import '../styles/boot-added.css';
-import Layout from "./layouts/layout";
-function MyApp({ Component, pageProps }) {
+import React from "react";
+
+function App({ Component, pageProps }) {
+  const getLayout =  Component.getLayout ?? ((page)=>page);
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <React.Fragment>
+      { getLayout( <Component {...pageProps} /> )}
+    </React.Fragment>
   )
 }
-
-export default MyApp
+export default App

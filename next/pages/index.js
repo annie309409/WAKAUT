@@ -5,7 +5,7 @@ import { AiTwotoneHeart } from "react-icons/ai";
 import PlaceModal from "./place_modal";
 import img from '../assets/workaut.png';
 import mapicon from '../assets/map-icon.png';
-
+import getLayout from "../components/layouts/getLayout";
 
 import dynamic from 'next/dynamic';
 const Map = dynamic(() => import("react-kakao-maps-sdk").then((module) => module.Map), {
@@ -15,7 +15,7 @@ const MapMarker = dynamic(() => import("react-kakao-maps-sdk").then((module) => 
     ssr: false
 });
 
-export default function () {
+export default function Index() {
   const [isOpen, setIsOpen] = useState(false);
     const [lgShow, setLgShow] = useState(false);
     let addr = '경기도 부천시 소사로482';
@@ -55,3 +55,5 @@ export default function () {
         </Container>
     )
 }
+
+getLayout(Index,{title:'주변에서 운동해요! WAKAUT!',description:'신개념 운동 플랫폼 워크아웃!'})

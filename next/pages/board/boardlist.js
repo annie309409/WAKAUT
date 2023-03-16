@@ -5,6 +5,7 @@ import {Container} from 'react-bootstrap';
 import List from '../../components/list';
 import Paging from '../../components/pagenation';
 import WriteModal from './write_modal';
+import getLayout from '../../components/layouts/getLayout';
 const BoardList=()=>{
     const [lgShow, setLgShow] = useState(false);
     return(
@@ -18,8 +19,11 @@ const BoardList=()=>{
                 <List title='데스매치 현피앱' note='광고사절입니당' malcnt='8' img={true} col='bg-warning' time='2023.03.08' kd="community" to="/board/boardview"/>
             </Container>
             <WriteModal lgShow={lgShow} setLgShow={setLgShow}/>
+            <Paging pg={10}/>
         </>
     )
 }
 
 export default BoardList;
+
+getLayout(BoardList,{title:'다같이 운동해요! WAKAUT!',description:'워크아웃 커뮤니티 게시판입니다.'})
