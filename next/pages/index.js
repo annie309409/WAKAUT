@@ -7,7 +7,6 @@ import img from '../assets/workaut.png';
 import mapicon from '../assets/map-icon.png';
 import getLayout from "../components/layouts/getLayout";
 import dynamic from 'next/dynamic';
-import KakaoSet from "../services/kakaoSet";
 const Map = dynamic(() => import("react-kakao-maps-sdk").then((module) => module.Map), {
     ssr: false
 });
@@ -24,7 +23,6 @@ export default function Index() {
     return(
         <Container className="d-flex mt-4 mb-4 index">
             <div className="left col-6 ">
-                <KakaoSet />
                 <List title={addr} malcnt={<AiTwotoneHeart />} note={title} col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>
                 <List title={addr} malcnt={<AiTwotoneHeart />} note={title} col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>
                 <List title={addr} malcnt={<AiTwotoneHeart />} note={title} col='bg-secondary' textClick={()=>{ setLgShow(true)}}></List>

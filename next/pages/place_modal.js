@@ -4,6 +4,7 @@ import {AiFillStar,AiOutlineHighlight} from "react-icons/ai";
 import {CiLocationOn, CiPhone, CiFaceSmile } from "react-icons/ci";
 import List from '../components/list';
 import Link from "next/link";
+import KakaoSet from '../services/kakaoSet';
 
 const PlaceModal=(props)=>{
     console.log(props.img);
@@ -22,8 +23,7 @@ const PlaceModal=(props)=>{
                     <Card.Text>{sc}</Card.Text>
                     <div className='btns'>
                         <Button variant="primary" className='fluid'>즐겨찾기 추가</Button>
-                       
-                        {/* <Button variant="warning" className='fluid ms-2'>카카오 공유하기</Button> */}
+                        <KakaoSet addr={props.addr} des={props.des} likes={sc} img={props.img} btntitle='카카오 공유하기'/>
                     </div>
                 </Card.Body>
                 </Card>
