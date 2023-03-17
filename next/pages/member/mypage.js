@@ -1,36 +1,34 @@
 import Title from "../../components/title";
 import {Container} from "react-bootstrap";
-import {BsChevronCompactRight, BsPencilSquare, BsBook,BsPencilFill,BsSuitHeartFill} from "react-icons/bs";
+import React from "react";
+import {BsChevronCompactRight, BsBook,BsPencilFill,BsSuitHeartFill} from "react-icons/bs";
 import MyPageList from "../../components/mypage_list";
 import { AiOutlineLogout  } from "react-icons/ai";
-import Link from "next/link";
+import getLayout from "../../components/layouts/getLayout";
+import MyPgWrite from "../../components/mypage_write";
 
-export default function(){
+const MyPage = () => {
     return(
         <Container className="mypg">
 
-        <Title title='마이페이지'/>
-
-            <div className="img-wrap">
-                <div className="mypg-img">&nbsp;</div>
-            </div>
-
+            <Title title='마이페이지'/>
+            <div className="img-wrap"><div className="mypg-img">&nbsp;</div></div>
             <div className="mypg-name">홍길동</div>
 
-            <div className='write d-flex'>
-                <Link href="/boardlist" className='write-ic col-lg-5'><BsPencilSquare className="sq-pen"/></Link>
-                <Link href="/boardlist" className='write-history col-lg-2'>남긴 글</Link>
-                <div className='history-amount col-lg-5'>(12)</div>
-            </div>
+            <MyPgWrite/>
 
-            <MyPageList link='/myinfo' type='내 정보 관리'
+            <MyPageList link='/member/myinfo' type='내 정보 관리'
                         bsicon={BsBook} icon2={BsChevronCompactRight}/>
-            <MyPageList link='/modify' type='내 정보 수정'
+            <MyPageList link='/member/modify' type='내 정보 수정'
                         bsicon={BsPencilFill} icon2={BsChevronCompactRight}/>
-            <MyPageList link='/favorites' type='즐겨찾기 목록'
+            <MyPageList link='/member/favorites' type='즐겨찾기 목록'
                         bsicon={BsSuitHeartFill} icon2={BsChevronCompactRight}/>
             <MyPageList aiicon={AiOutlineLogout}/>
 
         </Container>
     )
 }
+
+export default MyPage;
+
+getLayout(MyPage,{title:'WAKAUT! 마이페이지',description:'워크아웃 마이페이지'})

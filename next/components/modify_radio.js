@@ -1,10 +1,11 @@
-import {Container, Form} from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import {useState} from "react";
+import Link from "next/link";
 
 const ModifyRadio = (props) => {
     const [checkedValue, setCheckedValue] = useState(null);
-    const [selectedValue, setSelectedValue] = useState(checkedValue); // 라디오 버튼 현재 값을 저장
+    const [selectedValue, setSelectedValue] = useState(checkedValue); // 라디오 버튼의 현재 값을 저장
 
     const handleRadioChange = (event) => {
         setCheckedValue(event.target.value);
@@ -18,49 +19,60 @@ const ModifyRadio = (props) => {
     }
 
     return(
-    <Container>
-    {(!props.notype) ?
-    <Form className="radio-frm1 d-flex">
-        <Form.Label className="radio-type"
-                    size="lg" column lg={2}>{props.type}</Form.Label>
-        <Col lg={7}>
-            {props.radioval.map((val) => (
-            <Form.Check className="radio-btn"
-                type='radio'
-                inline
-                key={val}
-                label={val}
-                value={val}
-                checked={selectedValue === val}
-                onChange={handleRadioChange}
-                onClick={isChecked}
-            />))}
-            {(props.termsview)
+        <Container>
+            {(!props.notype)
                 ?
-                <span className="terms" onClick={()=>props.setLgShow(true)}>
+                <Form className="radio-frm1 d-flex">
+                    <Form.Label className="radio-type"
+                                size="lg" column lg={2}>{props.type}</Form.Label>
+                    <Col lg={7}>
+                        {props.radioval.map((val) => (
+                            <Form.Check className="radio-btn"
+                                        type='radio'
+                                        inline
+                                        key={val}
+                                        label={val}
+                                        value={val}
+                                        checked={selectedValue === val}
+                                        onChange={handleRadioChange}
+                                        onClick={isChecked}
+                            />))}
+
+                        {(props.termsview)
+                            ?
+                            <span className="terms" onClick={()=>props.setLgShow(true)}>
                     {props.termsview}</span>
+                            :
+                            false}
+                    </Col>
+                </Form>
+
                 :
-                false}
-        </Col>
-    </Form>
-
-    :
-
-    <Form className="d-flex radio-frm2">
-        {props.message.map((val2) => (
-        <Form.Check className="radio-btn"
-            type='radio'
-            inline
-            key={val2}
-            label={val2}
-            value={val2}
-            checked={selectedValue === val2}
-            onChange={handleRadioChange}
-            onClick={isChecked}
-        />))}
-    </Form>
-    }
-    </Container>
+                (props.message) ?
+                    <Form className="d-flex radio-frm2">
+                        {props.message.map((val2) => (
+                            <Form.Check className="radio-btn"
+                                        type='radio'
+                                        inline
+                                        key={val2}
+                                        label={val2}
+                                        value={val2}
+                                        checked={selectedValue === val2}
+                                        onChange={handleRadioChange}
+                                        onClick={isChecked}
+                            />))}
+                    </Form>
+                    :
+                    <div className='mod-btn-container d-flex'>
+                        {props.btn.map((btn) => (
+                            <Button className={btn.className}
+                                    variant={btn.variant}>
+                                <Link href={btn.link}>{btn.value}</Link>
+                            </Button>
+                        ))}
+                    </div>
+            }
+        </Container>
     )
 }
 export default ModifyRadio
