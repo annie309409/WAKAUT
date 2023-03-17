@@ -1,22 +1,29 @@
 import {Button, Form} from "react-bootstrap";
-import Link from "next/link";
-import React, {useState} from "react";
-import PlaceModal from "../pages/place_modal";
-import img from "../assets/workaut.png";
+import React from "react";
+
 
 const FavoritesList = (props) => {
-
-
     return (
-        <Form className="fav-list-wrap d-flex shadow">
-            <Form.Label column lg={1}>{props.region}</Form.Label>
-            <Form.Label column lg={6}><Link to={'#'} className="gym"
-                onClick={props.textClick}>{props.gym}</Link></Form.Label>
-            <Form.Label column lg={2}>{props.contact}</Form.Label>
-            <Form.Label column lg={3} className="delete-btn-wrap">
-                <Button className="delete-btn" type='button'>삭제</Button>
-            </Form.Label>
-        </Form>
+        <>
+            {props.lists.map((list) => (
+                (!list.btn)
+                    ?
+                    <Form className="fav-th d-flex">
+                        <Form.Label className="col-2">{list.region}</Form.Label>
+                        <Form.Label className="col-4">{list.gym}</Form.Label>
+                        <Form.Label className="col-3">{list.contact}</Form.Label>
+                    </Form>
+
+                    :
+
+                    <Form className="fav-list-wrap d-flex shadow">
+                        <Form.Label className="col-2">{list.region}</Form.Label>
+                        <Form.Label className="col-4 gym" onClick={list.handleModal}>{list.gym}</Form.Label>
+                        <Form.Label className="col-3">{list.contact}</Form.Label>
+                        <Form.Label className="delete-btn-wrap col-3"><Button className="delete-btn" type='button'>{list.btn}</Button></Form.Label>
+                    </Form>
+            ))}
+        </>
     );
 }
 

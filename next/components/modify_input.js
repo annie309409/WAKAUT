@@ -8,37 +8,37 @@ const Input = (props)=>{
     const [inputValue, setInputValue] = useState(props.value);
 
     return(
-<Container>
-<Form className="mod-frm d-flex">
-  <Form.Label className="mod-type"
-              size="lg" column lg={2}>{props.label}</Form.Label>
+        <Container>
+            <Form className="mod-frm d-flex">
+                <Form.Label className="mod-type"
+                            size="lg" column lg={2}>{props.label}</Form.Label>
 
-    <Col lg={7}>
+                <Col lg={7}>
 
-    {(!props.placeholder)
-        ?
-        <Form.Control className='mod-input Control shadow'
-          value={inputValue}  column lg={2}
-          type="text" onChange={(e) =>
-            setInputValue(e.target.value)}/>
-        :
-        <Form.Control className='mod-input Control shadow'
-           column lg={2} type="text"
-          placeholder={props.placeholder} />
-    }
+                    {(!props.placeholder)
+                        ?
+                        <Form.Control className='mod-input Control shadow'
+                                      value={inputValue}  column lg={2}
+                                      type="text" onChange={(e) =>
+                            setInputValue(e.target.value)}/>
+                        :
+                        <Form.Control className='mod-input Control shadow'
+                                      column lg={2} type="text"
+                                      placeholder={props.placeholder} />
+                    }
 
-    </Col>
+                </Col>
 
-   {(props.btn)
-       ?
-       (<Button className='mod-ipbtn col-2 shadow'
-                variant={props.variant}>{props.btnvalue}</Button>)
-       :
-       false}
+                {(props.btn)
+                    ?
+                    (<Button className='mod-ipbtn col-2 shadow'
+                             variant={props.variant}>{props.btnvalue}</Button>)
+                    :
+                    false}
 
-</Form>
-</Container>
-)
+            </Form>
+        </Container>
+    )
 }
 
 export default Input;
