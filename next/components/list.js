@@ -1,6 +1,5 @@
 import { CiAlarmOn,CiRead } from "react-icons/ci";
 import {Badge} from 'react-bootstrap';
-import Link from "next/link";
 
 const List = (props)=>{
     return(

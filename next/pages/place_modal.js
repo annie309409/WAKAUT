@@ -4,7 +4,11 @@ import {AiFillStar,AiOutlineHighlight} from "react-icons/ai";
 import {CiLocationOn, CiPhone, CiFaceSmile } from "react-icons/ci";
 import List from '../components/list';
 import Link from "next/link";
+<<<<<<< HEAD
 import kakaoShare from '../services/kakaoShare';
+=======
+import KakaoSet from '../services/kakaoSet';
+>>>>>>> d262d54c8585d5ae29473e3d0d6261d2365ea721
 
 const PlaceModal=(props)=>{
     console.log(props.img);
@@ -23,7 +27,11 @@ const PlaceModal=(props)=>{
                     <Card.Text>{sc}</Card.Text>
                     <div className='btns'>
                         <Button variant="primary" className='fluid'>즐겨찾기 추가</Button>
+<<<<<<< HEAD
                         <Button variant="warning" className='fluid ms-2' onClick={kakaoShare({'addr':props.addr, 'title':props.title, 'des':props.des, 'img':props.img, 'likes':props.likes})}>카카오 공유하기</Button>
+=======
+                        <KakaoSet addr={props.addr} des={props.des} likes={sc} img={props.img} btntitle='카카오 공유하기'/>
+>>>>>>> d262d54c8585d5ae29473e3d0d6261d2365ea721
                     </div>
                 </Card.Body>
                 </Card>

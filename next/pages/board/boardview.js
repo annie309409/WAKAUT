@@ -4,12 +4,15 @@ import Link from "next/link";
 import {useState} from 'react';
 import WriteModal from "./write_modal";
 import Mgmodal from "../../components/mgmodal";
+import getLayout from '../../components/layouts/getLayout';
+
+let title = '게시판 제목';
+let note = 'orem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.';
 
 const Boardview=()=>{
     const [lgShow, setLgShow] = useState(false);
     const [mgShow, setMgShow] = useState(false);
-    let title = '게시판 제목';
-    let note = 'orem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.';
+
  
     return (
         <>
@@ -53,3 +56,5 @@ const Boardview=()=>{
     )
 }
 export default Boardview;
+
+getLayout(Boardview,{title:title,description:note})
