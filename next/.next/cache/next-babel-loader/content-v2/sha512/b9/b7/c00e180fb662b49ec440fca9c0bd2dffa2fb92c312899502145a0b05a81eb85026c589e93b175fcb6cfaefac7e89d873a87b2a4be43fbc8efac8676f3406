@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Board from \"../../../models/board\";\nexport default (async (req, res) => {\n  const {\n    bid,\n    userid,\n    comment\n  } = req.body;\n  const cnt = new Board().insertCmt(bid, userid, comment).then(res => res);\n  res.status(200).json({\n    cnt: await cnt\n  });\n});","map":null,"metadata":{},"sourceType":"module"}

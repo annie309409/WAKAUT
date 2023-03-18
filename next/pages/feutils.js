@@ -1,9 +1,21 @@
 import axios from 'axios';
-const Datas=async()=>{
-    let url = `http://localhost:3000/api/board/boardlist`;
+const fixedUrl = 'http://localhost:3000/api'; 
+
+async function Datas(loc){
+    let url = `${fixedUrl}${loc}`;
     const res = await axios.get(url);
-    const boards = await res.data;
-    return boards;
+    const datas = await res.data;
+    return datas;
 }
 
-export default Datas;
+const Post = async (data,url) => {
+    const cnt = fetch(`${fixedUrl}${url}`,{ method: 'POST', mode: 'cors', body:JSON.stringify(data), headers:{'Content-Type': 'application/json'}
+    }).then(res=>res.json());
+    return await cnt;
+};
+
+const handleInput = (setInput, e) => {
+    setInput(e.target.value);
+};
+
+module.exports = {Datas,Post,handleInput}

@@ -5,40 +5,60 @@ import {useState} from 'react';
 import WriteModal from "./write_modal";
 import Mgmodal from "../../components/mgmodal";
 import getLayout from '../../components/layouts/getLayout';
+import {Datas,Post,handleInput} from '../feutils';
+let title='';
+let contents ='';
 
-let title = '게시판 제목';
-let note = 'orem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam earum quo porro sunt ratione pariatur sapiente aliquam atque vitae ab quia quaerat, alias, quam, nisi temporibus dolore? Unde, eligendi ab.';
 
-const Boardview=()=>{
+//데이터 끌고오기!
+export async function getServerSideProps(ctx){
+    let boards = await Datas(`/board/boardview?bid=${ctx.query.bid}`);
+    return{props:{boards}};
+}
+
+//데이터 등록하기
+export async function write(e,{bid,userid,comment}){
+    e.preventDefault();
+    console.log(bid,userid,comment);
+    Post({bid:bid,userid:userid,comment:comment},'/board/repwrite');
+    location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+}
+
+const Boardview=({boards})=>{
     const [lgShow, setLgShow] = useState(false);
     const [mgShow, setMgShow] = useState(false);
+    const [reply, setReply] = useState();
+    let bd = boards[0];
 
- 
     return (
         <>
             <div className="brdview">
                 <header className="bg-secondary pt-5 pb-4 brdview">
                 </header>
                 <Container>
-                    <List title={title} kd="review" time="2023-03-08" view='23'/>
+                    <List title={bd.title} kd={bd.category} time={bd.regdate2} view={bd.views+1} name={bd.name}/>
                 </Container>
             </div>
             
             <Container>
-                <p className="viewnote">{note}</p>
+                <p className="viewnote">{bd.content}</p>
                 <div className="replay p-5">
-                <div className="txtLft d-flex">
-                    <h5>abc123</h5>
-                    <p className="ms-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error quia obcaecati, ipsa rerum, quidem, perferendis est quaerat sunt fugiat beatae ratione? Sapiente magni a tenetur tempora numquam praesentium accusamus facilis.</p>
-                </div>
+                    {
+                        bd.com.map((m,idx)=>{
+                            return(
+                                <>
+                                 <div className="txtLft d-flex" key={idx}>
+                                    <h5>{m.name}</h5>
+                                    <p className="ms-5">{m.comment} <small>{m.regdate2}</small></p>
+                                 </div>
+                                </>
+                           )
+                        })
+                    }
                 <Form>
                     <div className="reTxt d-flex align-items-end mt-4"> 
-                        <Form.Control   
-                        as="textarea"
-                        placeholder="여기에 댓글을 달아주세요!"
-                        style={{ height: '80px' ,width:'90%' }}
-                        />
-                    <button className="btn btn-success ms-3" type="submit">댓글 등록</button>
+                        <Form.Control as="textarea" placeholder="댓글은 한번 달면 삭제가 불가능하답니당 👮‍♂️👮‍♀️ " style={{ height: '80px' ,width:'90%' }} onChange={(e)=>{handleInput(setReply,e)}} />
+                        <button className="btn btn-success ms-3" type="submit" onClick={(e)=>{ write(e,{bid:bd.bid,userid:2,comment:reply})}}>댓글 등록</button>
                     </div>
                 </Form>
                 </div>
@@ -50,11 +70,12 @@ const Boardview=()=>{
                     <Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}}>강제삭제</Button>
                 </div>
                 <Mgmodal LgShow={mgShow} setLgShow={setMgShow} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
-               <WriteModal title={title} note={note} setLgShow={setLgShow} lgShow={lgShow}/>
+               <WriteModal title={boards[0].title} note={boards[0].content} setLgShow={setLgShow} lgShow={lgShow}/>
             </Container>
         </>
     )
 }
-export default Boardview;
 
-getLayout(Boardview,{title:title,description:note})
+    getLayout(Boardview,{title:title,description:contents});
+
+export default Boardview;

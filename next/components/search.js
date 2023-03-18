@@ -6,7 +6,7 @@ const Search=(props)=>{
     <Container>
         <Form className='fluid d-flex justify-content-center'>
             <div className="left d-flex col-9">
-                <Selection  title='카테고리 선택' cat={props.cat}/>
+                <Selection  title={props.title} cat={props.cat}/>
                 <Form.Control className='ms-2'
                 placeholder="검색어를 입력하세요!"/>
             </div>
