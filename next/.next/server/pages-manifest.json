@@ -2,12 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
   "/board/boardlist": "pages/board/boardlist.js",
   "/board/boardview": "pages/board/boardview.js",
-  "/api/board/boardlist": "pages/api/board/boardlist.js",
-  "/api/board/boardview": "pages/api/board/boardview.js",
+  "/api/board/write": "pages/api/board/write.js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
   "/": "pages/index.js",
-  "/member/mypage": "pages/member/mypage.js",
-  "/member/login": "pages/member/login.js"
+  "/api/board/boardlist": "pages/api/board/boardlist.js"
 }

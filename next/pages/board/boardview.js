@@ -70,7 +70,7 @@ const Boardview=({boards})=>{
                     <Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}}>강제삭제</Button>
                 </div>
                 <Mgmodal LgShow={mgShow} setLgShow={setMgShow} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
-               <WriteModal title={boards[0].title} note={boards[0].content} setLgShow={setLgShow} lgShow={lgShow}/>
+               <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow}/>
             </Container>
         </>
     )

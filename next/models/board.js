@@ -53,6 +53,38 @@ class Board{
         }
         return rowData;
     }
+    //게시글 등록
+    async insert(data){
+        let conn =  null;
+        let rowData = null;
+        let params = [data.title,data.userid,data.content,data.category, data.facility];
+        try{ 
+            conn= await mariadb.makeConn();
+            await conn.query(SQL.board.insert,params);
+            await conn.commit();
+        }catch (e) {
+            console.log(e);
+        }finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+     //게시글 수정
+     async modify(data){
+        let conn =  null;
+        let rowData = null;
+        let params = [data.title,data.content,data.category, data.facility,data.bid];
+        try{ 
+            conn= await mariadb.makeConn();
+            await conn.query(SQL.board.update,params);
+            await conn.commit();
+        }catch (e) {
+            console.log(e);
+        }finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
 }
 
 module.exports=Board;
