@@ -1,6 +1,8 @@
 import { CiAlarmOn,CiRead } from "react-icons/ci";
 import { BsPersonCircle } from "react-icons/bs";
 import {Badge} from 'react-bootstrap';
+import Link from "next/link";
+
 
 const List = (props)=>{
     return(
@@ -12,7 +14,7 @@ const List = (props)=>{
                             <h2>{props.title}</h2>
                             <p className="ell mb-0">{props.note}</p>
                             {(props.time)? <p className="mt-2 mb-0"> <Badge bg={(props.kd=='review')?'warning':'success'}>{props.kd}</Badge> <BsPersonCircle /> {props.name} <CiAlarmOn /> {props.time} <CiRead /> {props.view} </p> : false}
-                            {(props.to)?<a href={props.to}></a>:false}
+                            {(props.to)?<Link href={props.to}> </Link>:false}
                     </div>
                 </div>
                 {(props.malcnt)?<div className={`mal ${props.col} ms-auto`}>{props.malcnt}</div> : false}

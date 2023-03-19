@@ -19,9 +19,13 @@ export async function getServerSideProps(ctx){
 //데이터 등록하기
 export async function write(e,{bid,userid,comment}){
     e.preventDefault();
-    console.log(bid,userid,comment);
     Post({bid:bid,userid:userid,comment:comment},'/board/repwrite');
     location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+}
+
+export async function del(e,{bid}){
+    e.preventDefault();
+    Post({bid:bid},'/board/repwrite')
 }
 
 const Boardview=({boards})=>{
@@ -50,6 +54,7 @@ const Boardview=({boards})=>{
                                  <div className="txtLft d-flex" key={idx}>
                                     <h5>{m.name}</h5>
                                     <p className="ms-5">{m.comment} <small>{m.regdate2}</small></p>
+                                    <p className="ms-3">삭제하기</p>
                                  </div>
                                 </>
                            )

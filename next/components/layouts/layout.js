@@ -1,15 +1,10 @@
 import Header from './header';
 import Footer from './footer';
 import Head from "next/head";
-import { useState, useEffect } from 'react';
 import Loading from '../loading';
 
 const Layout =({children,meta})=>{
   const {title,description,icon}=meta;
-  const [loading, setLoading] = useState(true);
-  useEffect(()=>{
-    setLoading(false);
-  })
   return(
     <>
       <Head>
@@ -26,7 +21,6 @@ const Layout =({children,meta})=>{
       <div className='hdrWrap'>
         <Header menu={['mypage','community','login/signin', 'join','manager']} route={['/member/mypage','/board/boardlist','/member/login', '/member/join','/admin/manager']}/>
       </div>
-      <Loading loading={loading}/>
       <div className="cntWrap">{children}</div>
       <div className='frtWrap'>
         <Footer />

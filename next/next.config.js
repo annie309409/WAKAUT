@@ -5,5 +5,10 @@ module.exports = withImages({
     // 국제화 : 그 나라에 맞게 문자를 국제화하는것 (internationalization)
     i18n : {
         locales:['ko'], defaultLocale : 'ko'
-    } 
+    },
+    //기본 로딩스피너 제거
+    devIndicators: {
+        buildActivity: false,
+    }, 
 });
+
