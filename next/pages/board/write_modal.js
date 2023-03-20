@@ -1,27 +1,27 @@
 import Modal from '../../components/modal';
 import {Form,FloatingLabel,Button} from 'react-bootstrap'; 
 import Selection from '../../components/selection';
-import {Datas,Post,handleInput} from '../feutils';
+import {Post,handleInput} from '../feutils';
 import { useState } from 'react';
 
-//데이터 등록하기
-export async function write(e,{bid,title,userid,content,category,facility}){
-    e.preventDefault();
-    Post({bid,title,userid,content,category,facility},'/board/write');
-    if (bid!=undefined) {
-        location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
-        console.log('수정!');
-    }else{
-        location.href=`http://localhost:3000/board/boardlist`
-    }
-    
-}
 
 const WriteModal=(props)=>{
     const [title,setTitle] = useState(props.title);
     const [note,setNote] = useState(props.note);
     const [category,setCategory] =  useState(props.category);
     const [facility,setFacility] =  useState(props.facility);
+    
+    async function write(e,{bid,title,userid,content,category,facility}){
+        e.preventDefault();
+        Post({bid,title,userid,content,category,facility},'/board/write');
+        props.setLgShow(false);
+        if (bid!=undefined) {
+            // location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+        }else{
+            // location.href=`http://localhost:3000/board/boardlist`
+        }
+    }
+
     return(
         <Modal lgShow={props.lgShow} setLgShow={props.setLgShow}>
              <Form>
@@ -43,7 +43,7 @@ const WriteModal=(props)=>{
                     value={note}  onChange={(e)=>handleInput(setNote,e)}/>
                 </FloatingLabel>
                 <Form.Group controlId="formFileMultiple" className="mb-3">
-                    <Form.Control  className='mt-2' type="file" multiple />
+                    <Form.Control  className='mt-2' type="file" accept=".gif, .jpg, .png" multiple />
                 </Form.Group>
                 <div className='btns d-flex justify-content-end'>
                     <Button type="reset" variant="secondary">다시쓰기</Button>

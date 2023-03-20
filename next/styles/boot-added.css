@@ -533,3 +533,13 @@ html ::-webkit-scrollbar-thumb{
     background-color: rgba(136, 136, 138, 0.8);
     border-radius: 10px;
 }
+
+.pg{
+    position: relative;
+    width: 20%;
+    margin: 20px auto;
+}
+
+.delRep{
+    cursor: pointer;
+}

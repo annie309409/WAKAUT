@@ -3,12 +3,20 @@ import SQL from './SQLs';
 
 class Board{
     //게시판 목록출력
-    async select(){
+    async select(pg,cat,note){
         let conn =  null;
         let rowData = null;
+        let where ='';
+        (cat !='All') ? cat = `category='${cat}'` : cat='';
+        console.log(cat);
+        if(cat && note){
+            where = ` and ${cat} and (title like '%테스트%' or content like '%테스트%' or u.name like '%테스트%') `
+        }else{
+            console.log('일반');
+        }
         try{
             conn= await mariadb.makeConn();
-            rowData  = await conn.query(SQL.board.select);
+            rowData  = await conn.query(SQL.board.select+where+SQL.board.select2,[pg]);
         }catch (e) {
             console.log(e);
         }finally {
@@ -45,6 +53,22 @@ class Board{
         try{ 
             conn= await mariadb.makeConn();
             await conn.query(SQL.board.insertCmt,params);
+            await conn.commit();
+        }catch (e) {
+            console.log(e);
+        }finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+    //코멘트 삭제
+    async deleteCmt(cid){
+        let conn =  null;
+        let rowData = null;
+        let params = [cid];
+        try{ 
+            conn= await mariadb.makeConn();
+            await conn.query(SQL.board.deleteCmt,params);
             await conn.commit();
         }catch (e) {
             console.log(e);

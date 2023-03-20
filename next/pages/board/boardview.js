@@ -16,13 +16,6 @@ export async function getServerSideProps(ctx){
     return{props:{boards}};
 }
 
-//데이터 등록하기
-export async function write(e,{bid,userid,comment}){
-    e.preventDefault();
-    Post({bid:bid,userid:userid,comment:comment},'/board/repwrite');
-    location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
-}
-
 export async function del(e,{bid}){
     e.preventDefault();
     Post({bid:bid},'/board/repwrite')
@@ -32,7 +25,33 @@ const Boardview=({boards})=>{
     const [lgShow, setLgShow] = useState(false);
     const [mgShow, setMgShow] = useState(false);
     const [reply, setReply] = useState();
+    const [cmts,setCmts] = useState(boards[0].com);
+    const [cid, setCid] = useState('');
     let bd = boards[0];
+
+    //데이터 등록하기
+    async function write(e,{bid,userid,comment}){
+        e.preventDefault();
+
+        if(reply!=''){
+            Post({bid:bid,userid:userid,comment:comment},'/board/repwrite');
+            dts();
+            setReply('');
+        }else{
+            alert('아무것도 입력하지 않았어요😥')
+        }
+    }
+    //등록 후 끌고오기
+    async function dts(){
+        let res = await Datas(`/board/boardview`,`bid=${bd.bid}`);
+        setCmts (res[0].com); 
+    }
+    //리플 삭제하기
+    function del(cid){
+        Post({cid:cid},'/board/repwrite');
+        dts();
+    }
+
 
     return (
         <>
@@ -48,13 +67,13 @@ const Boardview=({boards})=>{
                 <p className="viewnote">{bd.content}</p>
                 <div className="replay p-5">
                     {
-                        bd.com.map((m,idx)=>{
+                        cmts.map((m,idx)=>{
                             return(
                                 <>
                                  <div className="txtLft d-flex" key={idx}>
-                                    <h5>{m.name}</h5>
-                                    <p className="ms-5">{m.comment} <small>{m.regdate2}</small></p>
-                                    <p className="ms-3">삭제하기</p>
+                                    <h5 key={m+idx+idx}>{m.name}</h5>
+                                    <p className="ms-5" key={m+idx}>{m.comment} <small>{m.regdate2}</small></p>
+                                    <p className="ms-3 delRep" onClick={()=>{del(m.cid)}} key={m+m+idx}>X</p>
                                  </div>
                                 </>
                            )
@@ -62,7 +81,7 @@ const Boardview=({boards})=>{
                     }
                 <Form>
                     <div className="reTxt d-flex align-items-end mt-4"> 
-                        <Form.Control as="textarea" placeholder="댓글은 한번 달면 삭제가 불가능하답니당 👮‍♂️👮‍♀️ " style={{ height: '80px' ,width:'90%' }} onChange={(e)=>{handleInput(setReply,e)}} />
+                        <Form.Control as="textarea" placeholder="댓글은 한번 달면 삭제가 불가능하답니당 👮‍♂️👮‍♀️ " style={{ height: '80px' ,width:'90%' }} value={reply} onChange={(e)=>{handleInput(setReply,e)}} />
                         <button className="btn btn-success ms-3" type="submit" onClick={(e)=>{ write(e,{bid:bd.bid,userid:2,comment:reply})}}>댓글 등록</button>
                     </div>
                 </Form>
