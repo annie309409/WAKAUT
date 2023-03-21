@@ -3,6 +3,8 @@ import Title from "../../components/title";
 import Link from "next/link";
 import naver  from '../../assets/naverbtn.png';
 import kakao  from '../../assets/kakaobtn.png';
+import getLayout from "../../components/layouts/getLayout";
+
 function Login(){
     return (
         <Container className="panel">
@@ -51,4 +53,5 @@ function Login(){
     );
 }
 
+getLayout(Login,{title:'함께해요! WAKAUT',description:'워크아웃에 가입하시면 다양한 정보를 받을 수 있습니다.'});
 export default Login

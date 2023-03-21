@@ -16,17 +16,12 @@ export async function getServerSideProps(ctx){
     return{props:{boards}};
 }
 
-export async function del(e,{bid}){
-    e.preventDefault();
-    Post({bid:bid},'/board/repwrite')
-}
-
 const Boardview=({boards})=>{
     const [lgShow, setLgShow] = useState(false);
     const [mgShow, setMgShow] = useState(false);
     const [reply, setReply] = useState();
     const [cmts,setCmts] = useState(boards[0].com);
-    const [cid, setCid] = useState('');
+    const [cnfirm, setCnfirm] = useState(false);
     let bd = boards[0];
 
     //데이터 등록하기
@@ -52,6 +47,16 @@ const Boardview=({boards})=>{
         dts();
     }
 
+    //게시글 삭제하기
+    if(cnfirm){
+        async function delBD(){
+            let dt = Post({bid:bd.bid},'/board/delete').then(r=>r);
+            if((await dt).cnt > 0 ){
+                location.href ='http://localhost:3000/board/boardlist';
+            }
+        }
+        delBD();
+    };
 
     return (
         <>
@@ -93,7 +98,7 @@ const Boardview=({boards})=>{
                     <Button className="ms-2" variant="secondary" onClick={()=>{setMgShow(true)}}>삭제하기</Button>
                     <Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}}>강제삭제</Button>
                 </div>
-                <Mgmodal LgShow={mgShow} setLgShow={setMgShow} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
+                <Mgmodal LgShow={mgShow} setLgShow={setMgShow} setCnfirm={setCnfirm} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
                <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow}/>
             </Container>
         </>

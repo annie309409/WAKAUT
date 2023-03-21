@@ -3,7 +3,7 @@ const fixedUrl = 'http://localhost:3000/api';
 
 async function Datas(loc,param){
     let url = `${fixedUrl}${loc}`;
-    if(param)url = `${fixedUrl}${loc}?${param}`;
+    if(param) url = `${fixedUrl}${loc}?${param}`;
     const res = await axios.get(url);
     const datas = await res.data;
     return datas;

@@ -8,7 +8,9 @@ const SQL={
         insertCmt : `insert into comments (bid,userid,comment) values(?,?,?)`,
         insert : `insert into boards (title,writer,content,views,category,facility_name) values(?,?,?,0,?,?)`,
         update :`update boards set title=?,content=?,category=?,facility_name=? WHERE bid = ?`,
-        deleteCmt:`delete from comments where cid=?`
+        deleteCmt:`delete from comments where cid=?`,
+        deleteCmt2:`delete from comments where bid=?`,
+        delete:`delete from boards where bid=?`
     }
 }
 

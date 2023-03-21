@@ -12,8 +12,8 @@ const Mgmodal=(props)=>{
                 <p>{props.msg}</p>
             </Modal.Body>
             <Modal.Footer className="stopmodal" >
-                <Button variant="secondary" onClick={()=> props.setLgShow(false)}>아니요</Button>
-                <Button variant="primary" onClick={()=> props.setLgShow(false)}>네</Button>
+                <Button variant="secondary" onClick={()=> {props.setLgShow(false)}}>아니요</Button>
+                <Button variant="primary" onClick={()=> {props.setLgShow(false); props.setCnfirm(true)}}>네</Button>
             </Modal.Footer>
         </Modal>
     )

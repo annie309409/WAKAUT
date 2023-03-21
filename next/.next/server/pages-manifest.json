@@ -2,11 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/board/boardlist": "pages/board/boardlist.js",
-  "/api/board/boardlist": "pages/api/board/boardlist.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/api/board/write": "pages/api/board/write.js",
-  "/board/boardview": "pages/board/boardview.js",
-  "/api/board/repwrite": "pages/api/board/repwrite.js",
-  "/api/board/boardview": "pages/api/board/boardview.js"
+  "/": "pages/index.js",
+  "/api/main": "pages/api/main.js"
 }

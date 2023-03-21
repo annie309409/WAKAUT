@@ -2,6 +2,7 @@ import {Form,Navbar,Container,Button,Nav} from 'react-bootstrap';
 import Link from "next/link";
 import { useEffect } from 'react';
 
+
 const Header = (props)=>{
     return(
         <header>

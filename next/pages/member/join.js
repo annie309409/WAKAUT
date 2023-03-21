@@ -4,6 +4,7 @@ import Title from '../../components/title'
 import {useState} from "react";
 import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
+import getLayout from '../../components/layouts/getLayout';
 
 const Join=()=>{
     const [lgShow, setLgShow] = useState(false);
@@ -52,4 +53,5 @@ const Join=()=>{
     )
 }
 
+getLayout(Join,{title:'가입해요! WAKAUT',description:'워크아웃에 가입하시면 다양한 정보를 받을 수 있습니다.'});
 export default Join;

@@ -62,7 +62,7 @@ class Board{
         return rowData;
     }
     //코멘트 삭제
-    async deleteCmt(cid){
+    async deleteCmt(cid,bid){
         let conn =  null;
         let rowData = null;
         let params = [cid];
@@ -101,6 +101,24 @@ class Board{
         try{ 
             conn= await mariadb.makeConn();
              await conn.query(SQL.board.update,params);
+            await conn.commit();
+            rowData =1;
+        }catch (e) {
+            console.log(e);
+        }finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+    //게시글 삭제
+    async delete(bid){
+        let conn =  null;
+        let rowData = null;
+        let params = [bid];
+        try{ 
+            conn= await mariadb.makeConn();
+            await conn.query(SQL.board.deleteCmt2,params);
+            await conn.query(SQL.board.delete,params);
             await conn.commit();
             rowData =1;
         }catch (e) {

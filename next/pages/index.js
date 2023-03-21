@@ -6,9 +6,9 @@ import PlaceModal from "./place_modal";
 import img from '../assets/workaut.png';
 import mapicon from '../assets/map-icon.png';
 import getLayout from "../components/layouts/getLayout";
-import axios from "axios";
-import { XMLParser } from 'fast-xml-parser';
+
 import Modal from "../components/modal";
+import {Datas} from "../pages/feutils";
 
 import dynamic from 'next/dynamic';
 const Map = dynamic(() => import("react-kakao-maps-sdk").then((module) => module.Map), {
@@ -18,34 +18,8 @@ const MapMarker = dynamic(() => import("react-kakao-maps-sdk").then((module) => 
     ssr: false
 });
 
-
 export async function getServerSideProps(ctx) {
-    const URL =
-        " https://openapi.gg.go.kr/PubPhstFtM";
-
-    const params = {
-        KEY:
-            "59c361f5fb304a649662ff8ec90e184f",
-        Type: "xml",
-        pIndex: 1,  // pSize를 1000으로 설정하고 pIndex를 2로 설정하면 1001~2000까지의 데이터를 가져옴
-        pSize: 1000, // 데이터 요청은 한번에 최대 1000건
-    };
-
-    const headers = {
-        "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.78",
-    };
-
-    const xml = await axios.get(URL, {
-        params: params,
-        headers: headers,
-    });
-
-    // XML 을 JSON 으로 변환
-    const parser = new XMLParser();
-    let json = parser.parse(xml.data);
-    let items = json["PubPhstFtM"]["row"];
-
+    let items = await Datas('/main?srch=');
     return {props: {items: items}}
 }
 
