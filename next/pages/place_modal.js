@@ -1,6 +1,6 @@
 import Modal from '../components/modal'
 import {Card,Button} from 'react-bootstrap';
-import {AiFillStar,AiOutlineHighlight} from "react-icons/ai";
+import {AiFillStar,AiOutlineHighlight,AiOutlinePhone} from "react-icons/ai";
 import {CiLocationOn, CiFaceSmile } from "react-icons/ci";
 import List from '../components/list';
 import Link from "next/link";
@@ -11,7 +11,7 @@ const PlaceModal=(props)=>{
     const sc= (props.score) ? scores.map(m=>{return <AiFillStar key={m} />}): false;
     
     return(
-        <Modal lgShow={props.lgShow} setLgShow={props.setLgShow} class='d-flex' title="정보 상세보기">
+        <Modal size={props.size} lgShow={props.lgShow} setLgShow={props.setLgShow} class='d-flex' title="정보 상세보기">
             <div className='left col-6 me-1'>
                 <Card className='border-0'>
                 <Card.Img variant="top" src={props.img} />
@@ -28,6 +28,7 @@ const PlaceModal=(props)=>{
             <div className='right col-6 ms-1'>
                 <h2>{props.title}</h2>
                 <p><CiLocationOn /><span>{props.addr}</span></p>
+                <p><AiOutlinePhone /><span>{props.contact}</span></p>
                 <p><AiOutlineHighlight /><span>{props.des}</span></p>
                 <p><CiFaceSmile /><span>{sc}</span></p>
                 <div className='brdPrev mb-5'>
