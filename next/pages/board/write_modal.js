@@ -13,17 +13,24 @@ const WriteModal=(props)=>{
     
     async function write(e,{bid,title,userid,content,category,facility}){
         e.preventDefault();
-        Post({bid,title,userid,content,category,facility},'/board/write');
-        props.setLgShow(false);
-        if (bid!=undefined) {
-            // location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+        if(category== undefined || facility == undefined){
+            alert('카테고리 및 운동장소를 선택해주세요!');
+        }else if( title == undefined || content == undefined){
+            alert('제목 및 컨텐츠를 입력해주세요!');
+
         }else{
-            // location.href=`http://localhost:3000/board/boardlist`
+            let dt = Post({bid,title,userid,content,category,facility},'/board/write').then(res=>res);
+            props.setLgShow(false);
+            if (bid !== undefined && (await dt).cnt === 1) {
+                location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+            }else{
+                location.href=`http://localhost:3000/board/boardlist`
+            }
         }
     }
 
     return(
-        <Modal lgShow={props.lgShow} setLgShow={props.setLgShow}>
+        <Modal lgShow={props.lgShow} setLgShow={props.setLgShow} size='lg'>
              <Form>
                 <FloatingLabel controlId="title" label="제목">
                     <Form.Control className='mt-2' type="text" placeholder="제목을 입력해주세요" value={title} onChange={(e)=>handleInput(setTitle,e)}/>

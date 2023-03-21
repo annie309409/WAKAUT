@@ -100,8 +100,9 @@ class Board{
         let params = [data.title,data.content,data.category, data.facility,data.bid];
         try{ 
             conn= await mariadb.makeConn();
-            await conn.query(SQL.board.update,params);
+             await conn.query(SQL.board.update,params);
             await conn.commit();
+            rowData =1;
         }catch (e) {
             console.log(e);
         }finally {
