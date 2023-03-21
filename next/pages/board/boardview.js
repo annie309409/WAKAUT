@@ -16,7 +16,7 @@ export async function getServerSideProps(ctx){
     return{props:{boards}};
 }
 
-const Boardview=({boards})=>{
+const Boardview=({boards,session})=>{
     const [lgShow, setLgShow] = useState(false);
     const [mgShow, setMgShow] = useState(false);
     const [reply, setReply] = useState();
@@ -29,8 +29,8 @@ const Boardview=({boards})=>{
         e.preventDefault();
 
         if(reply!=''){
-            Post({bid:bid,userid:userid,comment:comment},'/board/repwrite');
-            dts();
+            let dt = Post({bid:bid,userid:userid,comment:comment},'/board/repwrite').then(r=>r);
+            if((await dt).cnt > 0) dts();
             setReply('');
         }else{
             alert('아무것도 입력하지 않았어요😥')
@@ -87,7 +87,7 @@ const Boardview=({boards})=>{
                 <Form>
                     <div className="reTxt d-flex align-items-end mt-4"> 
                         <Form.Control as="textarea" placeholder="댓글은 한번 달면 삭제가 불가능하답니당 👮‍♂️👮‍♀️ " style={{ height: '80px' ,width:'90%' }} value={reply} onChange={(e)=>{handleInput(setReply,e)}} />
-                        <button className="btn btn-success ms-3" type="submit" onClick={(e)=>{ write(e,{bid:bd.bid,userid:2,comment:reply})}}>댓글 등록</button>
+                        <button className="btn btn-success ms-3" type="submit" onClick={(e)=>{ write(e,{bid:bd.bid,userid:parseInt(session.userid),comment:reply})}}>댓글 등록</button>
                     </div>
                 </Form>
                 </div>
@@ -99,7 +99,7 @@ const Boardview=({boards})=>{
                     <Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}}>강제삭제</Button>
                 </div>
                 <Mgmodal LgShow={mgShow} setLgShow={setMgShow} setCnfirm={setCnfirm} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
-               <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow}/>
+               <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow} sename={session.name} seid={session.userid}/>
             </Container>
         </>
     )

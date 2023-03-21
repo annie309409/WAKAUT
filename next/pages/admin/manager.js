@@ -5,8 +5,15 @@ import Title from "../../components/title";
 import Managerlist from "../../components/manager_list";
 import Mgmodal from "../../components/mgmodal";
 import getLayout from '../../components/layouts/getLayout'
+import {Datas} from "../feutils";
 
-const Manager=()=>{
+export async function getServerSideProps(ctx) {
+    let datas = await Datas('/users/users');
+    return {props: {data: datas}}
+}
+
+
+const Manager=({data,session})=>{
     const [LgShow, setLgShow] = useState(false);
     return(
         <Container>
@@ -20,14 +27,14 @@ const Manager=()=>{
             <br />
             <br />
             <Container>
-                <Managerlist title='회원 정보' name='홍길동' gender='남' birth='2023-03-10' phone='010-9999-0111'
-                             email='zzyzzy@naver.com' boardnum='8' comments='4' setLgShow={setLgShow} img={true} />
-                <Managerlist title='회원 정보' name='홍길동' gender='남' birth='2023-03-10' phone='010-9999-0111'
-                             email='zzyzzy@naver.com' boardnum='8' comments='4' setLgShow={setLgShow}  img={true} />
-                <Managerlist title='회원 정보' name='홍길동' gender='남' birth='2023-03-10' phone='010-9999-0111'
-                             email='zzyzzy@naver.com' boardnum='8' comments='4' setLgShow={setLgShow}  img={true} />
-                <Managerlist title='회원 정보' name='홍길동' gender='남' birth='2023-03-10' phone='010-9999-0111'
-                             email='zzyzzy@naver.com' boardnum='8' comments='4'  setLgShow={setLgShow} img={true} />
+                {
+                    data.boards.map(m=>{
+                       return  <Managerlist title='회원 정보' name={m.name} gender={m.gender} birth={m.birth_date2} phone={m.phone_number}
+                                     email={m.email} boardnum='8' comments='4' setLgShow={setLgShow} img={true} />
+                        
+                    })
+                }
+            
                 <Paging cnt={5}/>
             </Container>
             <Mgmodal LgShow={LgShow} setLgShow={setLgShow} title='계정 관리' msg='해당 계정을 정말 정지시킬꺼에요?'/>

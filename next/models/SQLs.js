@@ -11,6 +11,13 @@ const SQL={
         deleteCmt:`delete from comments where cid=?`,
         deleteCmt2:`delete from comments where bid=?`,
         delete:`delete from boards where bid=?`
+    },
+    admin : {
+        selectUsers : `select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u`,
+    },
+    user:{
+        login :`select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u where u.name=? && u.passwd=?`
+
     }
 }
 

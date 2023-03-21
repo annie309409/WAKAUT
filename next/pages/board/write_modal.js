@@ -21,11 +21,11 @@ const WriteModal=(props)=>{
         }else{
             let dt = Post({bid,title,userid,content,category,facility},'/board/write').then(res=>res);
             props.setLgShow(false);
-            if (bid !== undefined && (await dt).cnt === 1) {
-                location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
-            }else{
-                location.href=`http://localhost:3000/board/boardlist`
-            }
+            // if (bid !== undefined && (await dt).cnt === 1) {
+            //     location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+            // }else{
+            //     location.href=`http://localhost:3000/board/boardlist`
+            // }
         }
     }
 
@@ -36,7 +36,7 @@ const WriteModal=(props)=>{
                     <Form.Control className='mt-2' type="text" placeholder="제목을 입력해주세요" value={title} onChange={(e)=>handleInput(setTitle,e)}/>
                 </FloatingLabel>
                 <FloatingLabel controlId="writer" label="작성자">
-                    <Form.Control  className='mt-2 mb-2' type="text" value="구디거북이" readOnly/>
+                    <Form.Control  className='mt-2 mb-2' type="text" value={props.sename} readOnly/>
                 </FloatingLabel>
                 <div className='d-flex'>
                     <Selection title="말머리를 선택하세요" cat={['community','review']} change={setCategory}/>
@@ -54,7 +54,7 @@ const WriteModal=(props)=>{
                 </Form.Group>
                 <div className='btns d-flex justify-content-end'>
                     <Button type="reset" variant="secondary">다시쓰기</Button>
-                    <Button type="submit" variant="success" className='ms-2' onClick={(e)=>write(e,{title:title,userid:2,content:note,category:category,facility:facility,bid:props.bid})}>{(props.title)?'수정하기':'글 올리기'}</Button>
+                    <Button type="submit" variant="success" className='ms-2' onClick={(e)=>write(e,{title:title,userid:props.seid,content:note,category:category,facility:facility,bid:props.bid})}>{(props.title)?'수정하기':'글 올리기'}</Button>
                 </div>   
             </Form>
         </Modal>

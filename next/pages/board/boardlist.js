@@ -15,7 +15,7 @@ export async function getServerSideProps(ctx){
     return{props:{boards}};   
 }
 
-const BoardList=({boards})=>{
+const BoardList=({boards,session})=>{
     let [dtfn,setDtfn] = useState(boards.boards);
     let [cnt,setCnt] = useState(2);
     const [lgShow, setLgShow] = useState(false);
@@ -68,7 +68,7 @@ const BoardList=({boards})=>{
                 <BarLoader color="#ccc" cssOverride={{position: "absolute", margin:"auto", top:0,left:0, right:0, bottom:0,zIndex:555}} />
             </div>
         </Container>
-        <WriteModal lgShow={lgShow} setLgShow={setLgShow}/>
+        <WriteModal lgShow={lgShow} setLgShow={setLgShow} sename={session.name} seid={session.userid}/>
         </>
     )
 }

@@ -4,8 +4,32 @@ import Link from "next/link";
 import naver  from '../../assets/naverbtn.png';
 import kakao  from '../../assets/kakaobtn.png';
 import getLayout from "../../components/layouts/getLayout";
+import {getSession, signIn} from "next-auth/client";
+import { useState } from "react";
+import {handleInput} from '../feutils';
+
+export async function getServerSideProps(ctx) {
+    const sess = await getSession(ctx);
+    return {props:{}}
+}
 
 function Login(){
+    const [userid, setUserid] = useState(null);
+    const [passwd, setPasswd] = useState(null);
+
+    async function loginHandle(e){
+        e.preventDefault();
+        const {error} = await signIn('userid-passwd-credentials',{userid,passwd, redirect:false});
+        if(error){
+            location.href='/member/fail';
+        }else{
+            location.href= '/member/myinfo';
+        }
+        console.log('pg login-',await error);
+    }
+
+    
+
     return (
         <Container className="panel">
             <Form>
@@ -17,13 +41,13 @@ function Login(){
 
                 <Form.Group as={Row} className="mb-3" controlId="formID">
                     <Col sm="6">
-                        <Form.Control type="text" placeholder="아이디를 입력하세요" />
+                        <Form.Control type="text" placeholder="아이디를 입력하세요"  value={userid} onChange={(e)=>{handleInput(setUserid,e)}} />
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3" controlId="formPassword">
                     <Col sm="6">
-                        <Form.Control type="password" placeholder="비밀번호를 입력하세요" />
+                        <Form.Control type="password" placeholder="비밀번호를 입력하세요" value={passwd} onChange={(e)=>{handleInput(setPasswd,e)}} />
                     </Col>
                 </Form.Group>
 
@@ -43,7 +67,7 @@ function Login(){
                 <br/>
                 <Form.Group className="mb-3" controlId="formSubmit">
                     <Col sm>
-                    <Button variant="secondary" type="submit" >
+                    <Button variant="secondary" type="submit" onClick={(e)=>{loginHandle(e)}}>
                         로그인하기
                     </Button>
                     </Col>

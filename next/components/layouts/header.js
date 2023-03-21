@@ -1,7 +1,5 @@
 import {Form,Navbar,Container,Button,Nav} from 'react-bootstrap';
 import Link from "next/link";
-import { useEffect } from 'react';
-
 
 const Header = (props)=>{
     return(
@@ -19,10 +17,10 @@ const Header = (props)=>{
                             })
                         }
                     </Nav>
-                        <Form className="d-flex col-5">
-                        <Form.Control placeholder="운동하는곳을 검색해보세요!" aria-label="findlocation" aria-describedby="basic-addon1"/>
-                            <Button className='ms-2 col-5' variant="outline-success">Search Place</Button>
-                        </Form>
+                    <Form className="d-flex col-5">
+                    <Form.Control placeholder={`${props.sess.name}님, 운동하는곳을 검색해보세요!`} aria-label="findlocation" aria-describedby="basic-addon1"/>
+                        <Button className='ms-2 col-5' variant="outline-success">Search Place</Button>
+                    </Form>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

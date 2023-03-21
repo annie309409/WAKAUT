@@ -1,10 +1,10 @@
 import Header from './header';
 import Footer from './footer';
 import Head from "next/head";
-import Loading from '../loading';
 
 const Layout =({children,meta})=>{
   const {title,description,icon}=meta;
+  let sess = children.props.session;
   return(
     <>
       <Head>
@@ -19,7 +19,7 @@ const Layout =({children,meta})=>{
             <title>{title}</title>
       </Head>
       <div className='hdrWrap'>
-        <Header menu={['mypage','community','login/signin', 'join','manager']} route={['/member/mypage','/board/boardlist','/member/login', '/member/join','/admin/manager']}/>
+        <Header menu={['mypage','community','login/signin', 'join','manager']} route={['/member/mypage','/board/boardlist','/member/login', '/member/join','/admin/manager']} sess={sess}/>
       </div>
       <div className="cntWrap">{children}</div>
       <div className='frtWrap'>
