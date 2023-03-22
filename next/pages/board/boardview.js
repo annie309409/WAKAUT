@@ -27,7 +27,6 @@ const Boardview=({boards,session})=>{
     //데이터 등록하기
     async function write(e,{bid,userid,comment}){
         e.preventDefault();
-
         if(reply!=''){
             let dt = Post({bid:bid,userid:userid,comment:comment},'/board/repwrite').then(r=>r);
             if((await dt).cnt > 0) dts();
@@ -78,7 +77,8 @@ const Boardview=({boards,session})=>{
                                  <div className="txtLft d-flex" key={idx}>
                                     <h5 key={m+idx+idx}>{m.name}</h5>
                                     <p className="ms-5" key={m+idx}>{m.comment} <small>{m.regdate2}</small></p>
-                                    <p className="ms-3 delRep" onClick={()=>{del(m.cid)}} key={m+m+idx}>X</p>
+                                    {(session.name === m.name)? <p className="ms-3 delRep" onClick={()=>{del(m.cid)}} key={m+m+idx}>X</p>:''}
+                                    {(session.name === 'admin')? <p className="ms-3 delRep" onClick={()=>{del(m.cid)}} key={m+m+idx}>X</p>:''}
                                  </div>
                                 </>
                            )
@@ -94,9 +94,9 @@ const Boardview=({boards,session})=>{
                 <div className="btns mt-4 mb-4 d-flex  justify-content-end">
                     
                     <Button className="ms-2" variant="primary"><Link href="/board/boardlist">목록으로</Link></Button>
-                    <Button className="ms-2" variant="success" onClick={()=>{setLgShow(true)}}>수정하기</Button>
-                    <Button className="ms-2" variant="secondary" onClick={()=>{setMgShow(true)}}>삭제하기</Button>
-                    <Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}}>강제삭제</Button>
+                    {(session.name===bd.name)?<Button className="ms-2" variant="success" onClick={()=>{setLgShow(true)}} >수정하기</Button>:''}
+                    {(session.name===bd.name)?<Button className="ms-2" variant="secondary" onClick={()=>{setMgShow(true)}} >삭제하기</Button>:''}
+                    {(session.name==='admin')?<Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}} >강제삭제</Button> : ''}
                 </div>
                 <Mgmodal LgShow={mgShow} setLgShow={setMgShow} setCnfirm={setCnfirm} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
                <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow} sename={session.name} seid={session.userid}/>

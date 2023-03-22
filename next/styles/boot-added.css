@@ -356,6 +356,7 @@ footer{
 /* 내정보 관리 : 김득열 */
 .myinfo{
     max-width: 500px;
+    padding: 100px 0px;
 }
 
 .myinfo-list-wrap {

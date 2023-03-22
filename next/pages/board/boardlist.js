@@ -57,7 +57,11 @@ const BoardList=({boards,session})=>{
     return(
         <>
         <Alerts color='success' msg='해당 게시판은 관리자에의해 실시간 관리되고있습니다. 허위사실유포 및 부적절한 표현은 차단될 수 있습니다.'/>
-        <Search cat={['commnunity','review']} title='All' btn={['검색하기','새글쓰기']} btncol={['secondary','success']} click={[sc,()=>{setLgShow(true)}]} setSelval={setSelval} setSrhVal={setSrhVal} srhVal={srhVal}/>
+        {
+        (session.userid !=0)?
+        <Search cat={['commnunity','review']} title='All' btn={['검색하기','새글쓰기']} btncol={['secondary','success']} click={[sc,()=>{setLgShow(true)}]} setSelval={setSelval} setSrhVal={setSrhVal} srhVal={srhVal}/>:
+        <Search cat={['commnunity','review']} title='All' btn={['검색하기']} btncol={['secondary']} click={[sc]} setSelval={setSelval} setSrhVal={setSrhVal} srhVal={srhVal}/>
+        }
         <Container className="lists">
             {
                 dtfn.map((m,idx)=>{

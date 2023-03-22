@@ -33,8 +33,9 @@ MyApp.getInitialProps = async (ctx)=>{
   // next app의 기본 props객체 초기화
   //application단위의 전역변수
   const appProps = await App.getInitialProps(ctx);
-  const sess =await getSession(ctx); 
+  let sess =await getSession(ctx);
   appProps.session = await sess;
+  if(!sess) appProps.session = {user:{ name: 'guest', email: 'null', image: null, userid: 0 }};
   return {...appProps};
 }
 export default MyApp

@@ -11,7 +11,7 @@ export default async (req,res)=>{
             email: (await result)[0].email, 
             name:(await result)[0].name }
             res.status(200).json(await data);
-    }catch(e){
-        console.log(e);
+        }catch(e){
+            res.status(500).json({'에러메세지':'에러발생'});
     }
 }

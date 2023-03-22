@@ -21,11 +21,12 @@ const WriteModal=(props)=>{
         }else{
             let dt = Post({bid,title,userid,content,category,facility},'/board/write').then(res=>res);
             props.setLgShow(false);
-            // if (bid !== undefined && (await dt).cnt === 1) {
-            //     location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
-            // }else{
-            //     location.href=`http://localhost:3000/board/boardlist`
-            // }
+            console.log(await dt);
+            if (bid !== undefined && (await dt).cnt === 1) {
+                location.href=`http://localhost:3000/board/boardview?bid=${bid}`;
+            }else{
+                location.href=`http://localhost:3000/board/boardlist`
+            }
         }
     }
 

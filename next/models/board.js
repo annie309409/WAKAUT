@@ -48,7 +48,7 @@ class Board{
     //코멘트 등록
     async insertCmt(bid,uid,cmt){
         let conn =  null;
-        let rowData = null;
+        let rowData = 1;
         let params = [bid,uid,cmt];
         try{ 
             conn= await mariadb.makeConn();
@@ -80,7 +80,7 @@ class Board{
     //게시글 등록
     async insert(data){
         let conn =  null;
-        let rowData = null;
+        let rowData = 1;
         let params = [data.title,data.userid,data.content,data.category, data.facility];
         try{ 
             conn= await mariadb.makeConn();
@@ -96,7 +96,7 @@ class Board{
      //게시글 수정
      async modify(data){
         let conn =  null;
-        let rowData = null;
+        let rowData = 1;
         let params = [data.title,data.content,data.category, data.facility,data.bid];
         try{ 
             conn= await mariadb.makeConn();

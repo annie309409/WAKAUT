@@ -5,6 +5,20 @@ import Head from "next/head";
 const Layout =({children,meta})=>{
   const {title,description,icon}=meta;
   let sess = children.props.session;
+  let menus = ['mypage','community','login/join','manager'];
+  let routers =['/member/mypage','/board/boardlist','/member/logout', '/admin/manager'];
+
+  if(sess.name ==='admin'){
+    menus = ['mypage','community','logout','manager'];
+    routers =['/member/mypage','/board/boardlist','/member/logout', '/admin/manager'];
+  }else if(sess.userid != 0 ){
+    menus = ['mypage','community','logout'];
+    routers =['/member/mypage','/board/boardlist','/member/logout'];
+  }else{
+    menus = ['mypage','community','login/join'];
+    routers =['/member/mypage','/board/boardlist','/member/login'];
+  }
+
   return(
     <>
       <Head>
@@ -19,7 +33,7 @@ const Layout =({children,meta})=>{
             <title>{title}</title>
       </Head>
       <div className='hdrWrap'>
-        <Header menu={['mypage','community','login/signin', 'join','manager']} route={['/member/mypage','/board/boardlist','/member/login', '/member/join','/admin/manager']} sess={sess}/>
+        <Header menu={menus} route={routers} sess={sess}/> 
       </div>
       <div className="cntWrap">{children}</div>
       <div className='frtWrap'>

@@ -21,11 +21,10 @@ function Login(){
         e.preventDefault();
         const {error} = await signIn('userid-passwd-credentials',{userid,passwd, redirect:false});
         if(error){
-            location.href='/member/fail';
+            alert('존재하지 않는 아이디이거나 패스워드가 일치하지 않습니다.');
         }else{
             location.href= '/member/myinfo';
         }
-        console.log('pg login-',await error);
     }
 
     

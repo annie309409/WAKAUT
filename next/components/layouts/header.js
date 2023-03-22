@@ -1,5 +1,6 @@
 import {Form,Navbar,Container,Button,Nav} from 'react-bootstrap';
 import Link from "next/link";
+import {signOut} from "next-auth/client";
 
 const Header = (props)=>{
     return(
@@ -13,6 +14,7 @@ const Header = (props)=>{
                     <Nav className="me-auto">
                         {
                             props.menu.map((e,i)=>{
+                                if(e==='logout') return <div className='ms-2 menus' key={i} onClick={()=>{signOut().then(r=>location.href='/')}}>{e}</div>
                                 return <div className='ms-2 menus' key={i}><Link href={props.route[i]}>{e}</Link></div>
                             })
                         }
