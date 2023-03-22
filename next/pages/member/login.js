@@ -7,6 +7,7 @@ import getLayout from "../../components/layouts/getLayout";
 import {getSession, signIn} from "next-auth/client";
 import { useState } from "react";
 import {handleInput} from '../feutils';
+import {kakaoInit} from '../../pages/feutils';
 
 export async function getServerSideProps(ctx) {
     const sess = await getSession(ctx);
@@ -16,6 +17,31 @@ export async function getServerSideProps(ctx) {
 function Login(){
     const [userid, setUserid] = useState(null);
     const [passwd, setPasswd] = useState(null);
+
+    const kakaoLogin = async () => {
+        // 카카오 초기화
+        const kakao = kakaoInit();
+
+        // 카카오 로그인 구현
+        // kakao.Auth.login({
+        //     success: () => {
+        //         kakao.API.request({
+        //             url: '/v2/user/me', // 사용자 정보 가져오기
+        //             success: (res) => {
+        //                 // 로그인 성공할 경우 정보 확인 후 /kakao 페이지로 push
+        //                 console.log(res);
+        //                 Router.push('/kakao');
+        //             },
+        //             fail: (error) => {
+        //                 console.log(error);
+        //             }
+        //         })
+        //     },
+        //     fail: (error) => {
+        //         console.log(error);
+        //     }
+        // })
+    }
 
     async function loginHandle(e){
         e.preventDefault();
@@ -53,7 +79,7 @@ function Login(){
                 <Form.Group as={Row} className="mb-3" controlId="sns">
                     <Col sm>
                         <Image src={naver}/>
-                        <Image className="ms-2" src={kakao}/>
+                        <Image className="ms-2" src={kakao} onClick={kakaoLogin}/>
                     </Col>
                 </Form.Group>
 

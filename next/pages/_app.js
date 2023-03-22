@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps,session }) {
     });
   },[router])
   const getLayout =  Component.getLayout ?? ((page)=>page);
+
   return (
     <React.Fragment>
       {loading && <Loading loading={loading} />}

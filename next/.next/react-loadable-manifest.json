@@ -4,5 +4,11 @@
     "files": [
       "static/chunks/0.js"
     ]
+  },
+  "index.js -> react-kakao-maps-sdk": {
+    "id": "./node_modules/react-kakao-maps-sdk/lib/index.module.js",
+    "files": [
+      "static/chunks/1.js"
+    ]
   }
 }

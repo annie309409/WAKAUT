@@ -11,6 +11,8 @@ import Modal from "../components/modal";
 import {Datas} from "../pages/feutils";
 
 import dynamic from 'next/dynamic';
+
+
 const Map = dynamic(() => import("react-kakao-maps-sdk").then((module) => module.Map), {
     ssr: false
 });

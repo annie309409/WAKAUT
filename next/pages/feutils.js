@@ -19,4 +19,14 @@ const handleInput = (setInput, e) => {
     setInput(e.target.value);
 };
 
-module.exports = {Datas,Post,handleInput}
+const kakaoInit = () => {
+    const kakao = (window).Kakao;
+    if(!kakao.isInitialized()) {
+        kakao.init('69823228c875a5a95558c4f4b78b0ae9');
+    }
+    console.log('카카오 이니셜라이즈 성공!');
+    return kakao;
+}
+
+
+module.exports = {Datas,Post,handleInput,kakaoInit}

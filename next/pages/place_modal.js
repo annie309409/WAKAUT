@@ -4,6 +4,9 @@ import {AiFillStar,AiOutlineHighlight,AiOutlinePhone} from "react-icons/ai";
 import {CiLocationOn, CiFaceSmile } from "react-icons/ci";
 import List from '../components/list';
 import Link from "next/link";
+import KakaoSet from '../services/kakaoSet';
+import {kakaoInit} from '../pages/feutils';
+
 
 const PlaceModal=(props)=>{
     let scores=[];
@@ -21,6 +24,7 @@ const PlaceModal=(props)=>{
                     <Card.Text>{sc}</Card.Text>
                     <div className='btns'>
                         <Button variant="primary" className='fluid'>즐겨찾기 추가</Button>
+                        <Button variant="warning" onClick={()=>{KakaoSet(kakaoInit(),{props})}} className='fluid'>카카오 공유하기</Button>
                     </div>
                 </Card.Body>
                 </Card>
