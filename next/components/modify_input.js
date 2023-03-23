@@ -7,35 +7,38 @@ import { useState} from "react";
 const Input = (props)=>{
     const [inputValue, setInputValue] = useState(props.value);
 
+    const handleChange = (e) => {
+        setInputValue(e.target.value);
+        props.onChange(e.target.value);
+    };
+
     return(
         <Container>
             <Form className="mod-frm d-flex">
                 <Form.Label className="mod-type"
                             size="lg" column lg={2}>{props.label}</Form.Label>
-
                 <Col lg={7}>
-
                     {(!props.placeholder)
                         ?
                         <Form.Control className='mod-input Control shadow'
-                                      value={inputValue}  column lg={2}
-                                      type="text" onChange={(e) =>
-                            setInputValue(e.target.value)}/>
+                                      value={inputValue}
+                                      lg={2}
+                                      type="text"
+                                      onChange={handleChange}/>
                         :
                         <Form.Control className='mod-input Control shadow'
-                                      column lg={2} type="text"
-                                      placeholder={props.placeholder} />
+                                      lg={2}
+                                      type="password"
+                                      placeholder={props.placeholder}
+                                      onChange={handleChange}/>
                     }
-
                 </Col>
-
                 {(props.btn)
                     ?
                     (<Button className='mod-ipbtn col-2 shadow'
                              variant={props.variant}>{props.btnvalue}</Button>)
                     :
                     false}
-
             </Form>
         </Container>
     )

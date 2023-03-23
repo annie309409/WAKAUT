@@ -17,8 +17,19 @@ const SQL={
     },
     user:{
         login :`select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u where u.name=? && u.passwd=?`
-
-    }
+    },
+    member : {
+        insertFvr : `insert into favorites (userid, facility, region, contact) values (?, ?, ?, ?)`,
+        selectFvr : `select facility, region, contact from favorites where userid = ?`,
+        selectMif : `select userid, name, email, phone_number, gender, date_format(birth_date, "%Y-%m-%d") birth_date from users where uid = ?`,
+        selectMdf : `SELECT *, DATE_FORMAT(birth_date, '%Y%m%d') as birth_date2 FROM users where uid = ?`,
+        updateInfo : `UPDATE users
+                     SET userid = ?, passwd = ?, name = ?,
+                         email = ?, phone_number = ?, gender = ?,
+                         birth_date = ?, agree_to_privacy_policy = ?,
+                         agree_to_advertising_info = ?
+                     WHERE uid = 1;`
+    },
 }
 
 export default SQL;

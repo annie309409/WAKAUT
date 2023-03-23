@@ -6,16 +6,28 @@ import PlaceModal from "../place_modal";
 import getLayout from "../../components/layouts/getLayout";
 import Paging from "../../components/pagenation";
 import img from '../../assets/workaut.png';
+import {Datas} from "../feutils";
 
 
+// 즐겨찾기 목록 가져오기
+export async function getServerSideProps(ctx){
+    let member = await Datas('/member/favorites', 'userid=1');
+    console.log(member);
+    return{props:{member}};
+}
 
-const Favorites = () => {
+const Favorites = ({member}) => {
+    // '경기도' 다음에 공백이 하나 이상 있는 부분을 찾아서 그 단어들을 추출
+    const regex = /경기도\s+([^\s]+)/;
+    let region = null;
+
+
     let addr = '경기도 김포시 대평원거리 11-43';
     let des = '#용인 #호랑이 #태권';
     const title = "용인 태권도장 성남지점"
     const [lgShow, setLgShow] = useState(false)
 
-    class Favlist {
+    class Fvrlist {
         constructor(region,gym,contact,btn) {
             this.region = region
             this.gym = gym
@@ -27,24 +39,34 @@ const Favorites = () => {
         }
     }
 
-    const lists = [
-        new Favlist("지역", "시설명","연락처",null),
-        new Favlist("의정부시", "팀매드 의정부점","098-7654-3210",'삭제'),
-        new Favlist("안양시", "슈퍼클라이밍","123-4567-8901","삭제"),
-        new Favlist("하남시", "하남 스카이다이빙","123-4567-8901","삭제")
-    ];
+    const fList = member.map((item) => {
+        const match = item.region.match(regex);
+        if(match)  region = match[1];
+        else region = '';
+
+        return {
+            region: region,
+            facility: item.facility,
+            contact: item.contact,
+        }
+    });
+
+    let lists = [];
+    fList.forEach((list) => {
+        lists.push(new Fvrlist(list.region, list.facility, list.contact, "삭제"));
+    });
 
     return(
-<>
-        <Container className="favorites">
-            <Title title='즐겨찾기 목록'/>
-            <hr className="hr"/>
-            <FavoritesList lists={lists}/>
-            <Paging cnt={2}/>
-            <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}
-                        addr={addr} title={title} des={des} img={img}/>
-        </Container>
-</>
+        <>
+            <Container className="favorites">
+                <Title title='즐겨찾기 목록'/>
+                <hr className="hr"/>
+                <FavoritesList lists={lists}/>
+                <Paging cnt={2}/>
+                <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}
+                            addr={addr} title={title} des={des} img={img}/>
+            </Container>
+        </>
     )
 }
 
