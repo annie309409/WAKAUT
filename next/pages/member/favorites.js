@@ -6,7 +6,7 @@ import PlaceModal from "../place_modal";
 import getLayout from "../../components/layouts/getLayout";
 import Paging from "../../components/pagenation";
 import img from '../../assets/workaut.png';
-import {Datas} from "../feutils";
+import {Datas} from "../../components/feutils";
 
 
 // 즐겨찾기 목록 가져오기

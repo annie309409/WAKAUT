@@ -5,7 +5,7 @@ import kakao  from '../../assets/kakaobtn.png';
 import getLayout from "../../components/layouts/getLayout";
 import {getSession, signIn} from "next-auth/client";
 import { useState } from "react";
-import {handleInput} from '../feutils';
+import {handleInput} from '../../components/feutils';
 
 function Login(){
     const [userid, setUserid] = useState(null);

@@ -1,14 +1,8 @@
 {
-  "..\\node_modules\\next\\dist\\client\\next-dev.js -> ./dev/noop": {
-    "id": "./node_modules/next/dist/client/dev/noop.js",
-    "files": [
-      "static/chunks/0.js"
-    ]
-  },
   "index.js -> react-kakao-maps-sdk": {
-    "id": "./node_modules/react-kakao-maps-sdk/lib/index.module.js",
+    "id": "IZ9h",
     "files": [
-      "static/chunks/1.js"
+      "static/chunks/12.acc4edd386c1b5210b47.js"
     ]
   }
 }

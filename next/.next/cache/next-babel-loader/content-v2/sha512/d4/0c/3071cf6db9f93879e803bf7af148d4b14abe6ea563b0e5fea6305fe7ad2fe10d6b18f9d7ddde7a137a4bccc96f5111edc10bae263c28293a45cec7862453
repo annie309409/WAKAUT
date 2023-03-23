@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Board from \"../../../models/board\";\nexport default (async (req, res) => {\n  let cnt = '';\n  cnt = new Board().delete(req.body.bid).then(res => res);\n  res.status(200).json({\n    cnt: await cnt\n  });\n  return cnt;\n});","map":null,"metadata":{},"sourceType":"module"}

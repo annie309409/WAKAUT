@@ -7,7 +7,7 @@ import img from '../assets/workaut.png';
 import mapicon from '../assets/map-icon.png';
 import getLayout from "../components/layouts/getLayout";
 import Modal from "../components/modal";
-import {Datas} from "../pages/feutils";
+import {Datas} from "../components/feutils";
 import {
     handleFacilityChange,
     handleSearchButtonClick,

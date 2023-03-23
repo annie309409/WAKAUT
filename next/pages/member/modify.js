@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from "../../components/layouts/getLayout";
-import {Datas, Post} from "../feutils";
+import {Datas, Post} from "../../components/feutils";
 
 export async function getServerSideProps(ctx){
     let member = await Datas('/member/modify', 'uid=1');

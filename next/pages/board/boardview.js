@@ -5,7 +5,7 @@ import {useState} from 'react';
 import WriteModal from "./write_modal";
 import Mgmodal from "../../components/mgmodal";
 import getLayout from '../../components/layouts/getLayout';
-import {Datas,Post,handleInput} from '../feutils';
+import {Datas,Post,handleInput} from '../../components/feutils';
 let title='';
 let contents ='';
 

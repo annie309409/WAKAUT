@@ -1,7 +1,7 @@
 import Modal from '../../components/modal';
 import {Form,FloatingLabel,Button} from 'react-bootstrap'; 
 import Selection from '../../components/selection';
-import {Post,handleInput} from '../feutils';
+import {Post,handleInput} from '../../components/feutils';
 import { useState } from 'react';
 
 

@@ -5,8 +5,7 @@ import {CiLocationOn, CiFaceSmile } from "react-icons/ci";
 import List from '../components/list';
 import Link from "next/link";
 import KakaoSet from '../services/kakaoSet';
-import {kakaoInit} from '../pages/feutils';
-import {Post} from "./feutils";
+import {Post,kakaoInit} from "../components/feutils";
 
 
 const PlaceModal=(props)=>{

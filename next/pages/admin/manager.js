@@ -5,7 +5,7 @@ import Title from "../../components/title";
 import Managerlist from "../../components/manager_list";
 import Mgmodal from "../../components/mgmodal";
 import getLayout from '../../components/layouts/getLayout'
-import {Datas} from "../feutils";
+import {Datas} from "../../components/feutils";
 
 export async function getServerSideProps(ctx) {
     let datas = await Datas('/users/users');

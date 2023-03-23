@@ -5,7 +5,7 @@ import {Container} from 'react-bootstrap';
 import List from '../../components/list';
 import WriteModal from './write_modal';
 import getLayout from '../../components/layouts/getLayout';
-import {Datas} from '../feutils';
+import {Datas} from '../../components/feutils';
 import { BarLoader } from "react-spinners"
 
 

@@ -3,7 +3,7 @@ import {Container} from "react-bootstrap";
 import MyInfoList from "../../components/myinfo_list";
 import MyInfoMain from "../../components/myinfo_main";
 import getLayout from "../../components/layouts/getLayout";
-import {Datas} from "../feutils";
+import {Datas} from "../../components/feutils";
 
 export async function getServerSideProps(ctx){
   let member = await Datas('/member/myinfo', 'uid=1');
