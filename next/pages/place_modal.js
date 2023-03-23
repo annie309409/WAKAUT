@@ -6,13 +6,20 @@ import List from '../components/list';
 import Link from "next/link";
 import KakaoSet from '../services/kakaoSet';
 import {kakaoInit} from '../pages/feutils';
+import {Post} from "./feutils";
 
 
 const PlaceModal=(props)=>{
     let scores=[];
     for(let i = 0; i<props.score; i++) scores.push(i);
     const sc= (props.score) ? scores.map(m=>{return <AiFillStar key={m} />}): false;
-    
+
+    // 즐겨찾기 추가
+    async function fvrAdd(e,{userid, facility, region, contact}){
+        e.preventDefault();
+        await Post({userid: userid, facility: facility, region: region, contact: contact}, '/member/addfavorites');
+    }
+
     return(
         <Modal size={props.size} lgShow={props.lgShow} setLgShow={props.setLgShow} class='d-flex' title="정보 상세보기">
             <div className='left col-6 me-1'>
@@ -23,7 +30,10 @@ const PlaceModal=(props)=>{
                     <Card.Text>다른 사용자에게 의견을 들려주세요</Card.Text>
                     <Card.Text>{sc}</Card.Text>
                     <div className='btns'>
-                        <Button variant="primary" className='fluid'>즐겨찾기 추가</Button>
+                        <Button variant="primary" className='fluid'
+                                onClick={(e)=>{ fvrAdd(e,{
+                                    userid:1, facility:props.title, region:props.addr, contact:props.contact})}}
+                        >즐겨찾기 추가</Button>
                         <Button variant="warning" onClick={()=>{KakaoSet(kakaoInit(),{props})}} className='fluid'>카카오 공유하기</Button>
                     </div>
                 </Card.Body>

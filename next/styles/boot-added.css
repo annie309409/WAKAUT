@@ -60,7 +60,7 @@ button a,button a:hover,button a:visited{
     overflow: hidden;
     word-break: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical
 }
 
@@ -355,15 +355,14 @@ footer{
 
 /* 내정보 관리 : 김득열 */
 .myinfo{
-    max-width: 500px;
-    padding: 100px 0px;
+    max-width: 600px;
 }
 
 .myinfo-list-wrap {
     display: flex;
     align-items: center;
     margin: 10px 0;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .myinfo-list {
@@ -377,9 +376,8 @@ footer{
 }
 
 .myinfo-main-wrap .myinfo-title {
-    font-size: 16px;
+    font-size: 22px;
     color: #606060;
-    font-weight: bold;
     flex: 1;
 }
 
@@ -404,18 +402,17 @@ footer{
 }
 
 .myinfo-main-wrap .profile-container .profile-img {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     background: #ccc;
     border-radius: 15px;
 }
 
-.myinfo-main-wrap .profile-container .profile-name {
-    font-size: 18px;
-    font-weight: bold;
+.profile-name {
+    font-size: 24px;
     justify-content: flex-start;
     display: flex;
-    flex: 1;
+
 }
 
 .myinfo-main-wrap .logout-container {
@@ -425,8 +422,8 @@ footer{
 
 .myinfo-btn{
     background:#239aaf; border:none;
-    color:white; font-size:12px;
-    width:90px; padding:5px 0;
+    color:white; font-size:16px;
+    width:110px; padding:5px 0;
 }
 
 
@@ -528,7 +525,7 @@ footer{
 /* 전체 스크롤 스타일 지정 : 박정아*/
 html ::-webkit-scrollbar {
     width: 15px;
-   
+
 }
 html ::-webkit-scrollbar-thumb{
     background-color: rgba(136, 136, 138, 0.8);
@@ -544,3 +541,25 @@ html ::-webkit-scrollbar-thumb{
 .delRep{
     cursor: pointer;
 }
+
+/* 메인페이지 전체시설보기 버튼 : 김득열 */
+.showAll-btn{
+    width: 100%;
+}
+
+/* 메인페이지 시설찾기 버튼 : 김득열 */
+.facility-btn{
+    transition: background-color 2s ease-in-out;  /* transition 속성 추가 */
+}
+
+/* 메인페이지 시설없음 알림모달 바디 : 김득열 */
+.searchModal {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 가로 중앙 정렬 */
+    height: 120px;
+    font-size: 22px;
+    color: #ff9c8f;
+}
+
+

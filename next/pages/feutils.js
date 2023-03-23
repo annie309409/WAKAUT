@@ -10,6 +10,7 @@ async function Datas(loc,param){
 }
 
 const Post = async (data,url) => {
+    console.log("넘어온데이타는", data);
     const cnt = fetch(`${fixedUrl}${url}`,{ method: 'POST', mode: 'cors', body:JSON.stringify(data), headers:{'Content-Type': 'application/json'}
     }).then(res=>res.json());
     return await cnt;
