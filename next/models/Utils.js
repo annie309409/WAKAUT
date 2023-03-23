@@ -1,4 +1,4 @@
-
+// index.js에서 사용되는 함수들
 // 전체시설보기 눌렀을때 재렌더링
 const handleShowAll = () => {
     location.href="/"

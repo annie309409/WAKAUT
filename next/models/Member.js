@@ -102,22 +102,41 @@ class Member {
         return rowData;
     }
 
-    // 즐겨찾기 삭제
-    // async deleteCmt(cid, bid) {
-    //     let conn = null;
-    //     let rowData = null;
-    //     let params = [cid];
-    //     try {
-    //         conn = await mariadb.makeConn();
-    //         await conn.query(SQL.board.deleteCmt, params);
-    //         await conn.commit();
-    //     } catch (e) {
-    //         console.log(e);
-    //     } finally {
-    //         await mariadb.closeConn();
-    //     }
-    //     return rowData;
-    // }
+    // 회원가입
+    async join(
+        userid,
+        passwd,
+        name,
+        email,
+        phone_number,
+        birth_date,
+        gender,
+        agree_to_privacy_policy,
+        agree_to_advertising_info)
+    {
+        let conn = null;
+        let rowData = null;
+        let params = [
+            userid,
+            passwd,
+            name,
+            email,
+            phone_number,
+            birth_date,
+            gender,
+            agree_to_privacy_policy,
+            agree_to_advertising_info];
+        try {
+            conn = await mariadb.makeConn();
+            await conn.query(SQL.member.join, params);
+            await conn.commit();
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
 }
 module.exports = Member;
 
