@@ -41,7 +41,7 @@ const WriteModal=(props)=>{
                 </FloatingLabel>
                 <div className='d-flex'>
                     <Selection title="말머리를 선택하세요" cat={['community','review']} change={setCategory}/>
-                    <Selection title="위치를 선택하세요" cat={['부천종합운동장','경기생활체육시설']} change={setFacility}/>
+                    <Selection title="위치를 선택하세요" cat={props.atlists} change={setFacility}/>
                 </div>
                 <FloatingLabel controlId="textarea" label="상대를 배려해주세요!">
                     <Form.Control className='mt-2'

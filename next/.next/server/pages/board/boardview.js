@@ -3182,7 +3182,7 @@ const WriteModal = props => {
     change: setCategory
   }), __jsx(_components_selection__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"], {
     title: "\uC704\uCE58\uB97C \uC120\uD0DD\uD558\uC138\uC694",
-    cat: ['부천종합운동장', '경기생활체육시설'],
+    cat: props.atlists,
     change: setFacility
   })), __jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["FloatingLabel"], {
     controlId: "textarea",
@@ -3261,16 +3261,19 @@ let contents = ''; //데이터 끌고오기!
 
 async function getServerSideProps(ctx) {
   let boards = await Object(_components_feutils__WEBPACK_IMPORTED_MODULE_7__["Datas"])(`/board/boardview?bid=${ctx.query.bid}`);
+  let atlists = await Object(_components_feutils__WEBPACK_IMPORTED_MODULE_7__["Datas"])(`/main?lists=y`);
   return {
     props: {
-      boards
+      boards,
+      atlists
     }
   };
 }
 
 const Boardview = ({
   boards,
-  session
+  session,
+  atlists
 }) => {
   const {
     0: lgShow,
@@ -3441,7 +3444,8 @@ const Boardview = ({
     setLgShow: setLgShow,
     lgShow: lgShow,
     sename: session.name,
-    seid: session.userid
+    seid: session.userid,
+    atlists: atlists
   })));
 };
 

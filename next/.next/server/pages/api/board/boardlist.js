@@ -153,18 +153,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Board {
   //게시판 목록출력
-  async select(pg, cat, note) {
+  async select(pg, cat, note, fcname) {
     let conn = null;
     let rowData = null;
     let where = '';
     cat != 'All' ? cat = `category='${cat}'` : cat = '';
-    console.log(cat);
 
     if (cat && note) {
       where = ` and ${cat} and (title like '%테스트%' or content like '%테스트%' or u.name like '%테스트%') `;
     } else {
       console.log('일반');
     }
+
+    if (fcname) where = ` and facility_name = '${fcname}' `;
 
     try {
       conn = await _MariaDB.default.makeConn();
@@ -320,12 +321,13 @@ __webpack_require__.r(__webpack_exports__);
   let {
     pg,
     cat,
-    note
+    note,
+    fcname
   } = req.query;
   console.log('서버 값:' + pg, cat, note);
 
   try {
-    const rowData = new _models_board__WEBPACK_IMPORTED_MODULE_0___default.a().select(parseInt(pg), cat, note).then(bds => bds);
+    const rowData = new _models_board__WEBPACK_IMPORTED_MODULE_0___default.a().select(parseInt(pg), cat, note, fcname).then(bds => bds);
     res.status(200).json(await rowData);
   } catch (e) {
     console.log(e);

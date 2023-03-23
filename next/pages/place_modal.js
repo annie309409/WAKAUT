@@ -10,6 +10,8 @@ import {Post,kakaoInit} from "../components/feutils";
 
 const PlaceModal=(props)=>{
     let scores=[];
+    let lis = props.bdList.boards;
+    if(lis == undefined) lis = ['','']; 
     for(let i = 0; i<props.score; i++) scores.push(i);
     const sc= (props.score) ? scores.map(m=>{return <AiFillStar key={m} />}): false;
 
@@ -45,8 +47,8 @@ const PlaceModal=(props)=>{
                 <p><AiOutlineHighlight /><span>{props.des}</span></p>
                 <p><CiFaceSmile /><span>{sc}</span></p>
                 <div className='brdPrev mb-5'>
-                    <List title="게시판 제목" note="이곳은 정말 좋은곳입니다." kd="community" time="2023-03-08" view="255"/>
-                    <List title="게시판 제목" note="이곳은 정말 좋은곳입니다." kd="review" time="2023-03-08" view="255"/>
+                     {(lis[0]!=undefined)?<List title={lis[0].title} note={lis[0].content} kd={lis[0].category} time={lis[0].regdate2} view={lis[0].views}/>:''}
+                     {(lis[1]!=undefined)?<List title={lis[1].title} note={lis[1].content} kd={lis[1].category} time={lis[1].regdate2} view={lis[1].views}/>:''}
                 </div>
                 <Button variant="success"> <Link href="/board/boardlist">게시글 더 보기</Link></Button>
             </div>

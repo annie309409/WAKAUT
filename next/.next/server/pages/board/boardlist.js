@@ -589,17 +589,21 @@ var boardlist_jsx = external_react_default.a.createElement;
  //처음 데이터 세팅
 
 async function getServerSideProps(ctx) {
-  let boards = await Object(feutils["Datas"])('/board/boardlist', 'pg=5');
+  let boards = await Object(feutils["Datas"])('/board/boardlist', 'pg=5'); // 운동목록 리스트 가져오기
+
+  let atlists = await Object(feutils["Datas"])(`/main?lists=y`);
   return {
     props: {
-      boards
+      boards,
+      atlists
     }
   };
 }
 
 const BoardList = ({
   boards,
-  session
+  session,
+  atlists
 }) => {
   let {
     0: dtfn,
@@ -661,7 +665,7 @@ const BoardList = ({
       });
     };
   });
-  return boardlist_jsx(external_react_default.a.Fragment, null, boardlist_jsx(components_alert, {
+  return boardlist_jsx(external_react_default.a.Fragment, null, console.log(atlists), boardlist_jsx(components_alert, {
     color: "success",
     msg: "\uD574\uB2F9 \uAC8C\uC2DC\uD310\uC740 \uAD00\uB9AC\uC790\uC5D0\uC758\uD574 \uC2E4\uC2DC\uAC04 \uAD00\uB9AC\uB418\uACE0\uC788\uC2B5\uB2C8\uB2E4. \uD5C8\uC704\uC0AC\uC2E4\uC720\uD3EC \uBC0F \uBD80\uC801\uC808\uD55C \uD45C\uD604\uC740 \uCC28\uB2E8\uB420 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   }), session.userid != 0 ? boardlist_jsx(search, {
@@ -717,7 +721,8 @@ const BoardList = ({
     lgShow: lgShow,
     setLgShow: setLgShow,
     sename: session.name,
-    seid: session.userid
+    seid: session.userid,
+    atlists: atlists
   }));
 };
 
@@ -3403,7 +3408,7 @@ const WriteModal = props => {
     change: setCategory
   }), __jsx(_components_selection__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"], {
     title: "\uC704\uCE58\uB97C \uC120\uD0DD\uD558\uC138\uC694",
-    cat: ['부천종합운동장', '경기생활체육시설'],
+    cat: props.atlists,
     change: setFacility
   })), __jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["FloatingLabel"], {
     controlId: "textarea",

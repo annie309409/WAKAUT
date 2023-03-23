@@ -12,10 +12,12 @@ import { BarLoader } from "react-spinners"
 //처음 데이터 세팅
 export async function getServerSideProps(ctx){
     let boards = await Datas('/board/boardlist','pg=5');
-    return{props:{boards}};   
+      // 운동목록 리스트 가져오기
+    let atlists = await Datas(`/main?lists=y`);
+    return{props:{boards,atlists}};   
 }
 
-const BoardList=({boards,session})=>{
+const BoardList=({boards,session,atlists})=>{
     let [dtfn,setDtfn] = useState(boards.boards);
     let [cnt,setCnt] = useState(2);
     const [lgShow, setLgShow] = useState(false);
@@ -56,6 +58,7 @@ const BoardList=({boards,session})=>{
 
     return(
         <>
+        { console.log(atlists)}
         <Alerts color='success' msg='해당 게시판은 관리자에의해 실시간 관리되고있습니다. 허위사실유포 및 부적절한 표현은 차단될 수 있습니다.'/>
         {
         (session.userid !=0)?
@@ -72,7 +75,7 @@ const BoardList=({boards,session})=>{
                 <BarLoader color="#ccc" cssOverride={{position: "absolute", margin:"auto", top:0,left:0, right:0, bottom:0,zIndex:555}} />
             </div>
         </Container>
-        <WriteModal lgShow={lgShow} setLgShow={setLgShow} sename={session.name} seid={session.userid}/>
+        <WriteModal lgShow={lgShow} setLgShow={setLgShow} sename={session.name} seid={session.userid} atlists={atlists}/>
         </>
     )
 }

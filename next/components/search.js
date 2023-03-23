@@ -2,7 +2,6 @@ import {Container,Form, Button} from 'react-bootstrap';
 import Selection from './selection';
 import {handleInput} from './feutils';
 
-
 const Search=(props)=>{
     return(
         <Container>

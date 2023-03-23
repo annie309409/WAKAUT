@@ -273,7 +273,7 @@ const WriteModal = props => {
     change: setCategory
   }), __jsx(_components_selection__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"], {
     title: "\uC704\uCE58\uB97C \uC120\uD0DD\uD558\uC138\uC694",
-    cat: ['부천종합운동장', '경기생활체육시설'],
+    cat: props.atlists,
     change: setFacility
   })), __jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["FloatingLabel"], {
     controlId: "textarea",

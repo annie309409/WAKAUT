@@ -951,6 +951,8 @@ var __jsx = external_react_default.a.createElement;
 
 const PlaceModal = props => {
   let scores = [];
+  let lis = props.bdList.boards;
+  if (lis == undefined) lis = ['', ''];
 
   for (let i = 0; i < props.score; i++) scores.push(i);
 
@@ -1013,19 +1015,19 @@ const PlaceModal = props => {
     className: "right col-6 ms-1"
   }, __jsx("h2", null, props.title), __jsx("p", null, __jsx(ci_["CiLocationOn"], null), __jsx("span", null, props.addr)), __jsx("p", null, __jsx(ai_["AiOutlinePhone"], null), __jsx("span", null, props.contact)), __jsx("p", null, __jsx(ai_["AiOutlineHighlight"], null), __jsx("span", null, props.des)), __jsx("p", null, __jsx(ci_["CiFaceSmile"], null), __jsx("span", null, sc)), __jsx("div", {
     className: "brdPrev mb-5"
-  }, __jsx(list["a" /* default */], {
-    title: "\uAC8C\uC2DC\uD310 \uC81C\uBAA9",
-    note: "\uC774\uACF3\uC740 \uC815\uB9D0 \uC88B\uC740\uACF3\uC785\uB2C8\uB2E4.",
-    kd: "community",
-    time: "2023-03-08",
-    view: "255"
-  }), __jsx(list["a" /* default */], {
-    title: "\uAC8C\uC2DC\uD310 \uC81C\uBAA9",
-    note: "\uC774\uACF3\uC740 \uC815\uB9D0 \uC88B\uC740\uACF3\uC785\uB2C8\uB2E4.",
-    kd: "review",
-    time: "2023-03-08",
-    view: "255"
-  })), __jsx(external_react_bootstrap_["Button"], {
+  }, lis[0] != undefined ? __jsx(list["a" /* default */], {
+    title: lis[0].title,
+    note: lis[0].content,
+    kd: lis[0].category,
+    time: lis[0].regdate2,
+    view: lis[0].views
+  }) : '', lis[1] != undefined ? __jsx(list["a" /* default */], {
+    title: lis[1].title,
+    note: lis[1].content,
+    kd: lis[1].category,
+    time: lis[1].regdate2,
+    view: lis[1].views
+  }) : ''), __jsx(external_react_bootstrap_["Button"], {
     variant: "success"
   }, " ", __jsx(link_default.a, {
     href: "/board/boardlist"

@@ -29,7 +29,6 @@ const MapMarker = dynamic(() => import("react-kakao-maps-sdk").then((module) => 
 export async function getServerSideProps(ctx) {
     const word = ctx.query.word || '';
     let items = await Datas('/main', `srch=${word}`);
-
     return {props: {items: items, word: word}}
 }
 
@@ -45,6 +44,7 @@ export default function Index({items, word}) {
     const [selectedPlace, setSelectedPlace] = useState(null);   // 마커 클릭시 모달 state
     const [searchCount, setSearchCount] = useState(items.length);  // 총 몇개의 시설이 조회된건지 저장하는 state
     const [isButtonActive, setIsButtonActive] = useState(false);
+    const [bdList, setBDLists] = useState({});
 
 
 
@@ -100,6 +100,12 @@ export default function Index({items, word}) {
         }
     }, [])
 
+    // 게시글 목록 가지고 오기
+    async function lists(fcname){
+        let boards = await Datas('/board/boardlist',`pg=5&fcname=${fcname}`).then(r=>r);
+        setBDLists(await boards);
+    }
+
 
     return(
         <Container className="d-flex mt-4 mb-4 index">
@@ -114,13 +120,14 @@ export default function Index({items, word}) {
                         col="bg-secondary"
                         textClick={() => {
                             setSelectedPlace(item);
-                            setLgShow(true);
+                            // setLgShow(true);
                             const lat = parseFloat(item.REFINE_WGS84_LAT);
                             const lng = parseFloat(item.REFINE_WGS84_LOGT);
                             setState((prev) => ({
                                 ...prev,
                                 center: { lat, lng },
                             }));
+                            lists(item.FACLT_NM).then().then(setLgShow(true))
                         }}
                     />
                 ))}
@@ -210,8 +217,9 @@ export default function Index({items, word}) {
                 img={img}
                 lat={selectedPlace ? selectedPlace.REFINE_WGS84_LAT : null}
                 lng={selectedPlace ? selectedPlace.REFINE_WGS84_LOGT : null}
+                bdList={bdList}
             />
-            <Modal title="알림" class="searchModal" size="sm" lgShow={show} setLgShow={setShow} children="해당하는 시설이 없습니다."/>
+            <Modal title="알림" class="searchModal" size="sm" lgShow={show} setLgShow={setShow}  children="해당하는 시설이 없습니다."/>
         </Container>
     )
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import { XMLParser } from 'fast-xml-parser';
 
 export default async(req,res)=>{
-    console.log("검색한 단어 : ", req.query);
+    // console.log("검색한 단어 : ", req.query);
     const URL =" https://openapi.gg.go.kr/PubPhstFtM";
     const params = {
         KEY: "59c361f5fb304a649662ff8ec90e184f",
@@ -29,6 +29,10 @@ export default async(req,res)=>{
         items = items.filter(f=>
             f.FACLT_NM.indexOf(req.query.srch.trim())!==-1
         )
+    }
+
+    if(req.query.lists){
+        items = items.map(m=> m.FACLT_NM)
     }
     res.status(200).json(items);
 }

@@ -68,5 +68,7 @@ const handleSearchButtonClick = (items, selectedSigun, selectedFacility,
     }
 }
 
+
+
 module.exports = {handleShowAll, handleFacilityChange,
     handleSigunChange, handleSearchTextChange, handleSearchButtonClick};

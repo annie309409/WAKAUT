@@ -13,17 +13,16 @@ let contents ='';
 //데이터 끌고오기!
 export async function getServerSideProps(ctx){
     let boards = await Datas(`/board/boardview?bid=${ctx.query.bid}`);
-    return{props:{boards}};
+    let atlists = await Datas(`/main?lists=y`);
+    return{props:{boards,atlists}};   
 }
-
-const Boardview=({boards,session})=>{
+const Boardview=({boards,session,atlists})=>{
     const [lgShow, setLgShow] = useState(false);
     const [mgShow, setMgShow] = useState(false);
     const [reply, setReply] = useState();
     const [cmts,setCmts] = useState(boards[0].com);
     const [cnfirm, setCnfirm] = useState(false);
     let bd = boards[0];
-
     //데이터 등록하기
     async function write(e,{bid,userid,comment}){
         e.preventDefault();
@@ -66,7 +65,6 @@ const Boardview=({boards,session})=>{
                     <List title={bd.title} kd={bd.category} time={bd.regdate2} view={bd.views+1} name={bd.name}/>
                 </Container>
             </div>
-            
             <Container>
                 <p className="viewnote">{bd.content}</p>
                 <div className="replay p-5">
@@ -99,12 +97,12 @@ const Boardview=({boards,session})=>{
                     {(session.name==='admin')?<Button className="ms-2" variant="danger" onClick={()=>{setMgShow(true)}} >강제삭제</Button> : ''}
                 </div>
                 <Mgmodal LgShow={mgShow} setLgShow={setMgShow} setCnfirm={setCnfirm} title="게시글 삭제" msg="정말 삭제하시겠습니까?"/>
-               <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow} sename={session.name} seid={session.userid}/>
+               <WriteModal title={boards[0].title} note={boards[0].content} bid={boards[0].bid} setLgShow={setLgShow} lgShow={lgShow} sename={session.name} seid={session.userid}  atlists={atlists}/>
             </Container>
         </>
     )
 }
 
-    getLayout(Boardview,{title:title,description:contents});
+getLayout(Boardview,{title:title,description:contents});
 
 export default Boardview;

@@ -1185,7 +1185,11 @@ function Index({
   const {
     0: isButtonActive,
     1: setIsButtonActive
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false); // 시군명 선택 시 시설구분명 셀렉트 태그에 표시할 options 배열 반환
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const {
+    0: bdList,
+    1: setBDLists
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}); // 시군명 선택 시 시설구분명 셀렉트 태그에 표시할 options 배열 반환
 
   function getFacilityOptions(sigun) {
     const facilities = items.filter(item => item.SIGUN_NM === sigun);
@@ -1235,7 +1239,13 @@ function Index({
         isLoading: false
       }));
     }
-  }, []);
+  }, []); // 게시글 목록 가지고 오기
+
+  async function lists(fcname) {
+    let boards = await Object(_components_feutils__WEBPACK_IMPORTED_MODULE_9__["Datas"])('/board/boardlist', `pg=5&fcname=${fcname}`).then(r => r);
+    setBDLists(await boards);
+  }
+
   return __jsx(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
     className: "d-flex mt-4 mb-4 index"
   }, __jsx("div", {
@@ -1247,8 +1257,8 @@ function Index({
     note: item.REFINE_ROADNM_ADDR,
     col: "bg-secondary",
     textClick: () => {
-      setSelectedPlace(item);
-      setLgShow(true);
+      setSelectedPlace(item); // setLgShow(true);
+
       const lat = parseFloat(item.REFINE_WGS84_LAT);
       const lng = parseFloat(item.REFINE_WGS84_LOGT);
       setState(prev => _objectSpread(_objectSpread({}, prev), {}, {
@@ -1257,6 +1267,7 @@ function Index({
           lng
         }
       }));
+      lists(item.FACLT_NM).then().then(setLgShow(true));
     }
   }))), __jsx("div", {
     className: "right col-6 ms-4"
@@ -1330,7 +1341,8 @@ function Index({
     des: des,
     img: _assets_workaut_png__WEBPACK_IMPORTED_MODULE_5___default.a,
     lat: selectedPlace ? selectedPlace.REFINE_WGS84_LAT : null,
-    lng: selectedPlace ? selectedPlace.REFINE_WGS84_LOGT : null
+    lng: selectedPlace ? selectedPlace.REFINE_WGS84_LOGT : null,
+    bdList: bdList
   }), __jsx(_components_modal__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"], {
     title: "\uC54C\uB9BC",
     class: "searchModal",
@@ -1536,6 +1548,8 @@ var __jsx = external_react_default.a.createElement;
 
 const PlaceModal = props => {
   let scores = [];
+  let lis = props.bdList.boards;
+  if (lis == undefined) lis = ['', ''];
 
   for (let i = 0; i < props.score; i++) scores.push(i);
 
@@ -1598,19 +1612,19 @@ const PlaceModal = props => {
     className: "right col-6 ms-1"
   }, __jsx("h2", null, props.title), __jsx("p", null, __jsx(ci_["CiLocationOn"], null), __jsx("span", null, props.addr)), __jsx("p", null, __jsx(ai_["AiOutlinePhone"], null), __jsx("span", null, props.contact)), __jsx("p", null, __jsx(ai_["AiOutlineHighlight"], null), __jsx("span", null, props.des)), __jsx("p", null, __jsx(ci_["CiFaceSmile"], null), __jsx("span", null, sc)), __jsx("div", {
     className: "brdPrev mb-5"
-  }, __jsx(list["a" /* default */], {
-    title: "\uAC8C\uC2DC\uD310 \uC81C\uBAA9",
-    note: "\uC774\uACF3\uC740 \uC815\uB9D0 \uC88B\uC740\uACF3\uC785\uB2C8\uB2E4.",
-    kd: "community",
-    time: "2023-03-08",
-    view: "255"
-  }), __jsx(list["a" /* default */], {
-    title: "\uAC8C\uC2DC\uD310 \uC81C\uBAA9",
-    note: "\uC774\uACF3\uC740 \uC815\uB9D0 \uC88B\uC740\uACF3\uC785\uB2C8\uB2E4.",
-    kd: "review",
-    time: "2023-03-08",
-    view: "255"
-  })), __jsx(external_react_bootstrap_["Button"], {
+  }, lis[0] != undefined ? __jsx(list["a" /* default */], {
+    title: lis[0].title,
+    note: lis[0].content,
+    kd: lis[0].category,
+    time: lis[0].regdate2,
+    view: lis[0].views
+  }) : '', lis[1] != undefined ? __jsx(list["a" /* default */], {
+    title: lis[1].title,
+    note: lis[1].content,
+    kd: lis[1].category,
+    time: lis[1].regdate2,
+    view: lis[1].views
+  }) : ''), __jsx(external_react_bootstrap_["Button"], {
     variant: "success"
   }, " ", __jsx(link_default.a, {
     href: "/board/boardlist"
