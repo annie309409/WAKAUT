@@ -5,32 +5,84 @@ import {useState} from "react";
 import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from '../../components/layouts/getLayout';
+import Link from "next/link";
+import {Post} from "../../components/feutils";
 
 const Join=()=>{
     const [lgShow, setLgShow] = useState(false);
-    const gender = ['남자', '여자', '선택안함'];
+    const gender = ['남자', '여자'];
     const terms1 = ['개인정보 수집 이용 동의(선택)']
     const terms2 = ['광고성 정보, 혜택 등 수신 동의(선택)']
-    const message = ['SMS', '이메일']
 
+    const [userid, setUserid] = useState('');
+    const [passwd, setPasswd] = useState('');
+    const [garbage, setGarbage] = useState('');   // 비밀번호확인(의미없음)
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [gen, setGen] = useState('');
+    const [birth, setBirth] = useState('');
+    const [agr1, setAgr1] = useState(0);
+    const [agr2, setAgr2] = useState(0);
+
+    const handleUserIdChange = (value) => {
+        setUserid(value);
+    };
+    const handlePasswordChange = (value) => {
+        setPasswd(value);
+    };
+    const handleNameChange = (value) => {
+        setName(value);
+    };
+    const handleEmailChange = (value) => {
+        setEmail(value);
+    };
+    const handlePhoneChange = (value) => {
+        setPhone(value);
+    };
+    const handleGenderChange = (value) => {
+        setGen(value);
+    };
+    const handleBirthChange = (value) => {
+        setBirth(value);
+    };
+    const handleAgree1Change = (value) => {
+        setAgr1(value);
+    };
+    const handleAgree2Change = (value) => {
+        setAgr2(value);
+    };
+
+    // 회원가입 버튼 클릭
+    async function handleSubmit () {
+        await Post({
+            userid: userid, passwd: passwd,
+            name: name, email: email,
+            phone_number: phone, gender: gen,
+            birth_date: birth,
+            agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
+        }, '/member/join');
+    }
     return(
         <Container className="modify-frm">
             <Title title='회원가입' />
-            <Input label='아이디' placeholder="아이디를 입력해 주세요" btn={true} btnvalue="중복확인" variant="outline-secondary"/>
-            <Input label='비밀번호' placeholder="6~20자 이내 영문,숫자,특문 조합으로 입력해 주세요" btn={false}/>
-            <Input label='비밀번호 확인' placeholder="비밀번호를 다시 한 번 입력해주세요" btn={false}/>
-            <Input label='이름' placeholder="이름을 입력해 주세요" btn={false}/>
-            <Input label='이메일' placeholder="이메일을 입력해 주세요" btn={true} btnvalue="중복확인" variant="outline-secondary"/>
-            <Input label='휴대폰' placeholder="번호를 입력해 주세요" btn={true} btnvalue="다른번호 인증" variant="outline-info"/>
-            <ModifyRadio type='성별' radioval={gender} />
-            <Input label='생년월일' value='' placeholder="YYYYMMDD" btn={false}/>
-            <ModifyRadio type='선택약관동의' radioval={terms1} setLgShow={setLgShow} termsview='약관보기'/>
+            <Input label='아이디' placeholder="" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleUserIdChange}/>
+            <Input label='비밀번호' placeholder="" btn={false} onChange={handlePasswordChange}/>
+            <Input label='비밀번호 확인' placeholder="" btn={false} onChange={setGarbage}/>
+            <Input label='닉네임' placeholder="" btn={false} onChange={handleNameChange}/>
+            <Input label='이메일' placeholder="" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleEmailChange}/>
+            <Input label='휴대폰' placeholder="" btn={true} btnvalue="다른번호 인증" variant="outline-info" onChange={handlePhoneChange}/>
+            <ModifyRadio type='성별' radioval={gender} onChange={handleGenderChange}/>
+            <Input label='생년월일' value='' placeholder="" btn={false} onChange={handleBirthChange}/>
+            <ModifyRadio type='선택약관동의' radioval={terms1} setLgShow={setLgShow} termsview='약관보기' onChange={handleAgree1Change}/>
             <hr className="hr"/>
-            <ModifyRadio type='선택약관동의' radioval={terms2}/>
-            <ModifyRadio message={message} notype={true} />
+            <ModifyRadio type='선택약관동의' radioval={terms2} onChange={handleAgree2Change}/>
 
             <div className='mod-btn-container d-flex'>
-               <Button className="mod-info-btn col-2 shadow" variant='info'>회원가입 완료</Button>
+                <Link href="/member/login">
+                    <Button className="mod-info-btn col-2 shadow" variant='info'
+                            onClick={handleSubmit}>회원가입 완료</Button>
+                </Link>
             </div>
 
             <ModalDetail lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙

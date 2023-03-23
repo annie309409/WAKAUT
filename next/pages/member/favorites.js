@@ -56,6 +56,7 @@ const Favorites = ({member}) => {
         lists.push(new Fvrlist(list.region, list.facility, list.contact, "삭제"));
     });
 
+
     return(
         <>
             <Container className="favorites">
@@ -63,8 +64,9 @@ const Favorites = ({member}) => {
                 <hr className="hr"/>
                 <FavoritesList lists={lists}/>
                 <Paging cnt={2}/>
-                <PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}
-                            addr={addr} title={title} des={des} img={img}/>
+                {/*<PlaceModal lgShow={lgShow} setLgShow={setLgShow} score={3}*/}
+                {/*            addr={addr} title={title} des={des} img={img}*/}
+                {/*/>*/}
             </Container>
         </>
     )

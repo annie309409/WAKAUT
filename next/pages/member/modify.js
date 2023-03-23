@@ -30,8 +30,8 @@ const InfoModify=({member})=>{
     const [phone, setPhone] = useState('');
     const [gen, setGen] = useState('');
     const [birth, setBirth] = useState('');
-    const [agr1, setAgr1] = useState('');
-    const [agr2, setAgr2] = useState('');
+    const [agr1, setAgr1] = useState(0);
+    const [agr2, setAgr2] = useState(0);
 
     const handleUserIdChange = (value) => {
         setUserid(value);
@@ -51,7 +51,7 @@ const InfoModify=({member})=>{
     const handleGenderChange = (value) => {
         setGen(value);
     };
-    const handleBirthIdChange = (value) => {
+    const handleBirthChange = (value) => {
         setBirth(value);
     };
     const handleAgree1Change = (value) => {
@@ -86,7 +86,7 @@ const InfoModify=({member})=>{
             birth_date: birth,
             agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
         }, '/member/modifyudt');
-        }
+    }
 
     return(
         <Container className='modify-frm'>
@@ -99,7 +99,7 @@ const InfoModify=({member})=>{
             <Input label='이메일' value={mdf.email} btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleEmailChange}/>
             <Input label='휴대폰' value={mdf.phone_number} btn={true} btnvalue="다른번호 인증" variant="outline-info" onChange={handlePhoneChange}/>
             <ModifyRadio type='성별' radioval={gender} checked={mdf.gender} onChange={handleGenderChange}/>
-            <Input label='생년월일' value={mdf.birth_date2} btn={false} onChange={handleBirthIdChange}/>
+            <Input label='생년월일' value={mdf.birth_date2} btn={false} onChange={handleBirthChange}/>
             <ModifyRadio
                 type='선택약관동의'
                 radioval={terms1}
