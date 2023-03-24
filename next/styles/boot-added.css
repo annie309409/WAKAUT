@@ -563,3 +563,17 @@ html ::-webkit-scrollbar-thumb{
 }
 
 
+/* 로그인페이지 수정: 박정아 */
+.panel{
+    padding: 100px 0px;
+}
+.panel form{
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.kakaoLogin{
+    cursor: pointer;
+    max-width: 200px;
+    margin: 0 auto;
+}

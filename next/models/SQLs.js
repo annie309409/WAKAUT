@@ -10,7 +10,8 @@ const SQL={
         update :`update boards set title=?,content=?,category=?,facility_name=? WHERE bid = ?`,
         deleteCmt:`delete from comments where cid=?`,
         deleteCmt2:`delete from comments where bid=?`,
-        delete:`delete from boards where bid=?`
+        delete:`delete from boards where bid=?`,
+        selectId:`select uid from users where userid = ?`
     },
     admin : {
         selectUsers : `select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u`,
@@ -32,6 +33,9 @@ const SQL={
         join : `insert into users (
             userid, passwd, name, email, phone_number, gender, birth_date, agree_to_privacy_policy, agree_to_advertising_info
         ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        socialJoin:`insert into users ( userid, passwd, name, email, phone_number, gender, birth_date, agree_to_privacy_policy, agree_to_advertising_info) values (?, 'nopasswd', ?, ?, '000', 'n', '0000-00-00', 1, 1)
+        `,
+        idcheck:`select * from users where userid=?`
     },
 }
 

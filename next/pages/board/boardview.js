@@ -22,6 +22,7 @@ const Boardview=({boards,session,atlists})=>{
     const [reply, setReply] = useState();
     const [cmts,setCmts] = useState(boards[0].com);
     const [cnfirm, setCnfirm] = useState(false);
+    const [uid, setUid] = useState(session.userid);
     let bd = boards[0];
     //데이터 등록하기
     async function write(e,{bid,userid,comment}){
@@ -45,6 +46,20 @@ const Boardview=({boards,session,atlists})=>{
         dts();
     }
 
+    //소셜사용자용 
+    async function selId (uid){
+        let res = await Datas('/board/boardlist',`userid=${uid}`).then(res=>res);
+        return await res;
+    }
+    
+    if(uid>1000000000){
+        let test = selId(uid);
+        async function tt(){
+            setUid((await test)[0].uid);
+        }
+        tt();
+    }
+
     //게시글 삭제하기
     if(cnfirm){
         async function delBD(){
@@ -62,7 +77,7 @@ const Boardview=({boards,session,atlists})=>{
                 <header className="bg-secondary pt-5 pb-4 brdview">
                 </header>
                 <Container>
-                    <List title={bd.title} kd={bd.category} time={bd.regdate2} view={bd.views+1} name={bd.name}/>
+                    <List title={bd.title} kd={bd.category} time={bd.regdate2} view={bd.views+1} name={bd.name} cat={bd.facility_name}/>
                 </Container>
             </div>
             <Container>
@@ -85,7 +100,7 @@ const Boardview=({boards,session,atlists})=>{
                 <Form>
                     <div className="reTxt d-flex align-items-end mt-4"> 
                         <Form.Control as="textarea" placeholder="댓글은 한번 달면 삭제가 불가능하답니당 👮‍♂️👮‍♀️ " style={{ height: '80px' ,width:'90%' }} value={reply} onChange={(e)=>{handleInput(setReply,e)}} />
-                        <button className="btn btn-success ms-3" type="submit" onClick={(e)=>{ write(e,{bid:bd.bid,userid:parseInt(session.userid),comment:reply})}}>댓글 등록</button>
+                        <button className="btn btn-success ms-3" type="submit" onClick={(e)=>{ write(e,{bid:bd.bid,userid:uid,comment:reply})}}>댓글 등록</button>
                     </div>
                 </Form>
                 </div>

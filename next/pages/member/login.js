@@ -1,11 +1,11 @@
-import {Form,Button,Row,Col,Container,Image} from "react-bootstrap";
+import { Form,Button,Row,Col,Container,Image } from "react-bootstrap";
 import Title from "../../components/title";
 import Link from "next/link";
 import kakao  from '../../assets/kakaobtn.png';
 import getLayout from "../../components/layouts/getLayout";
-import {getSession, signIn} from "next-auth/client";
+import { signIn } from "next-auth/client";
 import { useState } from "react";
-import {handleInput} from '../../components/feutils';
+import { handleInput } from '../../components/feutils';
 
 function Login(){
     const [userid, setUserid] = useState(null);
@@ -44,7 +44,10 @@ function Login(){
 
                 <Form.Group as={Row} className="mb-3" controlId="sns">
                     <Col sm>
-                        <Image className="ms-2" src={kakao} onClick={() => signIn('kakao',{ callbackUrl: "/" })}/>
+                        <div className="kakaoLogin" onClick={() => signIn('kakao',{ callbackUrl: "/member/check" })}>
+                            <Image className="ms-2" src={kakao}/>
+                            <span className="ms-2">카카오 로그인</span>
+                        </div>
                     </Col>
                 </Form.Group>
 
@@ -57,8 +60,11 @@ function Login(){
                 <br/>
                 <Form.Group className="mb-3" controlId="formSubmit">
                     <Col sm>
-                    <Button variant="secondary" type="submit" onClick={(e)=>{loginHandle(e)}}>
+                    <Button variant="success" type="submit" onClick={(e)=>{loginHandle(e)}}>
                         로그인하기
+                    </Button>
+                    <Button variant="secondary" className="ms-2" onClick={()=>{location.href='/member/join'}}>
+                        회원 가입하기
                     </Button>
                     </Col>
                 </Form.Group>

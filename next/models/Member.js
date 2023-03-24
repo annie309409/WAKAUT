@@ -137,6 +137,38 @@ class Member {
         }
         return rowData;
     }
+    //회원 가입여부 확인
+    async idCheck(userid) {
+        let conn = null;
+        let rowData = null;
+        let params = [userid];
+        try {
+            conn = await mariadb.makeConn();
+            rowData = await conn.query(SQL.member.idcheck, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
+    //소셜회원 가입 
+    async socialJoin(userid,name,email) {
+        let conn = null;
+        let rowData = 1;
+        let params = [userid,name,email];
+        try {
+            conn = await mariadb.makeConn();
+            await conn.query(SQL.member.socialJoin, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
 }
 module.exports = Member;
 

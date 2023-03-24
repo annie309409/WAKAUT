@@ -24,6 +24,20 @@ const BoardList=({boards,session,atlists})=>{
     const [selVal, setSelval] = useState('All');
     const [srhVal, setSrhVal] = useState('');
     const [srch,setSrch] = useState(false);
+    const [uid,setUid] = useState(session.userid);
+    
+    async function selId (uid){
+        let res = await Datas('/board/boardlist',`userid=${uid}`).then(res=>res);
+        return await res;
+    }
+    
+    if(uid>1000000000){
+        let test = selId(uid);
+        async function tt(){
+            setUid((await test)[0].uid);
+        }
+        tt();
+    }
 
     //스크롤 페이징 처리
     async function handleScroll(){
@@ -58,7 +72,6 @@ const BoardList=({boards,session,atlists})=>{
 
     return(
         <>
-        { console.log(atlists)}
         <Alerts color='success' msg='해당 게시판은 관리자에의해 실시간 관리되고있습니다. 허위사실유포 및 부적절한 표현은 차단될 수 있습니다.'/>
         {
         (session.userid !=0)?
@@ -68,14 +81,14 @@ const BoardList=({boards,session,atlists})=>{
         <Container className="lists">
             {
                 dtfn.map((m,idx)=>{
-                    return <List key={idx} title={m.title} note={m.content} malcnt={m.cmtcnt} img={true} col='bg-warning' time={m.regdate2} kd={m.category} view={m.views} to={`/board/boardview?bid=${m.bid}`} name={m.name} />
+                    return <List key={idx} title={m.title} note={m.content} malcnt={m.cmtcnt} img={true} col='bg-warning' time={m.regdate2} kd={m.category} view={m.views} to={`/board/boardview?bid=${m.bid}`} name={m.name} cat={m.facility_name} />
                 })
             }
             <div className="pg">
                 <BarLoader color="#ccc" cssOverride={{position: "absolute", margin:"auto", top:0,left:0, right:0, bottom:0,zIndex:555}} />
             </div>
         </Container>
-        <WriteModal lgShow={lgShow} setLgShow={setLgShow} sename={session.name} seid={session.userid} atlists={atlists}/>
+        <WriteModal lgShow={lgShow} setLgShow={setLgShow} sename={session.name} seid={uid} atlists={atlists}/>
         </>
     )
 }

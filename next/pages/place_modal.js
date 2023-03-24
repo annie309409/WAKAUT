@@ -7,7 +7,6 @@ import Link from "next/link";
 import KakaoSet from '../services/kakaoSet';
 import {Post,kakaoInit} from "../components/feutils";
 
-
 const PlaceModal=(props)=>{
     let scores=[];
     let lis = props.bdList.boards;
@@ -35,7 +34,7 @@ const PlaceModal=(props)=>{
                                 onClick={(e)=>{ fvrAdd(e,{
                                     userid:1, facility:props.title, region:props.addr, contact:props.contact})}}
                         >즐겨찾기 추가</Button>
-                        <Button variant="warning" onClick={()=>{KakaoSet(kakaoInit(),{props})}} className='fluid'>카카오 공유하기</Button>
+                        <Button variant="warning" onClick={()=>{KakaoSet(kakaoInit(),{props})}} className='fluid ms-2'>카카오 공유하기</Button>
                     </div>
                 </Card.Body>
                 </Card>
@@ -48,9 +47,10 @@ const PlaceModal=(props)=>{
                 <p><CiFaceSmile /><span>{sc}</span></p>
                 <div className='brdPrev mb-5'>
                      {(lis[0]!=undefined)?<List title={lis[0].title} note={lis[0].content} kd={lis[0].category} time={lis[0].regdate2} view={lis[0].views}/>:''}
-                     {(lis[1]!=undefined)?<List title={lis[1].title} note={lis[1].content} kd={lis[1].category} time={lis[1].regdate2} view={lis[1].views}/>:''}
+                     {(lis[1]!=undefined)?<List title={lis[1].title} note={lis[1].content} kd={lis[1].category} time={lis[1].regdate2} view={lis[1].views}/>:
+                     <p className='mt-2'>게시글이 없습니다. 글을 남겨보세요!😁</p>}
                 </div>
-                <Button variant="success"> <Link href="/board/boardlist">게시글 더 보기</Link></Button>
+                <Button variant="success"> <Link href="/board/boardlist">게시글 더보기</Link></Button>
             </div>
         </Modal>
     )

@@ -128,6 +128,21 @@ class Board{
         }
         return rowData;
     }
+    //소셜 작성자 조회
+    async selectId(userid){
+        let conn =  null;
+        let rowData = null;
+        let params = [userid];
+        try{ 
+            conn= await mariadb.makeConn();
+            rowData  = await conn.query(SQL.board.selectId,params);
+        }catch (e) {
+            console.log(e);
+        }finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
 }
 
 module.exports=Board;
