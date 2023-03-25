@@ -17,6 +17,7 @@ import {
 } from "../models/Utils";
 
 import dynamic from 'next/dynamic';
+import {getSession} from "next-auth/client";
 
 
 const Map = dynamic(() => import("react-kakao-maps-sdk").then((module) => module.Map), {
@@ -27,12 +28,18 @@ const MapMarker = dynamic(() => import("react-kakao-maps-sdk").then((module) => 
 });
 
 export async function getServerSideProps(ctx) {
+    // 세션 객체 가져오기
+    const session = await getSession(ctx);
+
+    // 로그인한 사용자의 아이디
+    let sessionUserid = session?.user?.userid || null;
+
     const word = ctx.query.word || '';
     let items = await Datas('/main', `srch=${word}`);
-    return {props: {items: items, word: word}}
+    return {props: {items: items, word: word, sessionUserid}}
 }
 
-export default function Index({items, word}) {
+export default function Index({items, word, sessionUserid}) {
     let des = '#에어로빅 #줌바 #조깅';
 
     const [lgShow, setLgShow] = useState(false);
@@ -65,9 +72,9 @@ export default function Index({items, word}) {
         isLoading: true,
     })
 
-    // useEffect는 최초 렌더링 이후에 실행됩니다. useEffect의 첫 번째 인자로 전달한
-    // 함수는 컴포넌트가 마운트(처음으로 렌더링)된 이후에 한번 실행되며, 두 번째 인자로
-    // 전달한 배열에 지정한 값이 변경되었을 때에도 실행됩니다.
+    // useEffect는 최초 렌더링 이후에 실행
+    // useEffect의 첫 번째 인자로 전달한 함수는 컴포넌트가 마운트된 이후에 한번 실행되며,
+    // 두 번째 인자로 전달한 배열에 지정한 값이 변경되었을 때에도 실행
     useEffect(() => {
         if (navigator.geolocation) {
             // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -218,6 +225,7 @@ export default function Index({items, word}) {
                 lat={selectedPlace ? selectedPlace.REFINE_WGS84_LAT : null}
                 lng={selectedPlace ? selectedPlace.REFINE_WGS84_LOGT : null}
                 bdList={bdList}
+                userid={sessionUserid}
             />
             <Modal title="알림" class="searchModal" size="sm" lgShow={show} setLgShow={setShow}  children="해당하는 시설이 없습니다."/>
         </Container>

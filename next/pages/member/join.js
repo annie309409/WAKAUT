@@ -6,7 +6,7 @@ import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from '../../components/layouts/getLayout';
 import Link from "next/link";
-import {Post} from "../../components/feutils";
+import {Datas, Post} from "../../components/feutils";
 
 const Join=()=>{
     const [lgShow, setLgShow] = useState(false);
@@ -16,7 +16,7 @@ const Join=()=>{
 
     const [userid, setUserid] = useState('');
     const [passwd, setPasswd] = useState('');
-    const [garbage, setGarbage] = useState('');   // 비밀번호확인(의미없음)
+    const [passwd2, setPasswd2] = useState('');   // 비밀번호확인(의미없음)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -25,11 +25,18 @@ const Join=()=>{
     const [agr1, setAgr1] = useState(0);
     const [agr2, setAgr2] = useState(0);
 
+    // 중복확인 결과 저장 state
+    const [isThereUserid, setIsThereUserid] = useState(false);
+    const [isThereEmail, setIsThereEmail] = useState(false);
+
     const handleUserIdChange = (value) => {
         setUserid(value);
     };
     const handlePasswordChange = (value) => {
         setPasswd(value);
+    };
+    const handlePassword2Change = (value) => {
+        setPasswd2(value);
     };
     const handleNameChange = (value) => {
         setName(value);
@@ -55,6 +62,10 @@ const Join=()=>{
 
     // 회원가입 버튼 클릭
     async function handleSubmit () {
+        if(isThereUserid === true) alert("아이디 중복을 확인해주세요.")
+        else if(isThereEmail === true) alert("이메일 중복을 확인해주세요.");
+        else if(passwd !== passwd2) alert("비밀번호가 일치하지 않습니다.");
+        else if(isThereUserid === false && isThereEmail === false && passwd === passwd2){
         await Post({
             userid: userid, passwd: passwd,
             name: name, email: email,
@@ -62,30 +73,61 @@ const Join=()=>{
             birth_date: birth,
             agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
         }, '/member/join');
+        location.href = "/member/login"
+        }
     }
+
+    // 아이디 중복확인 버튼 클릭
+    async function handleIsOverlapUid () {
+        const result = await Datas('/member/isoverlapuserid',`userid=${userid}`);
+        console.log(result);
+        if(result.length !== 0) {
+            alert("이미 있는 아이디 입니다.");
+            console.log(isThereUserid)
+            setIsThereUserid(true);
+        } else {
+            alert("사용가능한 아이디 입니다.");
+            console.log(isThereUserid)
+            setIsThereUserid(false);
+        }
+    }
+
+    // 이메일 중복확인 버튼 클릭
+    async function handleIsOverlapEmail () {
+        const result = await Datas('/member/isoverlapemail',`email=${email}`);
+        console.log(result);
+        if(result.length !== 0) {
+            alert("이미 있는 이메일 입니다.");
+            setIsThereEmail(true);
+            console.log(isThereEmail)
+        } else {
+            alert("사용가능한 이메일 입니다.");
+            setIsThereEmail(false);
+            console.log(isThereEmail)
+        }
+    }
+
     return(
         <Container className="modify-frm">
             <Title title='회원가입' />
-            <Input label='아이디' placeholder="" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleUserIdChange}/>
-            <Input label='비밀번호' placeholder="" btn={false} onChange={handlePasswordChange}/>
-            <Input label='비밀번호 확인' placeholder="" btn={false} onChange={setGarbage}/>
-            <Input label='닉네임' placeholder="" btn={false} onChange={handleNameChange}/>
-            <Input label='이메일' placeholder="" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleEmailChange}/>
-            <Input label='휴대폰' placeholder="" btn={true} btnvalue="다른번호 인증" variant="outline-info" onChange={handlePhoneChange}/>
+            <Input label='아이디' placeholder="영문자, 숫자 포함 5~10 글자" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleUserIdChange} btnevent={handleIsOverlapUid} type="text"/>
+            <Input label='비밀번호' placeholder="영문자, 숫자 포함 5~10 글자" btn={false} onChange={handlePasswordChange} type="password"/>
+            <Input label='비밀번호 확인' placeholder="비밀번호를 재입력하세요" btn={false} onChange={handlePassword2Change} type="password"/>
+            <Input label='닉네임' placeholder="한영문자 5~10 글자" btn={false} onChange={handleNameChange} type="text"/>
+            <Input label='이메일' placeholder="exam@exam.com" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleEmailChange} btnevent={handleIsOverlapEmail} type="text"/>
+            <Input label='휴대폰' placeholder="000-0000-0000" onChange={handlePhoneChange} type="text"/>
             <ModifyRadio type='성별' radioval={gender} onChange={handleGenderChange}/>
-            <Input label='생년월일' value='' placeholder="" btn={false} onChange={handleBirthChange}/>
+            <Input label='생년월일' value='' placeholder="2000-01-01" btn={false} onChange={handleBirthChange} type="text"/>
             <ModifyRadio type='선택약관동의' radioval={terms1} setLgShow={setLgShow} termsview='약관보기' onChange={handleAgree1Change}/>
             <hr className="hr"/>
             <ModifyRadio type='선택약관동의' radioval={terms2} onChange={handleAgree2Change}/>
 
             <div className='mod-btn-container d-flex'>
-                <Link href="/member/login">
                     <Button className="mod-info-btn col-2 shadow" variant='info'
                             onClick={handleSubmit}>회원가입 완료</Button>
-                </Link>
             </div>
 
-            <ModalDetail lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙
+            <ModalDetail size="md" lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙
                 제 1 조 (목적)이 약관은「공유마당」(이하 “사이트”라 칭함)에서 제공하는 인터넷관련서비스(이하 '서비스'라 칭함)를 이용함에 있어 「공유마당」과 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.제 2 조 (용어의 정의)이 약관에서 사용하는 주요한 용어의 정의는 다음과 같습니다.
                 ① ‘회원’이라 함은 이 약관에 동의하고, 「공유마당」과 서비스 이용 계약을 체결하여 이용자 아이디(ID)를 부여 받은 개인 및 기관을 말합니다.
                 ② ‘회원 아이디’(이하 ‘ID’라 칭함)라 함은 회원의 식별과 회원의 서비스 이용을 위하여 회원이 선정하고 신청함에 따라 「공유마당」에서 승인한 문자나 숫자 혹은 그 조합을 말합니다. 기관의 정보로 가입한 ID는 관련 법규가 인정하는 범위에서 개인정보와 같은 권리와 의무를 가지며 이하 개인과 개인정보로 언급되는 모든 약관은 기관과 기관정보를 포함합니다.

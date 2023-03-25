@@ -6,14 +6,26 @@ import MyPageList from "../../components/mypage_list";
 import { AiOutlineLogout  } from "react-icons/ai";
 import getLayout from "../../components/layouts/getLayout";
 import MyPgWrite from "../../components/mypage_write";
+import {getSession, signOut} from "next-auth/client";
+import {Datas} from "../../components/feutils";
 
-const MyPage = () => {
+export async function getServerSideProps(ctx) {
+    // 세션 객체 가져오기
+    const session = await getSession(ctx);
+    // 로그인한 사용자의 아이디
+    let userid = session.user.userid;
+    let member = await Datas('/member/mypage', `userid=${userid}`);
+    console.log("mypage 페이지 받아온 값 - ", member);
+    return{props: {member}};
+}
+
+const MyPage = ({member}) => {
     return(
         <Container className="mypg">
 
             <Title title='마이페이지'/>
             <div className="img-wrap"><div className="mypg-img">&nbsp;</div></div>
-            <div className="mypg-name">홍길동</div>
+            <div className="mypg-name">{member[0].name}</div>
 
             <MyPgWrite/>
 
