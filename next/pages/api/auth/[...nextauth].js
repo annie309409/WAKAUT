@@ -8,10 +8,10 @@ export default NextAuth({
     providers: [
         KakaoProvider({
             clientId: process.env.KAKAO_CLIENT_ID||'',
-            clientSecret: process.env.KAKAO_CLIENT_SECRET||'',
+            clientSecret:'ERMSDHsOwUhONXGC0PQlgp4jNQnUNdp0'||'',
         },
         function(){
-            console.log('성공?!');
+            console.log('성공!');
         }),
         Credentials({
             id: "userid-passwd-credentials",

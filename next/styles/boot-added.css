@@ -577,3 +577,30 @@ html ::-webkit-scrollbar-thumb{
     max-width: 200px;
     margin: 0 auto;
 }
+
+
+/*search부분 수정*/
+.srchHdr{
+    position: relative;
+}
+
+.srchHdr ul{
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: rgba(255,255,255,0.9);
+    z-index: 555;
+    list-style: none;
+    width: 57%;
+    padding: 0;
+}
+.srchHdr ul li{
+  line-height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.srchHdr ul li:hover{
+    background-color: #ccc;
+}

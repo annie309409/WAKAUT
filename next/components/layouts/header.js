@@ -1,16 +1,31 @@
 import {Form,Navbar,Container,Button,Nav} from 'react-bootstrap';
 import Link from "next/link";
 import {signOut} from "next-auth/client";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {Datas} from "../feutils";
 
 const Header = (props)=>{
     const [word, setWord] = useState('');
+    const [lists, setLists] = useState([]);
+    const [listsfn, setListsFn] = useState([]);
     const handleInput = (e) => {
         setWord(e.target.value);
+        if(e.target.value != '')findInd(e.target.value);
     };
     const handleSearch = () => {
         location.href=`http://localhost:3000/?word=${word}`;
     };
+
+    const indexing = async()=>{
+        setLists(await Datas('/main','lists=y'))
+    }
+    useEffect(()=>{
+        indexing();
+    })
+
+    const findInd =  async(ind)=>{
+        setListsFn(lists.filter(f=>f.indexOf(ind)!==-1));
+    }
     return(
         <header>
             <Navbar bg="light" expand="lg">
@@ -27,8 +42,15 @@ const Header = (props)=>{
                             })
                         }
                     </Nav>
-                    <Form className="d-flex col-5">
-                    <Form.Control onChange={handleInput} placeholder={`${props.sess.name}님, 운동하는곳을 검색해보세요!`} aria-label="findlocation" aria-describedby="basic-addon1"/>
+                    <Form className="d-flex col-5 srchHdr">
+                    <Form.Control onChange={handleInput} placeholder={`${props.sess.name}님, 운동하는곳을 검색해보세요!`} aria-label="findlocation" aria-describedby="basic-addon1" value={word}/>
+                        <ul>
+                            {
+                                listsfn.map((m,idx)=>{
+                                    return <li key={idx} onClick={(e)=>{ setWord(e.target.innerText), setListsFn([])}}>{m}</li>
+                                })
+                            }
+                        </ul>
                         <Button onClick={handleSearch} className='ms-2 col-5' variant="outline-success">Search Place</Button>
                     </Form>
                     </Navbar.Collapse>

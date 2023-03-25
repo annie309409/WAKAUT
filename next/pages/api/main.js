@@ -34,6 +34,7 @@ export default async(req,res)=>{
     if(req.query.lists){
         items = items.map(m=> m.FACLT_NM)
     }
+    
     res.status(200).json(items);
 }
 

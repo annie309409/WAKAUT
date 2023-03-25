@@ -23,7 +23,7 @@ const handleInput = (setInput, e) => {
 const kakaoInit = () => {
     const kakao = (window).Kakao;
     if(!kakao.isInitialized()) {
-        kakao.init("5902f1adf0dd7afcb5e13c5e0b3cdf54");
+        kakao.init("78f0db8ffa3b9e86fcbb2ab02f3dc511");
     }
     return kakao;
 }

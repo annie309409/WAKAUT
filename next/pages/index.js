@@ -111,9 +111,9 @@ export default function Index({items, word}) {
         <Container className="d-flex mt-4 mb-4 index">
             <div className="left col-6 ">
                 <p>총 {searchCount}건</p>
-                {searchResults.map((item) => (
+                {searchResults.map((item,idx) => (
                     <List
-                        key={item.FACLT_NM}
+                        key={idx}
                         title={item.FACLT_NM}
                         malcnt={<AiTwotoneHeart />}
                         note={item.REFINE_ROADNM_ADDR}

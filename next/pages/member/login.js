@@ -44,7 +44,7 @@ function Login(){
 
                 <Form.Group as={Row} className="mb-3" controlId="sns">
                     <Col sm>
-                        <div className="kakaoLogin" onClick={() => signIn('kakao',{ callbackUrl: "/member/check" })}>
+                        <div className="kakaoLogin" onClick={() => signIn('kakao',{ callbackUrl: "/member/check?" })}>
                             <Image className="ms-2" src={kakao}/>
                             <span className="ms-2">카카오 로그인</span>
                         </div>
