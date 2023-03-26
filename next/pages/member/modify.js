@@ -6,38 +6,51 @@ import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from "../../components/layouts/getLayout";
 import {Datas, Post} from "../../components/feutils";
+import {getSession} from "next-auth/client";
 
 export async function getServerSideProps(ctx){
-    let member = await Datas('/member/modify', 'uid=1');
-    console.log(member);
-    return{props:{member}};
+    // 세션 객체 가져오기
+    const session = await getSession(ctx);
+
+    // 로그인한 사용자의 아이디
+    let userid = session.user.userid;
+    let member = await Datas('/member/modify', `userid=${userid}`);
+    console.log("modify 페이지 받아온 값 - ", member);
+    return{props:{member, session}};
 }
 
 
-const InfoModify=({member})=>{
+const InfoModify=({member, session})=>{
     const mdf = member[0];
     const [lgShow, setLgShow] = useState(false);
     const gender = ['남자', '여자'];
     const terms1 = ['개인정보 수집 이용 동의(선택)'];
     const terms2 = ['광고성 정보, 혜택 등 수신 동의(선택)'];
 
-    const [userid, setUserid] = useState('');
-    const [garbage1, setGarbage1] = useState('')  ; // 현재비밀번호(의미없음)
-    const [passwd, setPasswd] = useState('');
-    const [garbage2, setGarbage2] = useState('');   // 새비밀번호확인(의미없음)
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [userid, setUserid] = useState(mdf.userid);
+    const [passwd1, setPasswd1] = useState(mdf.passwd); // 현재비밀번호
+    const [passwd2, setPasswd2] = useState(''); // 새비밀번호
+    const [passwd3, setPasswd3] = useState(''); // 새비밀번호확인(의미없음)
+    const [name, setName] = useState(mdf.name);
+    const [email, setEmail] = useState(mdf.email);
+    const [phone, setPhone] = useState(mdf.phone_number);
     const [gen, setGen] = useState('');
-    const [birth, setBirth] = useState('');
-    const [agr1, setAgr1] = useState(0);
-    const [agr2, setAgr2] = useState(0);
+    const [birth, setBirth] = useState(mdf.birth_date2);
+    const [agr1, setAgr1] = useState(mdf.agree_to_privacy_policy);
+    const [agr2, setAgr2] = useState(mdf.agree_to_advertising_info);
+
+    // 중복확인 결과 저장 state
+    const [isThereUserid, setIsThereUserid] = useState(false);
+    const [isThereEmail, setIsThereEmail] = useState(false);
 
     const handleUserIdChange = (value) => {
         setUserid(value);
     };
-    const handlePasswordChange = (value) => {
-        setPasswd(value);
+    const handlePasswordChange2 = (value) => {
+        setPasswd2(value);
+    };
+    const handlePasswordChange3 = (value) => {
+        setPasswd3(value);
     };
     const handleNameChange = (value) => {
         setName(value);
@@ -77,27 +90,100 @@ const InfoModify=({member})=>{
         new Btn('mod-info-btn col-2 shadow','info','/member/myinfo',"회원정보 수정")
     ];
 
-    // 회원정보 수정 버튼 클릭시 이벤트 핸들러를 부모요소에서 생성하고 ModifyRadio의 props로 전달할거임.
+    // 아이디 중복확인 버튼 클릭
+    async function handleIsOverlapUid () {
+        const result = await Datas('/member/isoverlapuserid',`userid=${userid}`);
+        if (result.length !== 0 && mdf.userid === result[0].userid){
+            alert("사용가능한 아이디 입니다.")
+            setIsThereUserid(false);
+        }
+        else if(result.length !== 0) {
+            alert("이미 있는 아이디 입니다.");
+            console.log(isThereUserid)
+            setIsThereUserid(true);
+        }
+        else {
+            alert("사용가능한 아이디 입니다.");
+            console.log(isThereUserid)
+            setIsThereUserid(false);
+        }
+    }
+
+    // 이메일 중복확인 버튼 클릭
+    async function handleIsOverlapEmail () {
+        const result = await Datas('/member/isoverlapemail',`email=${email}`);
+        if (result.length !== 0 && mdf.email === result[0].email){
+            alert("사용가능한 이메일 입니다.");
+            setIsThereEmail(false);
+            console.log(isThereEmail)
+        }
+        else if(result.length !== 0) {
+            alert("이미 있는 이메일 입니다.");
+            setIsThereEmail(true);
+            console.log(isThereEmail)
+        }
+        else {
+            alert("사용가능한 이메일 입니다.");
+            setIsThereEmail(false);
+            console.log(isThereEmail)
+        }
+    }
     async function handleSubmit () {
+        if(isThereUserid === true) alert("아이디 중복을 확인해주세요.")
+        else if(isThereEmail === true) alert("이메일 중복을 확인해주세요.");
+        else if(passwd !== passwd2) alert("비밀번호가 일치하지 않습니다.");
+        else if(isThereUserid === false && isThereEmail === false && passwd === passwd2){
+            await Post({
+                userid: userid, passwd: passwd,
+                name: name, email: email,
+                phone_number: phone, gender: gen,
+                birth_date: birth,
+                agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
+            }, '/member/join');
+            location.href = "/member/login"
+        }
+    }
+
+    // 회원정보 수정 버튼 클릭시
+    async function handleSubmit () {
+        if(isThereUserid === true) alert("아이디 중복을 확인해주세요.")
+        else if(isThereEmail === true) alert("이메일 중복을 확인해주세요.");
+        else if(passwd2 === null && passwd3 === null){
         await Post({
-            userid: userid, passwd: passwd,
+            uid: mdf.uid,
+            userid: userid, passwd: passwd1,
             name: name, email: email,
             phone_number: phone, gender: gen,
             birth_date: birth,
             agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
         }, '/member/modifyudt');
+        location.href="/member/myinfo"
+        }else if(passwd2 !== null || passwd3 !== null){
+            if (passwd2 !== passwd3){ alert("새로운 비밀번호가 일치하지 않습니다.")
+            } else {
+                await Post({
+                    uid: mdf.uid,
+                    userid: userid, passwd: passwd2,
+                    name: name, email: email,
+                    phone_number: phone, gender: gen,
+                    birth_date: birth,
+                    agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
+                }, '/member/modifyudt');
+                location.href="/member/myinfo"
+            }
+        }
     }
 
     return(
         <Container className='modify-frm'>
             <Title title='개인 정보 수정' />
-            <Input label='아이디' value={mdf.userid} placeholder="" btn={false} btnvalue="" variant="" onChange={handleUserIdChange}/>
-            <Input label='현재 비밀번호' value={mdf.passwd} btn={false} onChange={setGarbage1}/>
-            <Input label='새 비밀번호' placeholder="새 비밀번호를 입력해 주세요" btn={false} onChange={handlePasswordChange}/>
-            <Input label='새 비밀번호 확인' placeholder="새 비밀번호를 다시 입력해 주세요" btn={false} onChange={setGarbage2}/>
+            <Input label='아이디' value={mdf.userid} placeholder="" btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleUserIdChange} btnevent={handleIsOverlapUid}/>
+            <Input label='현재 비밀번호' value={mdf.passwd} btn={false} onChange={setPasswd1} readonly="1"/>
+            <Input label='새 비밀번호' placeholder="새 비밀번호를 입력해 주세요" btn={false} onChange={handlePasswordChange2} type="password"/>
+            <Input label='새 비밀번호 확인' placeholder="새 비밀번호를 다시 입력해 주세요" btn={false} onChange={handlePasswordChange3} type="password"/>
             <Input label='닉네임' value={mdf.name} btn={false} onChange={handleNameChange}/>
-            <Input label='이메일' value={mdf.email} btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleEmailChange}/>
-            <Input label='휴대폰' value={mdf.phone_number} btn={true} btnvalue="다른번호 인증" variant="outline-info" onChange={handlePhoneChange}/>
+            <Input label='이메일' value={mdf.email} btn={true} btnvalue="중복확인" variant="outline-secondary" onChange={handleEmailChange} btnevent={handleIsOverlapEmail}/>
+            <Input label='휴대폰' value={mdf.phone_number} onChange={handlePhoneChange}/>
             <ModifyRadio type='성별' radioval={gender} checked={mdf.gender} onChange={handleGenderChange}/>
             <Input label='생년월일' value={mdf.birth_date2} btn={false} onChange={handleBirthChange}/>
             <ModifyRadio
@@ -120,7 +206,9 @@ const InfoModify=({member})=>{
                          mdf={mdf}
                          handleModify={handleSubmit}
                          userid={userid}
-                         passwd={passwd}
+                         passwd1={passwd1}
+                         passwd2={passwd2}
+                         passwd3={passwd3}
                          name={name}
                          email={email}
                          phone={phone}

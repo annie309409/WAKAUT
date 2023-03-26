@@ -39,7 +39,7 @@ class Member {
     async selectMif(uid) {
         let conn = null;
         let rowData = null;
-        let params = [uid];
+        let params = [uid, uid];
         try {
             conn = await mariadb.makeConn();
             rowData = await conn.query(SQL.member.selectMif, params);
@@ -55,7 +55,7 @@ class Member {
     async selectMdf(uid) {
         let conn = null;
         let rowData = null;
-        let params = [uid];
+        let params = [uid, uid];
         try {
             conn = await mariadb.makeConn();
             rowData = await conn.query(SQL.member.selectMdf, params);
@@ -68,28 +68,13 @@ class Member {
     }
 
     // 회원정보 수정
-    async updateInfo(userid,
-                     passwd,
-                     name,
-                     email,
-                     phone_number,
-                     birth_date,
-                     gender,
-                     agree_to_privacy_policy,
-                     agree_to_advertising_info)
+    async updateInfo(uid, userid, passwd, name, email, phone_number, birth_date, gender,
+                     agree_to_privacy_policy, agree_to_advertising_info)
     {
         let conn = null;
         let rowData = null;
-        let params = [
-                        userid,
-                        passwd,
-                        name,
-                        email,
-                        phone_number,
-                        birth_date,
-                        gender,
-                        agree_to_privacy_policy,
-                        agree_to_advertising_info];
+        let params = [userid, passwd, name, email, phone_number, birth_date, gender,
+            agree_to_privacy_policy, agree_to_advertising_info, uid];
         try {
             conn = await mariadb.makeConn();
             await conn.query(SQL.member.updateInfo, params);
@@ -137,6 +122,39 @@ class Member {
         }
         return rowData;
     }
+
+    // 아이디 중복체크
+    async isOverlapUid(userid) {
+        let conn = null;
+        let rowData = null;
+        let params = [userid];
+        try {
+            conn = await mariadb.makeConn();
+            rowData = await conn.query(SQL.member.isOverlapUid, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
+    // 이메일 중복체크
+    async isOverlapEmail(userid) {
+        let conn = null;
+        let rowData = null;
+        let params = [userid];
+        try {
+            conn = await mariadb.makeConn();
+            rowData = await conn.query(SQL.member.isOverlapEmail, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
     //회원 가입여부 확인
     async idCheck(userid) {
         let conn = null;

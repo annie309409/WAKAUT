@@ -22,14 +22,16 @@ const SQL={
     member : {
         insertFvr : `insert into favorites (userid, facility, region, contact) values (?, ?, ?, ?)`,
         selectFvr : `select facility, region, contact from favorites where userid = ?`,
-        selectMif : `select userid, name, email, phone_number, gender, date_format(birth_date, "%Y-%m-%d") birth_date from users where uid = ?`,
-        selectMdf : `SELECT *, DATE_FORMAT(birth_date, '%Y-%m-%d') as birth_date2 FROM users where uid = ?`,
+        selectMif : `select userid, name, email, phone_number, gender, date_format(birth_date, "%Y-%m-%d") birth_date from users where uid = ? or userid = ?`,
+        selectMdf : `SELECT *, DATE_FORMAT(birth_date, '%Y-%m-%d') as birth_date2 FROM users where uid = ? or userid = ?`,
+        isOverlapUid : `select * from users where userid = ?`,
+        isOverlapEmail : `select * from users where email = ?`,
         updateInfo : `UPDATE users
                       SET userid = ?, passwd = ?, name = ?,
                           email = ?, phone_number = ?, gender = ?,
                           birth_date = ?, agree_to_privacy_policy = ?,
                           agree_to_advertising_info = ?
-                      WHERE uid = 1`,
+                      WHERE uid = ?`,
         join : `insert into users (
             userid, passwd, name, email, phone_number, gender, birth_date, agree_to_privacy_policy, agree_to_advertising_info
         ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,

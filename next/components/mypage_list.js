@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { BsIcon } from "react-icons/bs"
 import { AiIcon } from "react-icons/ai"
+import {signOut} from "next-auth/client";
 
 const MyPageList = (props) => {
     const BsIcon = props.bsicon;
@@ -28,8 +29,8 @@ const MyPageList = (props) => {
                 <div className='mypg-list-container d-flex'>
                     <Form className="logout shadow col-lg-10">
                         <Form.Label column lg={3}><AiIcon  /></Form.Label>
-                        <Form.Label column lg={6} className="logout-label">
-                            <Link href='/' className="logout-link">로그아웃</Link>
+                        <Form.Label column lg={6} className="logout-label" >
+                            <div className="logout-link" onClick={()=>{signOut().then(r=>location.href='/')}}>로그아웃</div>
                         </Form.Label>
                     </Form>
                 </div>

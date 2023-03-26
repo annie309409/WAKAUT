@@ -35,7 +35,9 @@ const ModifyRadio = (props) => {
     const handleModify = () => {
         props.handleModify(
             props.userid,
-            props.passwd,
+            props.passwd1,
+            props.passwd2,
+            props.passwd3,
             props.name,
             props.email,
             props.phone,
@@ -126,7 +128,7 @@ const ModifyRadio = (props) => {
                                 }
                             }}
                         >
-                            <Link href={btn.link}>{btn.value}</Link>
+                           {btn.value}
                         </Button>
                     ))}
                 </div>

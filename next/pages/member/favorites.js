@@ -7,11 +7,16 @@ import getLayout from "../../components/layouts/getLayout";
 import Paging from "../../components/pagenation";
 import img from '../../assets/workaut.png';
 import {Datas} from "../../components/feutils";
+import {getSession} from "next-auth/client";
 
 
 // 즐겨찾기 목록 가져오기
 export async function getServerSideProps(ctx){
-    let member = await Datas('/member/favorites', 'userid=1');
+    // 세션 객체 가져오기
+    const session = await getSession(ctx);
+    // 로그인한 사용자의 아이디
+    let userid = session.user.userid;
+    let member = await Datas('/member/favorites', `userid=${userid}`);
     console.log(member);
     return{props:{member}};
 }

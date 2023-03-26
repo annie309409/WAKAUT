@@ -16,7 +16,7 @@ const Layout =({children,meta})=>{
     routers =['/member/mypage','/board/boardlist','/member/logout'];
   }else{
     menus = ['mypage','community','login/join'];
-    routers =['/member/mypage','/board/boardlist','/member/login'];
+    routers =['/member/login','/board/boardlist','/member/login'];
   }
 
   return(
