@@ -19,6 +19,23 @@ class Member {
         return rowData;
     }
 
+    // 즐겨찾기 삭제
+    async deleteFvr(fid) {
+        let conn = null;
+        let rowData = null;
+        let params = [fid];
+        try {
+            conn = await mariadb.makeConn();
+            await conn.query(SQL.member.deleteFvr, params);
+            await conn.commit();
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
     // 즐겨찾기 목록 출력
     async selectFvr(userid) {
         let conn = null;
@@ -28,6 +45,46 @@ class Member {
             conn = await mariadb.makeConn();
             rowData = await conn.query(SQL.member.selectFvr, params);
         } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
+    // 회원탈퇴 시 게시글 삭제
+    async leaveDelete(writer) {
+        let conn = null;
+        let rowData = null;
+        let params = [writer]
+        try {
+            conn = await mariadb.makeConn();
+            await conn.query(SQL.member.leaveDelet, params);
+            await conn.commit();
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
+    // 회원탈퇴
+    async leave(uid) {
+        let conn = null;
+        let rowData = null;
+        let params = [uid]
+        try {
+            conn = await mariadb.makeConn();
+            await conn.beginTransaction();
+            // 해당 회원이 작성한 모든 댓글 삭제
+            await conn.query('DELETE FROM comments WHERE userid = ?', [uid]);
+            // 해당 회원이 작성한 모든 게시글 삭제
+            await conn.query('DELETE FROM boards WHERE writer = ?', [uid]);
+            await conn.query(SQL.member.leave, params);
+            await conn.commit();
+        } catch (e) {
+            await conn.rollback();
             console.log(e);
         } finally {
             await mariadb.closeConn();
@@ -49,6 +106,26 @@ class Member {
             await mariadb.closeConn();
         }
         return rowData;
+    }
+
+    // mypage 남긴글 수
+    async history(writer) {
+        let conn = null;
+        let rowData = null;
+        let params = [writer];
+        try {
+            conn = await mariadb.makeConn();
+            rowData = await conn.query(SQL.member.history, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData.map(row => {
+            return {
+                cnt: row.cnt.toString()
+            }
+        })
     }
 
     // modify 출력

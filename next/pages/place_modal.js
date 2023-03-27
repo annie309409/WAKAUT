@@ -20,9 +20,16 @@ const PlaceModal=(props)=>{
     async function fvrAdd(e,{userid, facility, region, contact}){
         e.preventDefault();
         if(userid !== null){
-            await Post({userid: userid, facility: facility, region: region, contact: contact}, '/member/addfavorites');
+            await Post({
+                userid: userid,
+                facility: facility,
+                region: region,
+                contact: contact
+            }, '/member/addfavorites');
             setIsCompleteAdd(true);
-        }else if(userid === null) location.href="/member/login"
+            // 즐겨찾기 추가 성공 후 콜백함수 호출
+            props.onFavoriteAdd();
+        }else location.href = "/member/login"
     }
 
     return(

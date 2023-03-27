@@ -13,7 +13,6 @@ export async function getServerSideProps(ctx) {
     // 로그인한 사용자의 아이디
     let userid = session.user.userid;
     let member = await Datas('/member/myinfo', `userid=${userid}`);
-    console.log("myinfo 페이지 받아온 값 - ", member);
     return{props: {member, session}};
 }
 

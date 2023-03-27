@@ -36,10 +36,11 @@ export async function getServerSideProps(ctx) {
 
     const word = ctx.query.word || '';
     let items = await Datas('/main', `srch=${word}`);
-    return {props: {items: items, word: word, sessionUserid}}
+    let fList = await Datas('/member/favorites', `userid=${sessionUserid}`);
+    return {props: {items: items, word: word, sessionUserid, fList}}
 }
 
-export default function Index({items, word, sessionUserid}) {
+export default function Index({items, word, sessionUserid, fList}) {
     let des = '#에어로빅 #줌바 #조깅';
 
     const [lgShow, setLgShow] = useState(false);
@@ -53,7 +54,29 @@ export default function Index({items, word, sessionUserid}) {
     const [isButtonActive, setIsButtonActive] = useState(false);
     const [bdList, setBDLists] = useState({});
 
+    // 즐겨찾기 추가 추적 state
+    const [favoriteAdded, setFavoriteAdded] = useState(false);
+    // List 컴포넌트 상태관리 state
+    const [listData, setListData] = useState([]);
 
+    useEffect(() => {
+        const updateListData = async () => {
+            const fetchedFList = await Datas('/member/favorites', `userid=${sessionUserid}`);
+            // 여기에서 새로운 데이터를 listData에 업데이트
+            const updatedListData = searchResults.map((item) => {
+                const isFavorited = fetchedFList.some((facility) => facility.facility === item.FACLT_NM);
+                return { ...item, isFavorited };
+            });
+            setListData(updatedListData);
+        };
+
+        updateListData();
+    }, [favoriteAdded, searchResults]);
+
+    const onFavoriteAdd = () => {
+        setFavoriteAdded(!favoriteAdded);
+        // location.href="/"
+    };
 
     // 시군명 선택 시 시설구분명 셀렉트 태그에 표시할 options 배열 반환
     function getFacilityOptions(sigun) {
@@ -118,16 +141,15 @@ export default function Index({items, word, sessionUserid}) {
         <Container className="d-flex mt-4 mb-4 index">
             <div className="left col-6 ">
                 <p>총 {searchCount}건</p>
-                {searchResults.map((item,idx) => (
+                {listData.map((item,idx) => (
                     <List
                         key={idx}
                         title={item.FACLT_NM}
                         malcnt={<AiTwotoneHeart />}
                         note={item.REFINE_ROADNM_ADDR}
-                        col="bg-secondary"
+                        col={item.isFavorited ? "bg-danger" : "bg-secondary"}
                         textClick={() => {
                             setSelectedPlace(item);
-                            // setLgShow(true);
                             const lat = parseFloat(item.REFINE_WGS84_LAT);
                             const lng = parseFloat(item.REFINE_WGS84_LOGT);
                             setState((prev) => ({
@@ -226,6 +248,7 @@ export default function Index({items, word, sessionUserid}) {
                 lng={selectedPlace ? selectedPlace.REFINE_WGS84_LOGT : null}
                 bdList={bdList}
                 userid={sessionUserid}
+                onFavoriteAdd={onFavoriteAdd}
             />
             <Modal title="알림" class="searchModal" size="sm" lgShow={show} setLgShow={setShow}  children="해당하는 시설이 없습니다."/>
         </Container>
