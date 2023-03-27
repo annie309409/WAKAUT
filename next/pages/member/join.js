@@ -1,11 +1,11 @@
-import {Container, Button} from 'react-bootstrap';
+import {Container, Button, Form, Row, Col} from 'react-bootstrap';
 import Input from '../../components/modify_input';
 import Title from '../../components/title'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from '../../components/layouts/getLayout';
-import {Datas, Post} from "../../components/feutils";
+import {check_captcha, Datas, Post} from "../../components/feutils";
 
 const Join=()=>{
     const [lgShow, setLgShow] = useState(false);
@@ -27,6 +27,17 @@ const Join=()=>{
     // 중복확인 결과 저장 state
     const [isThereUserid, setIsThereUserid] = useState(true);
     const [isThereEmail, setIsThereEmail] = useState(true);
+
+    const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
+    useEffect(() => {
+        const recaptchaScript = document.createElement("script");
+        recaptchaScript.src = "https://www.google.com/recaptcha/api.js";
+        recaptchaScript.async = true;
+        recaptchaScript.defer = true;
+        recaptchaScript.onload = () => setRecaptchaLoaded(true);
+        document.body.appendChild(recaptchaScript);
+    }, []);
 
     const handleUserIdChange = (value) => {
         setUserid(value);
@@ -145,21 +156,23 @@ const Join=()=>{
             return;
         }
 
-        await Post(
-            {
-                userid: userid,
-                passwd: passwd,
-                name: name,
-                email: email,
-                phone_number: phone,
-                gender: gen,
-                birth_date: birth,
-                agree_to_privacy_policy: agr1,
-                agree_to_advertising_info: agr2,
-            },
-            "/member/join"
-        );
-        location.href = "/member/login";
+        if (grecaptcha.getResponse() && await check_captcha(grecaptcha.getResponse())) {
+            await Post(
+                {
+                    userid: userid,
+                    passwd: passwd,
+                    name: name,
+                    email: email,
+                    phone_number: phone,
+                    gender: gen,
+                    birth_date: birth,
+                    agree_to_privacy_policy: agr1,
+                    agree_to_advertising_info: agr2,
+                },
+                "/member/join"
+            );
+            location.href = "/";
+        }
     }
 
     return(
@@ -177,6 +190,11 @@ const Join=()=>{
             <hr className="hr"/>
             <ModifyRadio type='선택약관동의' radioval={terms2} onChange={handleAgree2Change}/>
 
+            <Form.Group as={Row} className="mb-3" controlId="formID">
+                <Col sm="5">{recaptchaLoaded && (
+                    <div className="g-recaptcha cap2" data-sitekey="6LdL4OskAAAAAK7rwtgYuLMdFMXONFJgc5hhBcaX"></div>
+                )}</Col>
+            </Form.Group>
             <div className='mod-btn-container d-flex'>
                     <Button className="mod-info-btn col-2 shadow" variant='info'
                             onClick={handleSubmit}>회원가입 완료</Button>

@@ -1,11 +1,11 @@
-import {Container} from 'react-bootstrap';
+import {Col, Container, Form, Row} from 'react-bootstrap';
 import Input from '../../components/modify_input';
 import Title from '../../components/title'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from "../../components/layouts/getLayout";
-import {Datas, Post} from "../../components/feutils";
+import {check_captcha, Datas, Post} from "../../components/feutils";
 import {getSession, signOut} from "next-auth/client";
 
 export async function getServerSideProps(ctx){
@@ -33,7 +33,7 @@ const InfoModify=({member})=>{
     const [name, setName] = useState(mdf.name);
     const [email, setEmail] = useState(mdf.email);
     const [phone, setPhone] = useState(mdf.phone_number);
-    const [gen, setGen] = useState('');
+    const [gen, setGen] = useState(mdf.gender);
     const [birth, setBirth] = useState(mdf.birth_date2);
     const [agr1, setAgr1] = useState(mdf.agree_to_privacy_policy);
     const [agr2, setAgr2] = useState(mdf.agree_to_advertising_info);
@@ -41,6 +41,17 @@ const InfoModify=({member})=>{
     // 중복확인 결과 저장 state
     const [isThereUserid, setIsThereUserid] = useState(false);
     const [isThereEmail, setIsThereEmail] = useState(false);
+
+    const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
+    useEffect(() => {
+        const recaptchaScript = document.createElement("script");
+        recaptchaScript.src = "https://www.google.com/recaptcha/api.js";
+        recaptchaScript.async = true;
+        recaptchaScript.defer = true;
+        recaptchaScript.onload = () => setRecaptchaLoaded(true);
+        document.body.appendChild(recaptchaScript);
+    }, [recaptchaLoaded]);
 
     const handleUserIdChange = (value) => {
         setUserid(value);
@@ -177,41 +188,45 @@ const InfoModify=({member})=>{
             return;
         }
 
-        if(passwd2 === '' && passwd3 === ''){
-            await Post({
-                uid: mdf.uid,
-                userid: userid, passwd: passwd1,
-                name: name, email: email,
-                phone_number: phone, gender: gen,
-                birth_date: birth,
-                agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
-            }, '/member/modifyudt');
-            location.href="/member/myinfo"
-        } else if(passwd2 !== '' || passwd3 !== ''){
-            if (!pwdCheck.test(passwd2)) {
-                alert("비밀번호는 영소문자, 숫자 포함 5~10 글자여야 합니다.");
-            } else {
+        if (grecaptcha.getResponse() && await check_captcha(grecaptcha.getResponse())) {
+            if (passwd2 === '' && passwd3 === '') {
                 await Post({
                     uid: mdf.uid,
-                    userid: userid, passwd: passwd2,
+                    userid: userid, passwd: passwd1,
                     name: name, email: email,
                     phone_number: phone, gender: gen,
                     birth_date: birth,
                     agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
                 }, '/member/modifyudt');
-                location.href="/member/myinfo"
+                location.href = "/member/myinfo"
+            } else if (passwd2 !== '' || passwd3 !== '') {
+                if (!pwdCheck.test(passwd2)) {
+                    alert("비밀번호는 영소문자, 숫자 포함 5~10 글자여야 합니다.");
+                } else {
+                    await Post({
+                        uid: mdf.uid,
+                        userid: userid, passwd: passwd2,
+                        name: name, email: email,
+                        phone_number: phone, gender: gen,
+                        birth_date: birth,
+                        agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
+                    }, '/member/modifyudt');
+                    location.href = "/member/myinfo"
+                }
             }
         }
     }
 
     // 탈퇴하기 버튼 클릭시
     async function handleLeave () {
+        if (grecaptcha.getResponse() && await check_captcha(grecaptcha.getResponse())) {
         const confirmResult = confirm("탈퇴하시겠습니까?");
-        if (confirmResult) {
-            await Post({ uid: mdf.uid }, '/member/leave');
-            await signOut({ redirect: false }).then(() => {
-                location.href='/';
-            });
+            if (confirmResult) {
+                await Post({uid: mdf.uid}, '/member/leave');
+                await signOut({redirect: false}).then(() => {
+                    location.href = '/';
+                });
+            } else setRecaptchaLoaded(false);
         }
     }
 
@@ -242,6 +257,11 @@ const InfoModify=({member})=>{
                 agree2={mdf.agree_to_advertising_info}
                 onChange={handleAgree2Change}
             />
+            <Form.Group as={Row} className="mb-3" controlId="formID">
+                <Col sm="5">{recaptchaLoaded && (
+                    <div className="g-recaptcha cap2" data-sitekey="6LdL4OskAAAAAK7rwtgYuLMdFMXONFJgc5hhBcaX"></div>
+                )}</Col>
+            </Form.Group>
             <ModifyRadio btn={btn}
                          notype={true}
                          mdf={mdf}
