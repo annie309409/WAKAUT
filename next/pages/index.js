@@ -250,7 +250,7 @@ export default function Index({items, word, sessionUserid, fList}) {
                 userid={sessionUserid}
                 onFavoriteAdd={onFavoriteAdd}
             />
-            <Modal title="알림" class="searchModal" size="sm" lgShow={show} setLgShow={setShow}  children="해당하는 시설이 없습니다."/>
+            <Modal title="알림" class="searchModal" size="md" lgShow={show} setLgShow={setShow}  children="해당하는 시설이 없습니다."/>
         </Container>
     )
 }
