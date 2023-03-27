@@ -27,4 +27,14 @@ const kakaoInit = () => {
     }
     return kakao;
 }
-module.exports = {Datas,Post,handleInput,kakaoInit}
+
+// 구글 리캡챠
+const check_captcha = async (response) => {
+    let url = '/api/recaptcha?response=' + response;
+    const data = axios.get(url).then(data => data.data);
+    console.log((await data).success);
+
+    return (await data).success;
+};
+
+module.exports = {Datas,Post,handleInput,kakaoInit, check_captcha}

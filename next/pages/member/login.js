@@ -4,22 +4,34 @@ import Link from "next/link";
 import kakao  from '../../assets/kakaobtn.png';
 import getLayout from "../../components/layouts/getLayout";
 import { signIn } from "next-auth/client";
-import { useState } from "react";
-import { handleInput } from '../../components/feutils';
+import {useEffect, useState} from "react";
+import {check_captcha, handleInput} from '../../components/feutils';
 
 function Login(){
-    const [userid, setUserid] = useState(null);
-    const [passwd, setPasswd] = useState(null);
+    const [userid, setUserid] = useState('');
+    const [passwd, setPasswd] = useState('');
+    const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
+
+    useEffect(() => {
+        const recaptchaScript = document.createElement("script");
+        recaptchaScript.src = "https://www.google.com/recaptcha/api.js";
+        recaptchaScript.async = true;
+        recaptchaScript.defer = true;
+        recaptchaScript.onload = () => setRecaptchaLoaded(true);
+        document.body.appendChild(recaptchaScript);
+    }, []);
 
     async function loginHandle(e){
-        e.preventDefault();
-        const {error} = await signIn('userid-passwd-credentials',{userid,passwd, redirect:false});
-        if(error){
-            alert('존재하지 않는 아이디이거나 패스워드가 일치하지 않습니다.');
-        }else{
-            location.href= '/member/myinfo';
-        }
+            e.preventDefault();
+        if (grecaptcha.getResponse() && await check_captcha(grecaptcha.getResponse())) {
+            const {error} = await signIn('userid-passwd-credentials',{userid,passwd, redirect:false});
+            if(error){
+                alert('존재하지 않는 아이디이거나 패스워드가 일치하지 않습니다.');
+            }else{
+                location.href= '/member/mypage';
+            }
     }
+}
 
     return (
         <Container className="panel">
@@ -40,6 +52,11 @@ function Login(){
                     <Col sm="6">
                         <Form.Control type="password" placeholder="비밀번호를 입력하세요" value={passwd} onChange={(e)=>{handleInput(setPasswd,e)}} />
                     </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formID">
+                    <Col sm="5">{recaptchaLoaded && (
+                        <div className="g-recaptcha cap2" data-sitekey="6LdL4OskAAAAAK7rwtgYuLMdFMXONFJgc5hhBcaX"></div>
+                    )}</Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3" controlId="sns">
