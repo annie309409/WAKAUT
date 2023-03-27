@@ -3,11 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/api/main": "pages/api/main.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/api/member/favorites": "pages/api/member/favorites.js",
-  "/member/login": "pages/member/login.js",
-  "/api/board/boardlist": "pages/api/board/boardlist.js",
-  "/api/member/addscore": "pages/api/member/addscore.js"
+  "/member/check": "pages/member/check.js",
+  "/api/main": "pages/api/main.js"
 }

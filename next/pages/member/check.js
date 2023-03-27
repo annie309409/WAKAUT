@@ -1,7 +1,9 @@
 import getLayout from '../../components/layouts/getLayout';
 import {Datas} from '../../components/feutils';
 import { useEffect, useState } from 'react';
-import { Container,Button } from 'react-bootstrap';
+import { Container,Button,Image } from 'react-bootstrap';
+import wakaut from '../../assets/wakaut.gif';
+
 
 export default function checkSocial({session}){
     const [msg,setMsg] =  useState('님은 인증된 사용자입니다. 메인으로 이동합니다.');
@@ -23,7 +25,8 @@ export default function checkSocial({session}){
     },[])
     return(
         <> 
-            <Container>
+            <Container className='check'>
+                <Image src={wakaut}/>
                 <h2>{session.userid}{msg}</h2>
                 {
                     (msg==='님은 아직 가입되지 않았습니다.')?
