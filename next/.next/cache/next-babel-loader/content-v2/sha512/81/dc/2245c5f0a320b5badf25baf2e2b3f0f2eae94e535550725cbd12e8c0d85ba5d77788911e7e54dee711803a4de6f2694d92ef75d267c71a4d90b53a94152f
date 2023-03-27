@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Member from '../../../models/Member';\nexport default (async (req, res) => {\n  const {\n    uid\n  } = req.body;\n\n  try {\n    const rowData = new Member().leave(uid).then(res => res);\n    res.status(200).json({\n      rowData: await rowData\n    });\n  } catch (e) {\n    console.log(e);\n  }\n});","map":null,"metadata":{},"sourceType":"module"}

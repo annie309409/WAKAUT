@@ -264,6 +264,37 @@ class Member {
         return rowData;
     }
 
+    //스코어 추가 
+    async setScore(facility,score) {
+        let conn = null;
+        let rowData = 1;
+        let params = [facility,score];
+        try {
+            conn = await mariadb.makeConn();
+            await conn.query(SQL.member.setScore, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+     //스코어 조회
+     async getScore(facility) {
+        let conn = null;
+        let rowData = null;
+        let params = [facility];
+        try {
+            conn = await mariadb.makeConn();
+            rowData = await conn.query(SQL.member.getScore, params);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            await mariadb.closeConn();
+        }
+        return rowData;
+    }
+
 }
 module.exports = Member;
 

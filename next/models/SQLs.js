@@ -42,6 +42,8 @@ const SQL={
         idcheck:`select * from users where userid=?`,
         leave: `DELETE FROM users WHERE uid = ?`,
         leaveDelete: `DELETE FROM boards WHERE writer = ?`,
+        setScore : `insert into ratings (facility,rating) values (?,?)`,
+        getScore : `select CAST(count(r.rid) AS char) cnt, CAST(avg(r.rating) AS char) score from ratings r where facility = ?`
     },
 }
 

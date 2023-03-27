@@ -604,3 +604,9 @@ html ::-webkit-scrollbar-thumb{
 .srchHdr ul li:hover{
     background-color: #ccc;
 }
+
+.scores{
+    line-height: 40px;
+    font-size: 25px;
+    cursor: pointer;
+}

@@ -53,6 +53,9 @@ export default function Index({items, word, sessionUserid, fList}) {
     const [searchCount, setSearchCount] = useState(items.length);  // 총 몇개의 시설이 조회된건지 저장하는 state
     const [isButtonActive, setIsButtonActive] = useState(false);
     const [bdList, setBDLists] = useState({});
+    const [score, setScore] = useState({});
+    const [peops,setPeops] = useState('');
+    const [scs,setScs] = useState('');
 
     // 즐겨찾기 추가 추적 state
     const [favoriteAdded, setFavoriteAdded] = useState(false);
@@ -135,7 +138,12 @@ export default function Index({items, word, sessionUserid, fList}) {
         let boards = await Datas('/board/boardlist',`pg=5&fcname=${fcname}`).then(r=>r);
         setBDLists(await boards);
     }
-
+   //별점 가져오기 
+    const getScore = async (fac)=>{
+        let sc= await Datas('/member/addscore', `facility=${fac}`);
+        setPeops(await sc[0].cnt);
+        setScs(await sc[0].score);
+    }
 
     return(
         <Container className="d-flex mt-4 mb-4 index">
@@ -156,7 +164,7 @@ export default function Index({items, word, sessionUserid, fList}) {
                                 ...prev,
                                 center: { lat, lng },
                             }));
-                            lists(item.FACLT_NM).then().then(setLgShow(true))
+                            lists(item.FACLT_NM).then(getScore(item.FACLT_NM)).then(setLgShow(true))
                         }}
                     />
                 ))}
@@ -238,7 +246,10 @@ export default function Index({items, word, sessionUserid, fList}) {
                 size="lg"
                 lgShow={lgShow}
                 setLgShow={setLgShow}
-                score={3}
+                score={scs}
+                setScs = {setScs}
+                peops={peops}
+                setPeops = {setPeops}
                 title={selectedPlace ? selectedPlace.FACLT_NM : ""}
                 addr={selectedPlace ? selectedPlace.REFINE_ROADNM_ADDR : ""}
                 contact={selectedPlace ? selectedPlace.CONTCT_NO : ""}

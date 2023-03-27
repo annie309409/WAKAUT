@@ -3,6 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
+  "/api/main": "pages/api/main.js",
+  "/board/boardlist": "pages/board/boardlist.js",
   "/member/login": "pages/member/login.js",
-  "/api/main": "pages/api/main.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/member/join": "pages/member/join.js"
 }
