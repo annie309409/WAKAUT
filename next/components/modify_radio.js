@@ -1,7 +1,6 @@
 import {Button, Container, Form} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import {useEffect, useState} from "react";
-import Link from "next/link";
 
 const ModifyRadio = (props) => {
 
@@ -49,7 +48,7 @@ const ModifyRadio = (props) => {
     };
 
     const handleLeave = () => {
-
+        props.handleLeave();
     };
     return(
         <Container>

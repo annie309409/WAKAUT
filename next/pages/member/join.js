@@ -5,7 +5,6 @@ import {useState} from "react";
 import ModifyRadio from "../../components/modify_radio";
 import ModalDetail from "../../components/modal";
 import getLayout from '../../components/layouts/getLayout';
-import Link from "next/link";
 import {Datas, Post} from "../../components/feutils";
 
 const Join=()=>{
@@ -16,7 +15,7 @@ const Join=()=>{
 
     const [userid, setUserid] = useState('');
     const [passwd, setPasswd] = useState('');
-    const [passwd2, setPasswd2] = useState('');   // 비밀번호확인(의미없음)
+    const [passwd2, setPasswd2] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -26,8 +25,8 @@ const Join=()=>{
     const [agr2, setAgr2] = useState(0);
 
     // 중복확인 결과 저장 state
-    const [isThereUserid, setIsThereUserid] = useState(false);
-    const [isThereEmail, setIsThereEmail] = useState(false);
+    const [isThereUserid, setIsThereUserid] = useState(true);
+    const [isThereEmail, setIsThereEmail] = useState(true);
 
     const handleUserIdChange = (value) => {
         setUserid(value);
@@ -60,51 +59,107 @@ const Join=()=>{
         setAgr2(value);
     };
 
-    // 회원가입 버튼 클릭
-    async function handleSubmit () {
-        if(isThereUserid === true) alert("아이디 중복을 확인해주세요.")
-        else if(isThereEmail === true) alert("이메일 중복을 확인해주세요.");
-        else if(passwd !== passwd2) alert("비밀번호가 일치하지 않습니다.");
-        else if(isThereUserid === false && isThereEmail === false && passwd === passwd2){
-        await Post({
-            userid: userid, passwd: passwd,
-            name: name, email: email,
-            phone_number: phone, gender: gen,
-            birth_date: birth,
-            agree_to_privacy_policy: agr1, agree_to_advertising_info: agr2
-        }, '/member/join');
-        location.href = "/member/login"
-        }
-    }
+    const idCheck = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,10}$/;
+    const pwdCheck = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,10}$/;
+    const nameCheck = /^[a-z가-힣]{3,10}$/;
+    const emailCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(?:[a-zA-Z]{2,}|kr|co\.kr|go\.kr)$/;
+    const phoneCheck = /^01[016789]-\d{3,4}-\d{4}$/;
+    const birthCheck = /^(19|20)\d{2}-(0[1-9]|1[0-2])-([0-2][1-9]|3[01])$/;
 
     // 아이디 중복확인 버튼 클릭
     async function handleIsOverlapUid () {
-        const result = await Datas('/member/isoverlapuserid',`userid=${userid}`);
-        console.log(result);
-        if(result.length !== 0) {
-            alert("이미 있는 아이디 입니다.");
-            console.log(isThereUserid)
-            setIsThereUserid(true);
-        } else {
-            alert("사용가능한 아이디 입니다.");
-            console.log(isThereUserid)
-            setIsThereUserid(false);
+        if (userid === ''){
+            alert("아이디를 입력하세요.");
+        } else if(!idCheck.test(userid)){
+            alert("아이디는 영소문자, 숫자 포함 5~10 글자여야 합니다.")
+        }else {
+            const result = await Datas('/member/isoverlapuserid', `userid=${userid}`);
+            if (result.length !== 0) {
+                alert("이미 있는 아이디 입니다.");
+                setIsThereUserid(true);
+            } else {
+                alert("사용가능한 아이디 입니다.");
+                setIsThereUserid(false);
+            }
         }
     }
 
     // 이메일 중복확인 버튼 클릭
     async function handleIsOverlapEmail () {
-        const result = await Datas('/member/isoverlapemail',`email=${email}`);
-        console.log(result);
-        if(result.length !== 0) {
-            alert("이미 있는 이메일 입니다.");
-            setIsThereEmail(true);
-            console.log(isThereEmail)
-        } else {
-            alert("사용가능한 이메일 입니다.");
-            setIsThereEmail(false);
-            console.log(isThereEmail)
+        if(email === '' ){
+            alert("이메일을 입력하세요.");
+        } else if(!emailCheck.test(email)) {
+            alert("이메일이 유효하지 않습니다.")
+        }else {
+            const result = await Datas('/member/isoverlapemail', `email=${email}`);
+            if (result.length !== 0) {
+                alert("이미 있는 이메일 입니다.");
+                setIsThereEmail(true);
+            } else {
+                alert("사용가능한 이메일 입니다.");
+                setIsThereEmail(false);
+            }
         }
+    }
+
+    // 회원가입 버튼 클릭
+    async function handleSubmit() {
+        if (isThereUserid) {
+            alert("아이디 중복을 확인해주세요.");
+            return;
+        }
+        if (isThereEmail) {
+            alert("이메일 중복을 확인해주세요.");
+            return;
+        }
+        if (passwd !== passwd2) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+        if (!idCheck.test(userid)) {
+            alert("아이디는 영소문자, 숫자 포함 5~10 글자여야 합니다.");
+            return;
+        }
+        if (!pwdCheck.test(passwd)) {
+            alert("비밀번호는 영소문자, 숫자 포함 5~10 글자여야 합니다.");
+            return;
+        }
+        if (!nameCheck.test(name)) {
+            alert("닉네임은 한글 또는 영소문자 3~10 글자여야 합니다.");
+            return;
+        }
+        if (!emailCheck.test(email)) {
+            alert("이메일이 유효하지 않습니다.");
+            return;
+        }
+        if (!phoneCheck.test(phone)) {
+            alert("휴대폰 번호가 유효하지 않습니다.");
+            return;
+        }
+        if (gen === '') {
+            alert("성별을 선택하세요.");
+            return;
+        }
+        if (!birthCheck.test(birth)) {
+            alert("생년월일이 유효하지 않습니다.");
+            return;
+        }
+
+        await Post(
+            {
+                userid: userid,
+                passwd: passwd,
+                name: name,
+                email: email,
+                phone_number: phone,
+                gender: gen,
+                birth_date: birth,
+                agree_to_privacy_policy: agr1,
+                agree_to_advertising_info: agr2,
+            },
+            "/member/join"
+        );
+        location.href = "/member/login";
     }
 
     return(
@@ -127,7 +182,7 @@ const Join=()=>{
                             onClick={handleSubmit}>회원가입 완료</Button>
             </div>
 
-            <ModalDetail size="md" lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙
+            <ModalDetail size="lg" lgShow={lgShow} setLgShow={setLgShow} title="이용약관" children="제 1 장 총칙
                 제 1 조 (목적)이 약관은「공유마당」(이하 “사이트”라 칭함)에서 제공하는 인터넷관련서비스(이하 '서비스'라 칭함)를 이용함에 있어 「공유마당」과 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.제 2 조 (용어의 정의)이 약관에서 사용하는 주요한 용어의 정의는 다음과 같습니다.
                 ① ‘회원’이라 함은 이 약관에 동의하고, 「공유마당」과 서비스 이용 계약을 체결하여 이용자 아이디(ID)를 부여 받은 개인 및 기관을 말합니다.
                 ② ‘회원 아이디’(이하 ‘ID’라 칭함)라 함은 회원의 식별과 회원의 서비스 이용을 위하여 회원이 선정하고 신청함에 따라 「공유마당」에서 승인한 문자나 숫자 혹은 그 조합을 말합니다. 기관의 정보로 가입한 ID는 관련 법규가 인정하는 범위에서 개인정보와 같은 권리와 의무를 가지며 이하 개인과 개인정보로 언급되는 모든 약관은 기관과 기관정보를 포함합니다.

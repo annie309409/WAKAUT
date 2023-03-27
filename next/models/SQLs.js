@@ -17,13 +17,15 @@ const SQL={
         selectUsers : `select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u`,
     },
     user:{
-        login :`select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u where u.name=? && u.passwd=?`
+        login :`select u.*, date_format(u.birth_date,'%Y-%m-%d') birth_date2 from users u where u.userid=? && u.passwd=?`
     },
     member : {
         insertFvr : `insert into favorites (userid, facility, region, contact) values (?, ?, ?, ?)`,
-        selectFvr : `select facility, region, contact from favorites where userid = ?`,
+        selectFvr : `select fid, facility, region, contact from favorites where userid = ?`,
+        deleteFvr : `DELETE FROM favorites WHERE fid = ?`,
         selectMif : `select userid, name, email, phone_number, gender, date_format(birth_date, "%Y-%m-%d") birth_date from users where uid = ? or userid = ?`,
         selectMdf : `SELECT *, DATE_FORMAT(birth_date, '%Y-%m-%d') as birth_date2 FROM users where uid = ? or userid = ?`,
+        history : `SELECT count(bid) cnt from boards where writer = ?`,
         isOverlapUid : `select * from users where userid = ?`,
         isOverlapEmail : `select * from users where email = ?`,
         updateInfo : `UPDATE users
@@ -37,7 +39,9 @@ const SQL={
         ) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         socialJoin:`insert into users ( userid, passwd, name, email, phone_number, gender, birth_date, agree_to_privacy_policy, agree_to_advertising_info) values (?, 'nopasswd', ?, ?, '000', 'n', '0000-00-00', 1, 1)
         `,
-        idcheck:`select * from users where userid=?`
+        idcheck:`select * from users where userid=?`,
+        leave: `DELETE FROM users WHERE uid = ?`,
+        leaveDelete: `DELETE FROM boards WHERE writer = ?`,
     },
 }
 
