@@ -29,16 +29,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/board/boardlist": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/board/boardlist.js"
-    ],
-    "/member/join": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/member/join.js"
-    ],
     "/member/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
