@@ -25,8 +25,13 @@ const PlaceModal=(props)=>{
         if(stab)setSt(scores);
     }
 
+    // 소셜로그인 유저 잡아내기위한 정규표현식
+    const isSocialUser = /^\d{10}$/;
+
     const fixStar =async (idx)=>{
-        if(stab){
+        const result = isSocialUser.test(props.userid);
+        if(result) alert("소셜로그인 유저는 이용하지 못하는 서비스입니다.");
+        else if(stab){
             await Post({facility:props.title,score:idx+1},'/member/addscore');
             setStab(false);
             props.setPeops(parseInt(props.peops)+1);
@@ -40,11 +45,13 @@ const PlaceModal=(props)=>{
         }
     }
 
-
     // 즐겨찾기 추가
     async function fvrAdd(e,{userid, facility, region, contact}){
         e.preventDefault();
         if(userid !== null){
+            const result = isSocialUser.test(userid);
+            if(result) alert("소셜로그인 유저는 이용하지 못하는 서비스입니다.");
+            else{
             await Post({
                 userid: userid,
                 facility: facility,
@@ -54,6 +61,7 @@ const PlaceModal=(props)=>{
             setIsCompleteAdd(true);
             // 즐겨찾기 추가 성공 후 콜백함수 호출
             props.onFavoriteAdd();
+            }
         }else location.href = "/member/login"
     }
     
@@ -66,7 +74,7 @@ const PlaceModal=(props)=>{
             <Card.Body>
                 <Card.Title>시설평가하기</Card.Title>
                 <Card.Text>다른 사용자에게 의견을 들려주세요</Card.Text>
-                <Card.Text className='scores'>{st.map((m,idx)=><span onMouseOver={()=>{setStar(idx)}} onClick={()=>{fixStar(idx)}}>{m}</span>)}</Card.Text>
+                <Card.Text className='scores'>{st.map((m,idx)=><span key={idx} onMouseOver={()=>{setStar(idx)}} onClick={()=>{fixStar(idx)}}>{m}</span>)}</Card.Text>
                 <div className='btns'>
                     <Button variant="primary" className='fluid'
                             onClick={(e)=>{ fvrAdd(e,{

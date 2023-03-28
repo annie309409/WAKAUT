@@ -223,9 +223,9 @@ export default function Index({items, word, sessionUserid, fList}) {
                 </Form>
 
             <Map center={state.center} style={{ width: "100%", height: "800px" }}  level={3}>
-                {(!state.isLoading ? searchResults : []).map((item) => (
+                {(!state.isLoading ? searchResults : []).map((item, idx) => (
                     <MapMarker
-                        key={item.FACLT_NM}
+                        key={idx}
                         position={{ lat: item.REFINE_WGS84_LAT, lng: item.REFINE_WGS84_LOGT }}
                         onClick={() => {
                             setSelectedPlace(item);

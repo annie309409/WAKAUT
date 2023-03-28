@@ -9,10 +9,12 @@ const ModalDetail=(props)=>{
         </Modal.Header>
         <Modal.Body className={props.class}>
             { props.children }
-            { (props.btn)
-                ? <div><Link href={props.link}><Button>{props.btn}</Button></Link></div>
-                :false }
         </Modal.Body>
+            <Modal.Footer>
+                { (props.btn)
+                    ? <div><Link href={props.link}><Button>{props.btn}</Button></Link></div>
+                    :false }
+            </Modal.Footer>
       </Modal>
     )
 }
