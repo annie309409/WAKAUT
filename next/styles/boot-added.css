@@ -559,7 +559,6 @@ html ::-webkit-scrollbar-thumb{
     justify-content: center; /* 가로 중앙 정렬 */
     height: 200px;
     font-size: 22px;
-    color: #ff9c8f;
 }
 
 

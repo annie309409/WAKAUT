@@ -26,6 +26,17 @@ const Header = (props)=>{
     const findInd =  async(ind)=>{
         setListsFn(lists.filter(f=>f.indexOf(ind)!==-1));
     }
+
+    // 소셜로그인 유저 마이페이지 접근 금지
+    function divisionUser() {
+        const userid = props.sess.userid;
+        const isSocialUser = /^\d{10}$/;
+        return isSocialUser.test(userid);
+    }
+
+    const handleAccess = () => {
+        alert("소셜로그인 유저는 이용하지 못하는 서비스입니다.");
+    };
     return(
         <header>
             <Navbar bg="light" expand="lg">
@@ -38,7 +49,8 @@ const Header = (props)=>{
                         {
                             props.menu.map((e,i)=>{
                                 if(e==='logout') return <div className='ms-2 menus' key={i} onClick={()=>{signOut().then(r=>location.href='/')}}>{e}</div>
-                                return <div className='ms-2 menus' key={i}><Link href={props.route[i]}>{e}</Link></div>
+                                else if(e==='mypage'&&divisionUser()) return <div className='ms-2 menus' onClick={handleAccess} key={i}>{e}</div>
+                                else return <div className='ms-2 menus' key={i}><Link href={props.route[i]}>{e}</Link></div>
                             })
                         }
                     </Nav>
