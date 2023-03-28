@@ -68,7 +68,7 @@ const ModifyRadio = (props) => {
                                             label={val}
                                             value={val}
                                             name={props.type}
-                                            checked={
+                                            defaultChecked={
 (                                                (selectedGender === '남자' && val === '남자') ||
                                                 (selectedGender === '여자' && val === '여자') ) &&
                                                 props.checked !== undefined
